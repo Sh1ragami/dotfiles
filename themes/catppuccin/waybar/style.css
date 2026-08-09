@@ -169,18 +169,27 @@ window#waybar.hidden {
     padding: 8px 4px;
 }
 
-/* 縦型のときはモジュール個別の背景（島）を透明フラット化し、縦長にスリム化 */
+/* 縦型のときは各モジュールを縦長のカプセルコンテナにまとめて美しくパッケージ */
 #waybar.left #workspaces,
 #waybar.left #clock,
-#waybar.left #battery,
-#waybar.left #pulseaudio,
-#waybar.left #memory,
-#waybar.left #network,
+#waybar.left #hardware,
 #waybar.left #custom-notification {
+    background-color: rgba(203, 166, 247, 0.05);
+    border: 1px solid rgba(203, 166, 247, 0.12);
+    border-radius: 12px;
+    margin: 8px 4px;
+    padding: 10px 0px;
+}
+
+/* ハードウェアグループ内の個別モジュールは背景を透過して一体化 */
+#waybar.left #hardware #battery,
+#waybar.left #hardware #pulseaudio,
+#waybar.left #hardware #memory,
+#waybar.left #hardware #network {
     background: transparent;
     border: none;
     box-shadow: none;
-    margin: 8px 0px;
+    margin: 4px 0px;
     padding: 6px 0px;
 }
 

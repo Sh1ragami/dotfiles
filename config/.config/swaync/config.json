@@ -99,16 +99,6 @@
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh tokyonight"
         },
         {
-          "label": "󰈉  透過度切替",
-          "type": "button",
-          "command": "/home/sh1ragami/.config/kitty/scripts/toggle_opacity.sh"
-        },
-        {
-          "label": "󰃦  ブラー切替",
-          "type": "button",
-          "command": "/home/sh1ragami/.config/hypr/scripts/toggle_blur.sh"
-        },
-        {
           "label": "  バー位置",
           "type": "button",
           "command": "/home/sh1ragami/.config/waybar/scripts/toggle_position.sh"

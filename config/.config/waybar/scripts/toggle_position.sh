@@ -1,23 +1,23 @@
 #!/bin/bash
 # toggle_position.sh - Waybarの配置を上(top)と左(left)でトグルするスクリプト
 
-CONFIG_FILE="$HOME/.config/waybar/config.jsonc"
+DIR="$HOME/.config/waybar"
+CONFIG_LINK="$DIR/config.jsonc"
+TOP_CONFIG="$DIR/config_top.jsonc"
+LEFT_CONFIG="$DIR/config_left.jsonc"
 
-if [ ! -f "$CONFIG_FILE" ]; then
-    exit 1
+if [ ! -L "$CONFIG_LINK" ] && [ ! -f "$CONFIG_LINK" ]; then
+    ln -sf "$TOP_CONFIG" "$CONFIG_LINK"
 fi
 
-# 現在のポジションを取得
-CURRENT_POS=$(grep -po '"position":\s*"\K[^"]+' "$CONFIG_FILE")
+# リンク先を判定してトグル切り替え
+TARGET=$(readlink -f "$CONFIG_LINK")
 
-if [ "$CURRENT_POS" == "top" ]; then
-    NEW_POS="left"
+if [[ "$TARGET" == *config_top.jsonc ]]; then
+    ln -sf "$LEFT_CONFIG" "$CONFIG_LINK"
 else
-    NEW_POS="top"
+    ln -sf "$TOP_CONFIG" "$CONFIG_LINK"
 fi
-
-# 置換して保存
-sed -i "s/\"position\":\s*\"$CURRENT_POS\"/\"position\": \"$NEW_POS\"/g" "$CONFIG_FILE"
 
 # Waybarの再起動
 pkill waybar

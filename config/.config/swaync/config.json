@@ -53,53 +53,53 @@
       "escape": false
     },
     "buttons-grid#quick": {
+      "n-cols": 2,
       "actions": [
         {
-          "label": "",
+          "label": "  Wi-Fi",
           "type": "toggle",
           "active": true,
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
           "update_command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
         },
         {
-          "label": "󰂯",
+          "label": "󰂯  Bluetooth",
           "type": "toggle",
           "active": true,
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && bluetoothctl power on || bluetoothctl power off'",
           "update_command": "sh -c '[[ $(bluetoothctl show | grep \"PowerState\") == *\"on\"* ]] && echo true || echo false'"
         },
         {
-          "label": "󰍶",
+          "label": "󰍶  通知消音",
           "type": "toggle",
           "active": false,
           "command": "swaync-client -d",
           "update_command": "swaync-client -D"
         },
-
         {
-          "label": "󰌐",
+          "label": "󰌐  タイプ音",
           "type": "toggle",
           "active": true,
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && wayvibes || pkill wayvibes'",
           "update_command": "sh -c 'pgrep wayvibes >/dev/null && echo true || echo false'"
         },
         {
-          "label": "🌅",
+          "label": "🌅  夕暮れ",
           "type": "button",
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh sunset"
         },
         {
-          "label": "🍇",
+          "label": "🍇  星空",
           "type": "button",
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh catppuccin"
         },
         {
-          "label": "🌃",
+          "label": "🌃  東京夜",
           "type": "button",
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh tokyonight"
         },
         {
-          "label": "󰈉",
+          "label": "󰈉  透過調整",
           "type": "button",
           "command": "/home/sh1ragami/.config/kitty/scripts/opacity_slider.py"
         }

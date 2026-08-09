@@ -157,17 +157,15 @@ scrollbar trough {
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 50% !important; /* 強制的に真円化 */
-  min-width: 48px;
-  min-height: 48px;
-  width: 48px;
-  height: 48px;
-  margin: 6px;
-  background-color: rgba(30, 32, 48, 0.7);
-  border: 1px solid rgba(122, 162, 247, 0.15);
+  border-radius: 10px !important; /* スタイリッシュな角丸長方形 */
+  min-height: 38px;
+  margin: 4px;
+  background-color: rgba(30, 32, 48, 0.6);
+  border: 1px solid rgba(122, 162, 247, 0.12);
   color: #a9b1d6;
-  font-size: 1.25rem;
-  padding: 0px !important; /* 余計なパディングを排除して歪みをなくす */
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 6px 12px !important;
   text-align: center;
   box-shadow: none;
 }

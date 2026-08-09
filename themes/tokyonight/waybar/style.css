@@ -25,15 +25,27 @@ window#waybar.hidden {
  * 🏝️ 各島（アイランド）の設定
  */
 
-/* 左右に浮いている島 (ワークスペース、ハードウェア情報、通知) */
+/* 左右に浮いている島 (ワークスペース、ハードウェア情報) */
 #workspaces,
-#group-hardware,
-#custom-notification {
+#group-hardware {
     background-color: rgba(26, 27, 38, 0.8); /* Tokyo Night Dark */
     border: 1px solid rgba(122, 162, 247, 0.25); /* ブルー境界線 */
     border-radius: 14px;
     padding: 3px 12px;
     margin: 6px 6px 4px 6px; /* 上部に隙間を作り、浮いているように配置 */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 🔔 独立した「通知ベル」の島 (カプセルではなく、完全な真円のボタンにする) */
+#custom-notification {
+    background-color: rgba(26, 27, 38, 0.8);
+    border: 1px solid rgba(122, 162, 247, 0.25);
+    border-radius: 50%; /* 真円にする */
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0px !important;
+    margin: 6px 12px 4px 6px;
+    text-align: center;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -77,13 +89,12 @@ window#waybar.hidden {
     background-color: rgba(125, 207, 255, 0.1);
 }
 
-/* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 (4pxに引き締めてまとめる) */
+/* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 (詰めすぎず 8px のゆとりを持たせる) */
 #pulseaudio,
 #network,
 #memory,
-#battery,
-#custom-notification {
-    padding: 0 4px;
+#battery {
+    padding: 0 8px;
 }
 
 #pulseaudio {

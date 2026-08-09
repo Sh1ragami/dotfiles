@@ -1,6 +1,6 @@
 /*
- * Integrated Floating Waybar Theme (Cocoa-Terracotta Theme)
- * Perfectly stable and beautiful glassmorphism design
+ * Island-Style Waybar Theme (Terracotta / Cocoa Brown Sunset Theme)
+ * Matches glowing red/orange borders and warm desktop setups (HyprLuna concept)
  */
 
 * {
@@ -11,26 +11,37 @@
     border-radius: 0;
 }
 
-/* 
- * 統合型のフローティングバー設定
- * バーを一体化させてマージンを設けることで、消滅バグを防ぎます
- */
+/* バー全体のコンテナは完全に透明（余計な背景をすべて排除） */
 window#waybar {
-    background-color: rgba(36, 27, 25, 0.8); /* ココアブラウン半透明 */
-    border: 1px solid rgba(234, 105, 98, 0.25); /* テラコッタの細いボーダー */
-    border-radius: 14px;
+    background-color: transparent;
     color: #dfd0b2;
-    margin: 6px 12px;
-    transition: all 0.3s ease;
 }
 
-/* 各モジュールの共通マージンとパディング */
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* 
+ * 🏝️ 各島（アイランド）の設定
+ * 各モジュール（ワークスペース、時計、ハードウェア、ツール）のみをカプセルとして浮かせる
+ */
 #workspaces,
 #clock,
 #group-hardware,
 #group-tools {
-    margin: 2px 6px;
-    padding: 2px 10px;
+    background-color: rgba(36, 27, 25, 0.8); /* 落ち着いたココアブラウンの半透明背景 */
+    border: 1px solid rgba(234, 105, 98, 0.25); /* テラコッタの細いボーダー */
+    border-radius: 14px;
+    padding: 3px 12px;
+    margin: 4px 6px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#workspaces:hover,
+#clock:hover,
+#group-hardware:hover,
+#group-tools:hover {
+    border-color: rgba(234, 105, 98, 0.5); /* ホバー時に優しく光る */
 }
 
 /* ワークスペースボタン設定 */

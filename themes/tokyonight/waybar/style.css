@@ -162,14 +162,9 @@ window#waybar.hidden {
     border-bottom: none;
 }
 
-#waybar.left box {
-    flex-direction: column;
-}
-
 #waybar.left .modules-left,
 #waybar.left .modules-center,
 #waybar.left .modules-right {
-    flex-direction: column;
     padding: 8px 4px;
 }
 

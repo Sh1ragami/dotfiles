@@ -177,11 +177,11 @@ window#waybar.hidden {
 #waybar.left #memory,
 #waybar.left #network,
 #waybar.left #custom-notification {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    margin: 8px 0px !important;
-    padding: 6px 0px !important;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 8px 0px;
+    padding: 6px 0px;
 }
 
 /* ワークスペースボタンを縦型に最適化 */

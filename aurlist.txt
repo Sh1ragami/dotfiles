@@ -1,0 +1,15 @@
+android-studio
+antigravity-cli
+brother-hll2400dw
+catppuccin-cursors-mocha
+google-chrome
+input-remapper
+obsidian-bin
+ocrmypdf
+paru
+paru-debug
+spotify
+teams-for-linux
+wayland-idle-inhibitor-git
+wayvibes-git
+wlogout

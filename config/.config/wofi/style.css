@@ -1,0 +1,47 @@
+/* 全体のウィンドウ設定 */
+window {
+    background-color: rgba(30, 30, 46, 0.95); /* 深めの紺色、少し透過 */
+    border: 2px solid #cba6f7; /* ラベンダー色のボーダー */
+    border-radius: 15px;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+}
+
+/* 入力ボックス */
+#input {
+    margin: 15px;
+    border: none;
+    border-bottom: 2px solid #f5e0dc;
+    background-color: rgba(49, 50, 68, 0.5);
+    color: #cdd6f4;
+    padding: 10px;
+}
+
+/* 各アプリアイテムの並び */
+#entry {
+    margin: 5px 15px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.2s; /* ホバー時のアニメーション */
+}
+
+/* 選択された時の色 */
+#entry:selected {
+    background-color: #cba6f7;
+}
+
+/* アイコン（ここがポイント！） */
+img {
+    margin-right: 15px; /* アイコンとテキストの間隔 */
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5)); /* 影をつけて立体感を出す */
+}
+
+/* テキスト */
+#text {
+    color: #cdd6f4;
+    font-size: 16px;
+}
+
+#entry:selected #text {
+    color: #1e1e2e;
+    font-weight: bold;
+}

@@ -1,0 +1,73 @@
+/* バー全体の基本設定 */
+window#waybar {
+    background-color: rgba(5, 5, 0, 0.5);
+}
+
+#workspaces button.active {
+    color: #33ccff;
+    border-left: 3px solid #33ccff;
+}
+
+#battery, 
+#clock, 
+#network, 
+#pulseaudio, 
+#custom-notification,
+#custom-vibes,
+#custom-keyd,
+#custom-tmux {
+    margin: 10px 0px;
+}
+
+#custom-vibes.on {
+    color: #b4befe; /* Lavender: ONの時は明るい色 */
+}
+
+#custom-vibes.off {
+    color: #6c7086; /* Gray: OFFの時は暗い色 */
+}
+
+/* バッテリー警告のアニメーションの色 */
+#battery {
+    color: #a6e3a1;
+}
+
+#battery.charging, #battery.plugged {
+    color: #f9e2af;
+}
+
+
+/* バッテリー警告のアニメーション */
+@keyframes blink {
+    to {
+        background-color: #f38ba8;
+        color: #11111b;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f38ba8;
+    color: #11111b;
+    animation-name: blink;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Tmuxモジュール */
+#custom-tmux {
+    color: #00F300;
+    padding: 8px 0px;
+    margin: 4px 2px;
+    border-radius: 5px;
+}
+
+#custom-keyd {
+    color: #a6e3a1; /* ONの時の色 (例: 薄い緑) */
+    padding: 0 10px;
+}
+
+#custom-keyd.inactive {
+    color: #6c7086; /* OFFの時の色 (例: グレー) */
+}

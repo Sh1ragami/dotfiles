@@ -1,0 +1,97 @@
+{
+    "layer": "top",
+    "position": "left",
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 0,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-right": ["custom/tmux", "custom/keyd","custom/vibes", "pulseaudio", "battery", "network", "custom/notification"],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "on-click": "activate"
+    },
+
+    "custom/tmux": {
+        "exec": "~/.config/waybar/scripts/tmux.sh",
+        "interval": 5,
+        "tooltip": false,
+        "on-click": "foot -e tmux attach"
+    },
+
+    "custom/vibes": {
+        "format": "{icon}",
+        "return-type": "json",
+        "format-icons": {
+            "on": "󰌌",
+            "off": "󰌐"
+        },
+        "exec": "pgrep wayvibes > /dev/null && echo '{\"text\": \"ON\", \"alt\": \"on\", \"class\": \"on\"}' || echo '{\"text\": \"OFF\", \"alt\": \"off\", \"class\": \"off\"}'",
+        "interval": 1,
+        "on-click": "~/.config/waybar/scripts/vibes-menu.sh", // 左クリックでメニュー
+        "on-click-right": "pkill wayvibes || ~/.config/waybar/scripts/vibes-menu.sh", // 右クリックで即時トグル
+        "signal": 8
+    },
+
+    "pulseaudio": {
+        "format": "{icon}\n{volume}",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", "", ""]
+        }
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}\n{capacity}",
+        "format-charging": "󱐋\n{capacity}",
+        "format-plugged": "\n{capacity}",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "network": {
+        // SSIDやDisconnectedという文字を出すと横に伸びるため、アイコン重視に
+        "format-wifi": "\n{signalStrength}",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "⚠", 
+        "tooltip-format": "{ifname} via {gwaddr}\n{essid}",
+        "on-click": "~/.config/hypr/scripts/toggle_wifi.sh" 
+    },
+
+    "custom/notification": {
+      "tooltip": false,
+      "format": "{icon}",
+      "format-icons": {
+        "notification": "<span foreground='red'><sup></sup></span>",
+        "none": "",
+        "dnd-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-none": "",
+        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-inhibited-none": ""
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
+
+    "custom/keyd": {
+        "exec": "~/.config/waybar/scripts/keyd.sh",
+        "return-type": "json",
+        "format": "{}",
+        "on-click": "~/.config/waybar/scripts/keyd.sh toggle",
+        "signal": 8
+    }
+}

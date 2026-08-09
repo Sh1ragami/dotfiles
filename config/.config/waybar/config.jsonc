@@ -1,13 +1,22 @@
 {
     "layer": "top",
-    "position": "left",
-    "margin-top": 0,
-    "margin-left": 0,
-    "margin-right": 0,
-    "spacing": 0,
+    "position": "top",
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right": 10,
+    "margin-bottom": 0,
+    "spacing": 4,
 
     "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["custom/tmux", "custom/keyd","custom/vibes", "pulseaudio", "battery", "network", "custom/notification"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "custom/keyd",
+        "custom/vibes",
+        "pulseaudio",
+        "network",
+        "battery",
+        "custom/notification"
+    ],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -16,11 +25,9 @@
         "on-click": "activate"
     },
 
-    "custom/tmux": {
-        "exec": "~/.config/waybar/scripts/tmux.sh",
-        "interval": 5,
-        "tooltip": false,
-        "on-click": "foot -e tmux attach"
+    "clock": {
+        "format": "  {:%H:%M}   📅  {:%m/%d (%a)}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
     "custom/vibes": {
@@ -32,17 +39,18 @@
         },
         "exec": "pgrep wayvibes > /dev/null && echo '{\"text\": \"ON\", \"alt\": \"on\", \"class\": \"on\"}' || echo '{\"text\": \"OFF\", \"alt\": \"off\", \"class\": \"off\"}'",
         "interval": 1,
-        "on-click": "~/.config/waybar/scripts/vibes-menu.sh", // 左クリックでメニュー
-        "on-click-right": "pkill wayvibes || ~/.config/waybar/scripts/vibes-menu.sh", // 右クリックで即時トグル
+        "on-click": "~/.config/waybar/scripts/vibes-menu.sh",
+        "on-click-right": "pkill wayvibes || ~/.config/waybar/scripts/vibes-menu.sh",
         "signal": 8
     },
 
     "pulseaudio": {
-        "format": "{icon}\n{volume}",
-        "format-muted": "",
+        "format": "{icon} {volume}%",
+        "format-muted": "  Muted",
         "format-icons": {
             "default": ["", "", ""]
-        }
+        },
+        "on-click": "pavucontrol"
     },
 
     "battery": {
@@ -50,41 +58,40 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}\n{capacity}",
-        "format-charging": "󱐋\n{capacity}",
-        "format-plugged": "\n{capacity}",
+        "format": "{icon}  {capacity}%",
+        "format-charging": "󱐋 {capacity}%",
+        "format-plugged": "  {capacity}%",
         "format-alt": "{icon} {time}",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
     "network": {
-        // SSIDやDisconnectedという文字を出すと横に伸びるため、アイコン重視に
-        "format-wifi": "\n{signalStrength}",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "⚠", 
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "󰈀  wired",
+        "format-disconnected": "⚠  disconnected",
         "tooltip-format": "{ifname} via {gwaddr}\n{essid}",
-        "on-click": "~/.config/hypr/scripts/toggle_wifi.sh" 
+        "on-click": "~/.config/hypr/scripts/toggle_wifi.sh"
     },
 
     "custom/notification": {
-      "tooltip": false,
-      "format": "{icon}",
-      "format-icons": {
-        "notification": "<span foreground='red'><sup></sup></span>",
-        "none": "",
-        "dnd-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-none": "",
-        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "inhibited-none": "",
-        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-inhibited-none": ""
-      },
-      "return-type": "json",
-      "exec-if": "which swaync-client",
-      "exec": "swaync-client -swb",
-      "on-click": "swaync-client -t -sw",
-      "on-click-right": "swaync-client -d -sw",
-      "escape": true
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     },
 
     "custom/keyd": {

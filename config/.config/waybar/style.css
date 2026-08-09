@@ -1,6 +1,6 @@
 /*
- * Island-Style Waybar Theme (Red / Orange / Moonlight Theme)
- * Matches glowing red/orange borders and warm desktop setups
+ * Island-Style Waybar Theme (Terracotta / Cocoa Brown Sunset Theme)
+ * Matches glowing red/orange borders and warm desktop setups (HyprLuna concept)
  */
 
 * {
@@ -14,7 +14,7 @@
 /* バー全体のコンテナは透明にする（島を浮かせるため） */
 window#waybar {
     background-color: transparent;
-    color: #cdd6f4;
+    color: #dfd0b2; /* 暖かみのあるクリーム色 */
 }
 
 window#waybar.hidden {
@@ -23,14 +23,14 @@ window#waybar.hidden {
 
 /* 
  * 🏝️ 各島（アイランド）の基本設定
- * 暖かみのあるオレンジとレッドの微細な光のボーダー
+ * ココアブラウン背景と、超極細の落ち着いたテラコッタ境界線
  */
 #workspaces,
 #clock,
 #group-hardware,
 #group-tools {
-    background-color: rgba(26, 26, 26, 0.75); /* 深い黒に近いダークグレー背景 */
-    border: 1px solid rgba(255, 159, 28, 0.2); /* ほのかなオレンジの境界線 */
+    background-color: rgba(36, 27, 25, 0.75); /* ココアブラウン半透明 */
+    border: 1px solid rgba(234, 105, 98, 0.15); /* 落ち着いたレッドの境界線 */
     border-radius: 16px;
     padding: 3px 14px;
     margin: 4px 6px;
@@ -41,13 +41,13 @@ window#waybar.hidden {
 #clock:hover,
 #group-hardware:hover,
 #group-tools:hover {
-    border-color: rgba(255, 85, 85, 0.5); /* ホバー時にレッドに光る */
+    border-color: rgba(234, 105, 98, 0.4); /* ホバー時に優しく光る */
 }
 
 /* ワークスペースボタン設定 */
 #workspaces button {
     padding: 0px 8px;
-    color: #7f849c;
+    color: #928374; /* グレイッシュブラウン */
     background-color: transparent;
     border-radius: 10px;
     transition: all 0.25s ease;
@@ -55,18 +55,18 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-    color: #ff9f1c; /* メインのオレンジ */
-    background-color: rgba(255, 159, 28, 0.12);
+    color: #d8a657; /* 落ち着いた黄・オレンジ */
+    background-color: rgba(216, 166, 87, 0.12);
 }
 
 #workspaces button:hover {
-    color: #ff5555; /* ホバー時はレッド */
-    background-color: rgba(255, 85, 85, 0.1);
+    color: #ea6962; /* ホバー時はテラコッタレッド */
+    background-color: rgba(234, 105, 98, 0.1);
 }
 
 /* 🕒 中央の時計設定 (月の光イメージ) */
 #clock {
-    color: #ffe494; /* 淡い黄色 (月の光) */
+    color: #dfd0b2; /* クリーム色 */
     font-size: 14px;
 }
 
@@ -82,39 +82,39 @@ window#waybar.hidden {
 }
 
 #pulseaudio {
-    color: #ff5555; /* 赤系統のオーディオ */
+    color: #ea6962; /* テラコッタレッド */
 }
 
 #pulseaudio.muted {
-    color: #6c7086;
+    color: #727169;
 }
 
 #network {
-    color: #ff9f1c; /* オレンジ系統のネットワーク */
+    color: #d8a657; /* サンドイエロー */
 }
 
 #network.disconnected {
-    color: #ff5555;
+    color: #ea6962;
 }
 
 #battery {
-    color: #ffe494; /* 淡い黄色のバッテリー */
+    color: #a9b665; /* セージグリーン */
 }
 
 #battery.charging, #battery.plugged {
-    color: #ff9f1c;
+    color: #d8a657;
 }
 
 @keyframes blink {
     to {
-        background-color: #ff5555;
-        color: #11111b;
+        background-color: #ea6962;
+        color: #1e1e1e;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #ff5555;
-    color: #11111b;
+    background-color: #ea6962;
+    color: #1e1e1e;
     animation-name: blink;
     animation-duration: 0.8s;
     animation-timing-function: linear;
@@ -125,21 +125,21 @@ window#waybar.hidden {
 
 /* 便利ツール */
 #custom-keyd {
-    color: #ffe494;
+    color: #dfd0b2;
 }
 
 #custom-keyd.inactive {
-    color: #6c7086;
+    color: #727169;
 }
 
 #custom-vibes.on {
-    color: #ff9f1c;
+    color: #d8a657;
 }
 
 #custom-vibes.off {
-    color: #6c7086;
+    color: #727169;
 }
 
 #custom-notification {
-    color: #ff5555;
+    color: #ea6962;
 }

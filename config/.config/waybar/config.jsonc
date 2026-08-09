@@ -26,7 +26,7 @@
     },
 
     "clock": {
-        "format": "  {:%H:%M}   📅  {:%m/%d (%a)}",
+        "format": "  {0:%H:%M}   📅  {0:%m/%d (%a)}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 

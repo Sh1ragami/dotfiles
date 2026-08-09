@@ -2,6 +2,7 @@ android-studio
 antigravity-cli
 brother-hll2400dw
 catppuccin-cursors-mocha
+fcitx5-mozc-ut
 google-chrome
 input-remapper
 obsidian-bin

@@ -43,9 +43,18 @@ window#waybar.hidden {
     border-radius: 50%; /* 真円にする */
     min-width: 32px;
     min-height: 32px;
-    padding: 0px; /* パディングを排除して歪みを防ぐ */
+    padding: 0px !important;
     margin: 6px 12px 4px 6px;
+    color: #bb9af7;
+    text-align: center;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 🔔 通知がある（未読あり）状態の真円ボタン (背景がブルーになり、ベルが暗く反転する) */
+#custom-notification.some {
+    background-color: #7aa2f7;
+    border-color: #7aa2f7;
+    color: #1a1b26;
 }
 
 /* 🕒 中央の時計の島 (上に隙間を作らず画面端に密着、上角丸なし) */
@@ -140,8 +149,4 @@ window#waybar.hidden {
     animation-iteration-count: infinite;
     animation-direction: alternate;
     border-radius: 6px;
-}
-
-#custom-notification {
-    color: #bb9af7; /* Magenta */
 }

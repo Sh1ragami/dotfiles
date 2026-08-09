@@ -124,7 +124,6 @@ texlive-langjapanese
 texlive-meta
 thunar
 tk
-tmux
 trash-cli
 ttf-cascadia-code-nerd
 ttf-jetbrains-mono-nerd

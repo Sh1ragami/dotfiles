@@ -105,14 +105,9 @@
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh tokyonight"
         },
         {
-          "label": "󰈈",
-          "type": "button",
-          "command": "/home/sh1ragami/.config/kitty/scripts/change_opacity.sh up"
-        },
-        {
           "label": "󰈉",
           "type": "button",
-          "command": "/home/sh1ragami/.config/kitty/scripts/change_opacity.sh down"
+          "command": "/home/sh1ragami/.config/kitty/scripts/opacity_slider.py"
         }
       ]
     }

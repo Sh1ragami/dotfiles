@@ -43,10 +43,9 @@ window#waybar.hidden {
     border-radius: 50%; /* 真円にする */
     min-width: 32px;
     min-height: 32px;
-    padding: 0px !important; /* パディングを排除して歪みを防ぐ */
+    padding: 0px; /* パディングを排除して歪みを防ぐ */
     margin: 6px 12px 4px 6px; /* 独立して浮かせる */
     color: #ea6962;
-    text-align: center;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

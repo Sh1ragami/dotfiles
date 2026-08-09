@@ -6,10 +6,10 @@
   "control-center-layer": "top",
   "layer-shell": true,
   "cssPriority": "application",
-  "control-center-margin-top": 10,
-  "control-center-margin-bottom": 10,
-  "control-center-margin-right": 10,
-  "control-center-margin-left": 10,
+  "control-center-margin-top": 12,
+  "control-center-margin-bottom": 12,
+  "control-center-margin-right": 12,
+  "control-center-margin-left": 12,
   "notification-2fa-action": true,
   "notification-inline-replies": false,
   "notification-icon-size": 64,
@@ -20,9 +20,9 @@
   "timeout-critical": 0,
   "fit-to-screen": true,
   "relative-timestamps": true,
-  "control-center-width": 400,
-  "control-center-height": 650,
-  "notification-window-width": 400,
+  "control-center-width": 380,
+  "control-center-height": 600,
+  "notification-window-width": 380,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
   "transition-time": 200,
@@ -33,32 +33,18 @@
   "widgets": [
     "custom/profile",
     "buttons-grid#quick",
-    "mpris",
-    "volume",
-    "backlight",
     "title",
-    "notifications",
-    "buttons-grid#themes"
+    "notifications"
   ],
 
   "widget-config": {
     "title": {
-      "text": "通知",
+      "text": "通知センター",
       "clear-all-button": true,
       "button-text": "すべてクリア"
     },
     "dnd": {
       "text": "Do Not Disturb"
-    },
-    "mpris": {
-      "image-size": 80,
-      "image-radius": 10
-    },
-    "volume": {
-      "label": ""
-    },
-    "backlight": {
-      "label": ""
     },
     "custom/profile": {
       "exec": "/home/sh1ragami/.config/swaync/scripts/profile.sh",
@@ -90,38 +76,17 @@
           "update_command": "swaync-client -D"
         },
         {
-          "label": "󰃭",
-          "type": "button",
-          "command": "sh -c 'swaync-client -cp && gsimplecal'"
-        },
-        {
-          "label": "󰓃",
-          "type": "button",
-          "command": "sh -c 'swaync-client -cp && pavucontrol'"
-        },
-        {
-          "label": "󰌌",
-          "type": "toggle",
-          "active": true,
-          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && wayvibes || pkill wayvibes'",
-          "update_command": "sh -c 'pgrep wayvibes >/dev/null && echo true || echo false'"
-        }
-      ]
-    },
-    "buttons-grid#themes": {
-      "actions": [
-        {
-          "label": "🌅 Sunset",
+          "label": "🌅",
           "type": "button",
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh sunset"
         },
         {
-          "label": "🍇 Catppuccin",
+          "label": "🍇",
           "type": "button",
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh catppuccin"
         },
         {
-          "label": "🌃 Tokyo Night",
+          "label": "🌃",
           "type": "button",
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh tokyonight"
         }

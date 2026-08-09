@@ -1,11 +1,11 @@
 /*
- * Wofi Glassmorphism Space Theme
- * Matches the HyprLuna inspired Waybar design
+ * Wofi Glassmorphism Space-Sunset Theme
+ * Matches the glowing red/orange Waybar design
  */
 
 window {
-    background-color: rgba(17, 17, 27, 0.75); /* 半透明な宇宙の闇 */
-    border: 1px solid rgba(137, 180, 250, 0.2); /* 青白く光る細いボーダー */
+    background-color: rgba(26, 26, 26, 0.75); /* 半透明なダークグレー */
+    border: 1px solid rgba(255, 159, 28, 0.3); /* オレンジに光る細いボーダー */
     border-radius: 16px;
     font-family: "JetBrainsMono Nerd Font", sans-serif;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
@@ -16,14 +16,14 @@ window {
     margin: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    background-color: rgba(30, 30, 46, 0.5);
+    background-color: rgba(35, 35, 35, 0.5);
     color: #cdd6f4;
     padding: 10px;
     font-size: 15px;
 }
 
 #input:focus {
-    border-color: #cba6f7; /* フォーカス時にラベンダーに光る */
+    border-color: #ff5555; /* フォーカス時にレッドに光る */
 }
 
 /* 各アプリアイテム */
@@ -36,8 +36,8 @@ window {
 
 /* 選択時 */
 #entry:selected {
-    background-color: rgba(203, 166, 247, 0.2); /* ほのかなラベンダーの背景 */
-    border: 1px solid rgba(203, 166, 247, 0.4);
+    background-color: rgba(255, 159, 28, 0.15); /* ほのかなオレンジの背景 */
+    border: 1px solid rgba(255, 159, 28, 0.4);
 }
 
 /* アイコン */
@@ -53,6 +53,6 @@ img {
 }
 
 #entry:selected #text {
-    color: #f5c2e7; /* 選択時はピンクに光る */
+    color: #ff5555; /* 選択時はレッドに光る */
     font-weight: bold;
 }

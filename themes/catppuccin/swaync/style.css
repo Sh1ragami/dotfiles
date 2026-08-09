@@ -57,14 +57,16 @@ scrollbar trough {
 }
 
 /* 
- * 🎛️ コントロールセンター (サイドバー本体)
+ * 🎛️ コントロールセンター (サイドバー本体 - 上辺・右辺を画面端に密着)
  */
 .control-center {
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: -5px 10px 40px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(203, 166, 247, 0.25);
-  border-radius: 18px;
-  margin: 10px;
-  background-color: rgba(30, 30, 46, 0.92); /* 不透明度を0.92に引き上げ */
+  border-top: none;
+  border-right: none;
+  border-radius: 0px 0px 0px 20px; /* 左下の角だけ丸くする */
+  margin: 0px;
+  background-color: rgba(30, 30, 46, 0.92);
   padding: 20px;
 }
 

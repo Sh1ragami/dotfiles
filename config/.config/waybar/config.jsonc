@@ -55,8 +55,8 @@
     },
 
     "pulseaudio": {
-        "format": "{icon}  {volume}%",
-        "format-muted": "   Muted",
+        "format": "{icon}{volume}%",
+        "format-muted": " Muted",
         "format-icons": {
             "default": ["", "", ""]
         },
@@ -68,10 +68,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon} {capacity}%",
-        "format-charging": "󱐋 {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{icon} {time}",
+        "format": "{icon}{capacity}%",
+        "format-charging": "󱐋{capacity}%",
+        "format-plugged": "{capacity}%",
+        "format-alt": "{icon}{time}",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
@@ -84,7 +84,7 @@
     },
 
     "memory": {
-        "format": "󰍛 {percentage}%",
+        "format": "󰍛{percentage}%",
         "interval": 10,
         "tooltip-format": "Memory: {used:0.1f}GiB / {total:0.1f}GiB"
     },

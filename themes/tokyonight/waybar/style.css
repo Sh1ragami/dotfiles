@@ -77,13 +77,13 @@ window#waybar.hidden {
     background-color: rgba(125, 207, 255, 0.1);
 }
 
-/* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 */
+/* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 (4pxに引き締めてまとめる) */
 #pulseaudio,
 #network,
 #memory,
 #battery,
 #custom-notification {
-    padding: 0 8px;
+    padding: 0 4px;
 }
 
 #pulseaudio {

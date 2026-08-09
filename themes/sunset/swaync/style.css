@@ -9,7 +9,7 @@
   color: #dfd0b2; /* 暖かみのあるクリーム色 */
 }
 
-/* スクロールバーを完全に非表示にして野暮ったさを排除 */
+/* 極細で目立たないスクロールバー */
 scrollbar,
 scrollbar button,
 scrollbar slider,
@@ -57,15 +57,17 @@ scrollbar trough {
 }
 
 /* 
- * 🎛️ コントロールセンター (サイドバー本体)
+ * 🎛️ コントロールセンター (サイドバー本体 - 上辺・右辺を画面端に密着)
  */
 .control-center {
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: -5px 10px 40px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(234, 105, 98, 0.25);
-  border-radius: 18px;
-  margin: 10px;
-  background-color: rgba(26, 20, 18, 0.92); /* 透明度を下げて視認性を劇的に向上 (0.92) */
-  padding: 20px; /* 余白を広げてスッキリ配置 */
+  border-top: none; /* 上辺の枠線を消す */
+  border-right: none; /* 右辺の枠線を消す */
+  border-radius: 0px 0px 0px 20px; /* 左下の角だけ丸くする (右上・右下・左上は画面端に密着) */
+  margin: 0px; /* マージンを完全ゼロにし、画面端にピタッと接する */
+  background-color: rgba(26, 20, 18, 0.92); /* 視認性を確保する高めの不透明度 */
+  padding: 20px;
 }
 
 /* コントロールセンターのタイトルエリア */
@@ -135,7 +137,7 @@ scrollbar trough {
   border: 1px solid rgba(234, 105, 98, 0.15);
   border-radius: 14px;
   padding: 16px;
-  margin-bottom: 20px; /* 下部との余白を大きく確保 */
+  margin-bottom: 20px;
   background-image: url("file:///home/sh1ragami/.config/swaync/assets/profile-bg.png");
   background-repeat: no-repeat;
   background-position: right center;
@@ -153,11 +155,11 @@ scrollbar trough {
   background-color: rgba(45, 35, 33, 0.25);
   border-radius: 14px;
   padding: 12px;
-  margin-bottom: 24px; /* 下部との余白を大きく確保 */
+  margin-bottom: 24px;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 50%; /* すべてのボタンを丸型に統一 */
+  border-radius: 50%;
   min-width: 44px;
   min-height: 44px;
   margin: 6px;

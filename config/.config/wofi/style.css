@@ -1,11 +1,11 @@
 /*
- * Wofi Glassmorphism Catppuccin Theme
- * Matches the lavender/blue Waybar design
+ * Wofi Glassmorphism Cocoa-Sunset Theme
+ * Matches the warm Terracotta Waybar design
  */
 
 window {
-    background-color: rgba(30, 30, 46, 0.75); /* 半透明なCatppuccin Mocha */
-    border: 1px solid rgba(203, 166, 247, 0.2); /* ラベンダーに光る細いボーダー */
+    background-color: rgba(36, 27, 25, 0.85); /* 半透明なココアブラウン */
+    border: 1px solid rgba(234, 105, 98, 0.2); /* テラコッタに光る細いボーダー */
     border-radius: 16px;
     font-family: "JetBrainsMono Nerd Font", sans-serif;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
@@ -16,14 +16,14 @@ window {
     margin: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    background-color: rgba(45, 45, 60, 0.5);
-    color: #cdd6f4;
+    background-color: rgba(45, 35, 33, 0.5);
+    color: #dfd0b2;
     padding: 10px;
     font-size: 15px;
 }
 
 #input:focus {
-    border-color: #cba6f7; /* フォーカス時にラベンダーに光る */
+    border-color: #ea6962; /* フォーカス時にテラコッタレッドに光る */
 }
 
 /* 各アプリアイテム */
@@ -36,8 +36,8 @@ window {
 
 /* 選択時 */
 #entry:selected {
-    background-color: rgba(203, 166, 247, 0.15); /* ほのかなラベンダーの背景 */
-    border: 1px solid rgba(203, 166, 247, 0.4);
+    background-color: rgba(216, 166, 87, 0.15); /* ほのかな黄・オレンジの背景 */
+    border: 1px solid rgba(216, 166, 87, 0.4);
 }
 
 /* アイコン */
@@ -48,11 +48,11 @@ img {
 
 /* アプリ名テキスト */
 #text {
-    color: #cdd6f4;
+    color: #dfd0b2;
     font-size: 15px;
 }
 
 #entry:selected #text {
-    color: #f5c2e7; /* 選択時はピンクに光る */
+    color: #ea6962; /* 選択時はテラコッタレッドに光る */
     font-weight: bold;
 }

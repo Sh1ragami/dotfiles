@@ -1,15 +1,15 @@
 /*
- * SwayNC (Sway Notification Center) Catppuccin Mocha Minimalist Stylesheet
- * Matches the lavender/blue Catppuccin theme with spacious and clean layout
+ * SwayNC (Sway Notification Center) Cocoa-Terracotta Minimalist Stylesheet
+ * Matches the warm sunset theme with spacious and clean layout
  */
 
 * {
   font-family: "JetBrainsMono Nerd Font", "Ubuntu Nerd Font", sans-serif;
   transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
-  color: #cdd6f4; /* Catppuccin Text */
+  color: #dfd0b2; /* 暖かみのあるクリーム色 */
 }
 
-/* スクロールバーを完全に非表示にして野暮ったさを排除 */
+/* 極細で目立たないスクロールバー */
 scrollbar,
 scrollbar button,
 scrollbar slider,
@@ -31,10 +31,10 @@ scrollbar trough {
  */
 .floating-notifications.background .notification-row .notification-background {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(203, 166, 247, 0.25);
+  border: 1px solid rgba(234, 105, 98, 0.25);
   border-radius: 12px;
   margin: 10px;
-  background-color: rgba(30, 30, 46, 0.9);
+  background-color: rgba(36, 27, 25, 0.9);
   padding: 0;
 }
 
@@ -44,27 +44,29 @@ scrollbar trough {
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  border-color: #f38ba8;
+  border-color: #ea6962;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .summary {
-  color: #cdd6f4;
+  color: #dfd0b2;
   font-weight: bold;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .time {
-  color: #7f849c;
+  color: #928374;
 }
 
 /* 
- * 🎛️ コントロールセンター (サイドバー本体)
+ * 🎛️ コントロールセンター (サイドバー本体 - 上辺・右辺を画面端に密着)
  */
 .control-center {
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(203, 166, 247, 0.25);
-  border-radius: 18px;
-  margin: 10px;
-  background-color: rgba(30, 30, 46, 0.92); /* 不透明度を0.92に引き上げ */
+  box-shadow: -5px 10px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(234, 105, 98, 0.25);
+  border-top: none; /* 上辺の枠線を消す */
+  border-right: none; /* 右辺の枠線を消す */
+  border-radius: 0px 0px 0px 20px; /* 左下の角だけ丸くする (右上・右下・左上は画面端に密着) */
+  margin: 0px; /* マージンを完全ゼロにし、画面端にピタッと接する */
+  background-color: rgba(26, 20, 18, 0.92); /* 視認性を確保する高めの不透明度 */
   padding: 20px;
 }
 
@@ -75,7 +77,7 @@ scrollbar trough {
 }
 
 .control-center .widget-title > label {
-  color: #cdd6f4;
+  color: #dfd0b2;
   font-size: 1.25em;
   font-weight: bold;
 }
@@ -83,24 +85,24 @@ scrollbar trough {
 /* すべてクリアボタン */
 .control-center .widget-title button {
   border-radius: 8px;
-  color: #cdd6f4;
-  background-color: rgba(49, 50, 68, 0.6);
-  border: 1px solid rgba(203, 166, 247, 0.2);
+  color: #dfd0b2;
+  background-color: rgba(45, 35, 33, 0.6);
+  border: 1px solid rgba(234, 105, 98, 0.2);
   padding: 6px 14px;
   font-size: 0.9em;
 }
 
 .control-center .widget-title button:hover {
-  border-color: #cba6f7;
-  background-color: rgba(203, 166, 247, 0.2);
+  border-color: #ea6962;
+  background-color: rgba(234, 105, 98, 0.2);
 }
 
 /* 通知アイテム */
 .control-center .notification-row .notification-background {
   border-radius: 10px;
-  color: #cdd6f4;
-  background-color: rgba(30, 30, 46, 0.5);
-  border: 1px solid rgba(203, 166, 247, 0.15);
+  color: #dfd0b2;
+  background-color: rgba(36, 27, 25, 0.5);
+  border: 1px solid rgba(234, 105, 98, 0.15);
   margin-top: 8px;
 }
 
@@ -110,29 +112,29 @@ scrollbar trough {
 }
 
 .control-center .notification-row .notification-background:hover {
-  background-color: rgba(49, 50, 68, 0.6);
-  border-color: rgba(203, 166, 247, 0.3);
+  background-color: rgba(45, 35, 33, 0.6);
+  border-color: rgba(234, 105, 98, 0.3);
 }
 
 .close-button {
   border-radius: 50%;
-  background-color: rgba(243, 139, 168, 0.15);
-  color: #f38ba8;
+  background-color: rgba(234, 105, 98, 0.15);
+  color: #ea6962;
   padding: 4px;
   margin: 4px;
 }
 
 .close-button:hover {
-  background-color: #f38ba8;
-  color: #11111b;
+  background-color: #ea6962;
+  color: #1e1e1e;
 }
 
 /* 
  * 👤 プロファイルヘッダーウィジェット
  */
 .widget-custom-profile {
-  background-color: rgba(49, 50, 68, 0.4);
-  border: 1px solid rgba(203, 166, 247, 0.15);
+  background-color: rgba(45, 35, 33, 0.4);
+  border: 1px solid rgba(234, 105, 98, 0.15);
   border-radius: 14px;
   padding: 16px;
   margin-bottom: 20px;
@@ -143,14 +145,14 @@ scrollbar trough {
 }
 
 .widget-custom-profile label {
-  color: #cdd6f4;
+  color: #dfd0b2;
 }
 
 /* 
  * ⚙️ クイック設定 ＆ テーマグリッド
  */
 .widget-buttons-grid {
-  background-color: rgba(49, 50, 68, 0.25);
+  background-color: rgba(45, 35, 33, 0.25);
   border-radius: 14px;
   padding: 12px;
   margin-bottom: 24px;
@@ -161,20 +163,20 @@ scrollbar trough {
   min-width: 44px;
   min-height: 44px;
   margin: 6px;
-  background-color: rgba(49, 50, 68, 0.7);
-  border: 1px solid rgba(203, 166, 247, 0.15);
-  color: #cdd6f4;
+  background-color: rgba(45, 35, 33, 0.7);
+  border: 1px solid rgba(234, 105, 98, 0.15);
+  color: #dfd0b2;
   font-size: 1.25rem;
   padding: 0;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  border-color: #cba6f7;
-  background-color: rgba(203, 166, 247, 0.2);
+  border-color: #ea6962;
+  background-color: rgba(234, 105, 98, 0.2);
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:checked {
-  background-color: #cba6f7;
-  color: #11111b;
-  border-color: #cba6f7;
+  background-color: #d8a657;
+  color: #1e1e1e;
+  border-color: #d8a657;
 }

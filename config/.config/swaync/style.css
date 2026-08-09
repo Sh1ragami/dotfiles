@@ -1,343 +1,273 @@
+/*
+ * SwayNC (Sway Notification Center) Cocoa-Terracotta Glassmorphism Stylesheet
+ * Matches the warm sunset theme (HyprLuna style layout)
+ */
 
 * {
-  all: unset;
-  font-size: 14px;
-  font-family: "Ubuntu Nerd Font";
-  transition: 200ms;
+  font-family: "JetBrainsMono Nerd Font", "Ubuntu Nerd Font", sans-serif;
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  color: #dfd0b2; /* 暖かみのあるクリーム色 */
 }
 
+/* スライダー (音量・明るさ) の共通設定 */
 trough highlight {
-  background: #c6d0f5;
+  background: #ea6962; /* 温かいレッド */
 }
 
 scale trough {
   margin: 0rem 1rem;
-  background-color: #414559;
+  background-color: rgba(45, 35, 33, 0.6);
   min-height: 8px;
-  min-width: 70px;
+  border-radius: 8px;
 }
 
 slider {
-  background-color: #8caaee;
+  background-color: #d8a657; /* サンドイエロー */
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 50%;
 }
 
+/* 
+ * 🎴 フローティング通知 (通知ポップアップ)
+ */
 .floating-notifications.background .notification-row .notification-background {
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px #414559;
-  border-radius: 12.6px;
-  margin: 18px;
-  background-color: #303446;
-  color: #c6d0f5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(234, 105, 98, 0.25);
+  border-radius: 16px;
+  margin: 10px;
+  background-color: rgba(36, 27, 25, 0.85); /* すりガラスココア */
   padding: 0;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification {
-  padding: 7px;
-  border-radius: 12.6px;
+  padding: 10px;
+  border-radius: 16px;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  box-shadow: inset 0 0 7px 0 #e78284;
+  border-color: #ea6962;
+  box-shadow: inset 0 0 10px rgba(234, 105, 98, 0.2);
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content {
-  margin: 7px;
+  margin: 8px;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .summary {
-  color: #c6d0f5;
+  color: #dfd0b2;
+  font-weight: bold;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .time {
-  color: #a5adce;
+  color: #928374;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .body {
-  color: #c6d0f5;
+  color: #dfd0b2;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * {
-  min-height: 3.4em;
-}
-
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action {
-  border-radius: 7px;
-  color: #c6d0f5;
-  background-color: #414559;
-  box-shadow: inset 0 0 0 1px #51576d;
-  margin: 7px;
-}
-
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
-  box-shadow: inset 0 0 0 1px #51576d;
-  background-color: #414559;
-  color: #c6d0f5;
-}
-
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
-  box-shadow: inset 0 0 0 1px #51576d;
-  background-color: #85c1dc;
-  color: #c6d0f5;
-}
-
-.floating-notifications.background .notification-row .notification-background .close-button {
-  margin: 7px;
-  padding: 2px;
-  border-radius: 6.3px;
-  color: #303446;
-  background-color: #e78284;
-}
-
-.floating-notifications.background .notification-row .notification-background .close-button:hover {
-  background-color: #ea999c;
-  color: #303446;
-}
-
-.floating-notifications.background .notification-row .notification-background .close-button:active {
-  background-color: #e78284;
-  color: #303446;
-}
-
+/* 
+ * 🎛️ コントロールセンター (サイドバー本体)
+ */
 .control-center {
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px #414559;
-  border-radius: 12.6px;
-  margin: 18px;
-  background-color: #303446;
-  color: #c6d0f5;
-  padding: 14px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(234, 105, 98, 0.25);
+  border-radius: 20px;
+  margin: 10px;
+  background-color: rgba(26, 20, 18, 0.9); /* 深めのココアブラウン半透明 */
+  padding: 16px;
 }
 
 .control-center .widget-title > label {
-  color: #c6d0f5;
-  font-size: 1.3em;
+  color: #dfd0b2;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 8px 0;
 }
 
+/* すべてクリアボタン */
 .control-center .widget-title button {
-  border-radius: 7px;
-  color: #c6d0f5;
-  background-color: #414559;
-  box-shadow: inset 0 0 0 1px #51576d;
-  padding: 8px;
+  border-radius: 10px;
+  color: #dfd0b2;
+  background-color: rgba(45, 35, 33, 0.6);
+  border: 1px solid rgba(234, 105, 98, 0.2);
+  padding: 6px 14px;
 }
 
 .control-center .widget-title button:hover {
-  box-shadow: inset 0 0 0 1px #51576d;
-  background-color: #626880;
-  color: #c6d0f5;
+  border-color: #ea6962;
+  background-color: rgba(234, 105, 98, 0.2);
 }
 
-.control-center .widget-title button:active {
-  box-shadow: inset 0 0 0 1px #51576d;
-  background-color: #85c1dc;
-  color: #303446;
-}
-
+/* コントロールセンター内の通知リスト */
 .control-center .notification-row .notification-background {
-  border-radius: 7px;
-  color: #c6d0f5;
-  background-color: #414559;
-  box-shadow: inset 0 0 0 1px #51576d;
-  margin-top: 14px;
+  border-radius: 12px;
+  color: #dfd0b2;
+  background-color: rgba(36, 27, 25, 0.6);
+  border: 1px solid rgba(234, 105, 98, 0.15);
+  margin-top: 10px;
 }
 
 .control-center .notification-row .notification-background .notification {
-  padding: 7px;
-  border-radius: 7px;
+  padding: 10px;
+  border-radius: 12px;
 }
 
 .control-center .notification-row .notification-background .notification.critical {
-  box-shadow: inset 0 0 7px 0 #e78284;
-}
-
-.control-center .notification-row .notification-background .notification .notification-content {
-  margin: 7px;
-}
-
-.control-center .notification-row .notification-background .notification .notification-content .summary {
-  color: #c6d0f5;
-}
-
-.control-center .notification-row .notification-background .notification .notification-content .time {
-  color: #a5adce;
-}
-
-.control-center .notification-row .notification-background .notification .notification-content .body {
-  color: #c6d0f5;
-}
-
-.control-center .notification-row .notification-background .notification > *:last-child > * {
-  min-height: 3.4em;
-}
-
-.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
-  border-radius: 7px;
-  color: #c6d0f5;
-  background-color: #232634;
-  box-shadow: inset 0 0 0 1px #51576d;
-  margin: 7px;
-}
-
-.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
-  box-shadow: inset 0 0 0 1px #51576d;
-  background-color: #414559;
-  color: #c6d0f5;
-}
-
-.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
-  box-shadow: inset 0 0 0 1px #51576d;
-  background-color: #85c1dc;
-  color: #c6d0f5;
-}
-
-.control-center .notification-row .notification-background .close-button {
-  margin: 7px;
-  padding: 2px;
-  border-radius: 6.3px;
-  color: #303446;
-  background-color: #ea999c;
-}
-
-.close-button {
-  border-radius: 6.3px;
-}
-
-.control-center .notification-row .notification-background .close-button:hover {
-  background-color: #e78284;
-  color: #303446;
-}
-
-.control-center .notification-row .notification-background .close-button:active {
-  background-color: #e78284;
-  color: #303446;
+  border-color: #ea6962;
 }
 
 .control-center .notification-row .notification-background:hover {
-  box-shadow: inset 0 0 0 1px #51576d;
-  background-color: #838ba7;
-  color: #c6d0f5;
+  background-color: rgba(45, 35, 33, 0.7);
+  border-color: rgba(234, 105, 98, 0.35);
 }
 
-.control-center .notification-row .notification-background:active {
-  box-shadow: inset 0 0 0 1px #51576d;
-  background-color: #85c1dc;
-  color: #c6d0f5;
+.close-button {
+  border-radius: 50%;
+  background-color: rgba(234, 105, 98, 0.2);
+  color: #ea6962;
+  padding: 4px;
+  margin: 4px;
 }
 
-.notification.critical progress {
-  background-color: #e78284;
+.close-button:hover {
+  background-color: #ea6962;
+  color: #1e1e1e;
 }
 
-.notification.low progress,
-.notification.normal progress {
-  background-color: #8caaee;
+/* 
+ * 👤 プロファイルヘッダーウィジェット
+ */
+.widget-custom-profile {
+  background-color: rgba(45, 35, 33, 0.5);
+  border: 1px solid rgba(234, 105, 98, 0.2);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  background-image: url("file:///home/sh1ragami/.config/swaync/assets/profile-bg.png"); /* アバター背景用のプレースホルダー */
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
 }
 
-.control-center-dnd {
-  margin-top: 5px;
-  border-radius: 8px;
-  background: #414559;
-  border: 1px solid #51576d;
-  box-shadow: none;
+.widget-custom-profile label {
+  color: #dfd0b2;
 }
 
-.control-center-dnd:checked {
-  background: #414559;
-}
-
-.control-center-dnd slider {
-  background: #51576d;
-  border-radius: 8px;
-}
-
-.widget-dnd {
-  margin: 0px;
-  font-size: 1.1rem;
-}
-
-.widget-dnd > switch {
-  font-size: initial;
-  border-radius: 8px;
-  background: #414559;
-  border: 1px solid #51576d;
-  box-shadow: none;
-}
-
-.widget-dnd > switch:checked {
-  background: #414559;
-}
-
-.widget-dnd > switch slider {
-  background: #51576d;
-  border-radius: 8px;
-  border: 1px solid #737994;
-}
-
-.widget-mpris .widget-mpris-player {
-  background: #414559;
-  padding: 7px;
-}
-
-.widget-mpris .widget-mpris-title {
-  font-size: 1.2rem;
-}
-
-.widget-mpris .widget-mpris-subtitle {
-  font-size: 0.8rem;
-}
-
-.widget-menubar > box > .menu-button-bar > button > label {
-  font-size: 3rem;
-  padding: 0.5rem 2rem;
-}
-
-.widget-menubar > box > .menu-button-bar > :last-child {
-  color: #e78284;
-}
-
-.power-buttons button:hover,
-.powermode-buttons button:hover,
-.screenshot-buttons button:hover {
-  background: #414559;
-}
-
-.control-center .widget-label > label {
-  color: #c6d0f5;
-  font-size: 2rem;
-}
-
+/* 
+ * ⚙️ クイック設定グリッド (ボタンを丸型に配置)
+ */
 .widget-buttons-grid {
-  padding-top: 1rem;
+  background-color: rgba(45, 35, 33, 0.3);
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button label {
-  font-size: 2.5rem;
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  border-radius: 50%; /* 丸いトグルボタン */
+  min-width: 44px;
+  min-height: 44px;
+  margin: 6px;
+  background-color: rgba(45, 35, 33, 0.8);
+  border: 1px solid rgba(234, 105, 98, 0.2);
+  color: #dfd0b2;
+  font-size: 1.3rem;
+  padding: 0;
 }
 
-.widget-volume {
-  padding-top: 1rem;
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  border-color: #ea6962;
+  background-color: rgba(234, 105, 98, 0.2);
 }
 
-.widget-volume label {
-  font-size: 1.5rem;
-  color: #85c1dc;
+.widget-buttons-grid > flowbox > flowboxchild > button:checked {
+  background-color: #d8a657; /* トグルON時はオレンジ・黄に光る */
+  color: #1e1e1e;
+  border-color: #d8a657;
 }
 
-.widget-volume trough highlight {
-  background: #85c1dc;
+/* 
+ * 🎨 テーマ切り替えウィジェット (下部ボタンリスト)
+ */
+#themes.widget-buttons-grid {
+  background-color: rgba(45, 35, 33, 0.4);
+  border: 1px solid rgba(234, 105, 98, 0.2);
+  border-radius: 14px;
+  padding: 12px;
+  margin-top: 14px;
 }
 
-.widget-backlight trough highlight {
-  background: #e5c890;
+#themes.widget-buttons-grid > flowbox > flowboxchild > button {
+  border-radius: 10px; /* テーマ切替は押しやすい丸角長方形 */
+  min-width: 100px;
+  min-height: 38px;
+  margin: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  background-color: rgba(36, 27, 25, 0.7);
+  border: 1px solid rgba(234, 105, 98, 0.15);
+  color: #dfd0b2;
 }
 
+#themes.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  border-color: #ea6962;
+  background-color: rgba(234, 105, 98, 0.25);
+  color: #ea6962;
+}
+
+/* 
+ * 🎵 MPRIS メディアプレイヤー
+ */
+.widget-mpris {
+  background-color: rgba(45, 35, 33, 0.4);
+  border: 1px solid rgba(234, 105, 98, 0.15);
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.widget-mpris-player {
+  background-color: transparent;
+  padding: 6px;
+}
+
+.widget-mpris-title {
+  font-weight: bold;
+  color: #dfd0b2;
+}
+
+.widget-mpris-subtitle {
+  color: #928374;
+}
+
+.widget-mpris-controller button {
+  border-radius: 50%;
+  min-width: 32px;
+  min-height: 32px;
+  margin: 0 4px;
+  background-color: rgba(45, 35, 33, 0.6);
+  color: #dfd0b2;
+}
+
+.widget-mpris-controller button:hover {
+  background-color: rgba(234, 105, 98, 0.2);
+  color: #ea6962;
+}
+
+/* 🔊 音量・明るさスライダーの調整 */
+.widget-volume,
+.widget-backlight {
+  background-color: rgba(45, 35, 33, 0.3);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+}
+
+.widget-volume label,
 .widget-backlight label {
-  font-size: 1.5rem;
-  color: #e5c890;
-}
-
-.widget-backlight .KB {
-  padding-bottom: 1rem;
-}
-
-.image {
-  padding-right: 0.5rem;
+  color: #d8a657;
+  font-size: 1.2rem;
+  margin-right: 8px;
 }

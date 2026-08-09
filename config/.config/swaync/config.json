@@ -6,10 +6,10 @@
   "control-center-layer": "top",
   "layer-shell": true,
   "cssPriority": "application",
-  "control-center-margin-top": 0,
-  "control-center-margin-bottom": 0,
-  "control-center-margin-right": 0,
-  "control-center-margin-left": 0,
+  "control-center-margin-top": 10,
+  "control-center-margin-bottom": 10,
+  "control-center-margin-right": 10,
+  "control-center-margin-left": 10,
   "notification-2fa-action": true,
   "notification-inline-replies": false,
   "notification-icon-size": 64,
@@ -20,45 +20,30 @@
   "timeout-critical": 0,
   "fit-to-screen": true,
   "relative-timestamps": true,
-  "control-center-width": 500,
-  "control-center-height": 600,
-  "notification-window-width": 500,
+  "control-center-width": 400,
+  "control-center-height": 850,
+  "notification-window-width": 400,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
   "transition-time": 200,
   "hide-on-clear": false,
   "hide-on-action": true,
   "script-fail-notify": true,
-  "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
-      "urgency": "Normal"
-    },
-    "example-action-script": {
-      "exec": "echo 'Do something actionable!'",
-      "urgency": "Normal",
-      "run-on": "action"
-    }
-  },
-  "notification-visibility": {
-    "example-name": {
-      "state": "muted",
-      "urgency": "Low",
-      "app-name": "Spotify"
-    }
-  },
+
   "widgets": [
-    "title",
-    "dnd",
+    "custom/profile",
+    "buttons-grid#quick",
     "mpris",
     "volume",
     "backlight",
-    "buttons-grid",
-    "notifications"
+    "title",
+    "notifications",
+    "buttons-grid#themes"
   ],
+
   "widget-config": {
     "title": {
-      "text": "コントロールセンター",
+      "text": "通知",
       "clear-all-button": true,
       "button-text": "すべてクリア"
     },
@@ -66,8 +51,8 @@
       "text": "Do Not Disturb"
     },
     "mpris": {
-      "image-size": 96,
-      "image-radius": 12
+      "image-size": 80,
+      "image-radius": 10
     },
     "volume": {
       "label": ""
@@ -75,33 +60,70 @@
     "backlight": {
       "label": ""
     },
-    "buttons-grid": {
+    "custom/profile": {
+      "exec": "/home/sh1ragami/.config/swaync/scripts/profile.sh",
+      "return-type": "json",
+      "interval": 30,
+      "escape": false
+    },
+    "buttons-grid#quick": {
       "actions": [
         {
-          "label": "  Wi-Fi",
+          "label": "",
           "type": "toggle",
           "active": true,
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
           "update_command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
         },
         {
-          "label": "󰂯 Bluetooth",
+          "label": "󰂯",
           "type": "toggle",
           "active": true,
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && bluetoothctl power on || bluetoothctl power off'",
           "update_command": "sh -c '[[ $(bluetoothctl show | grep \"PowerState\") == *\"on\"* ]] && echo true || echo false'"
         },
         {
-          "label": "󰌌  Vibes",
+          "label": "󰍶",
+          "type": "toggle",
+          "active": false,
+          "command": "swaync-client -d",
+          "update_command": "swaync-client -D"
+        },
+        {
+          "label": "󰃭",
+          "type": "button",
+          "command": "sh -c 'swaync-client -cp && gsimplecal'"
+        },
+        {
+          "label": "󰓃",
+          "type": "button",
+          "command": "sh -c 'swaync-client -cp && pavucontrol'"
+        },
+        {
+          "label": "󰌌",
           "type": "toggle",
           "active": true,
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && wayvibes || pkill wayvibes'",
           "update_command": "sh -c 'pgrep wayvibes >/dev/null && echo true || echo false'"
+        }
+      ]
+    },
+    "buttons-grid#themes": {
+      "actions": [
+        {
+          "label": "🌅 Sunset",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh sunset"
         },
         {
-          "label": "🎨 テーマ切替",
+          "label": "🍇 Catppuccin",
           "type": "button",
-          "command": "sh -c 'sleep 0.1 && swaync-client -cp && /home/sh1ragami/.config/hypr/scripts/theme_selector.sh'"
+          "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh catppuccin"
+        },
+        {
+          "label": "🌃 Tokyo Night",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh tokyonight"
         }
       ]
     }

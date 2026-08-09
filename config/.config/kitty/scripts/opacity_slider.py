@@ -21,10 +21,25 @@ class OpacitySlider(Gtk.Window):
         
         # 画面の右上 (SwayNCサイドバーの左隣) に配置
         display = Gdk.Display.get_default()
-        monitor = display.get_primary_monitor()
-        geometry = monitor.get_geometry()
-        # 右上端 (x: 画面幅 - ウィンドウ幅 - 410px (SwayNCマージン込の幅), y: 80px)
-        self.move(geometry.width - 240 - 410, 80)
+        monitor = display.get_primary_monitor() if display else None
+        
+        win_x = 1200
+        win_y = 80
+        
+        if monitor:
+            try:
+                geometry = monitor.get_geometry()
+                win_x = geometry.width - 240 - 410
+                win_y = 80
+            except Exception:
+                pass
+        else:
+            screen = Gdk.Screen.get_default()
+            if screen:
+                win_x = screen.get_width() - 240 - 410
+                win_y = 80
+
+        self.move(win_x, win_y)
 
         # 現在の透過度を opacity.conf からロード
         self.conf_file = os.path.expanduser("~/.config/kitty/opacity.conf")
@@ -72,9 +87,16 @@ class OpacitySlider(Gtk.Window):
         # 設定ファイル書き込み
         with open(self.conf_file, "w") as f:
             f.write(f"background_opacity {val}\n")
-        # リモートコントロールによるリアルタイム変更
-        subprocess.run(["kitty", "@", "set-background-opacity", str(val)], stderr=subprocess.DEVNULL)
-        # 互換用のシグナル送信
+        
+        # メインの kitty.conf を touch して再読み込みを強制トリガー
+        main_conf = os.path.expanduser("~/.config/kitty/kitty.conf")
+        if os.path.exists(main_conf):
+            try:
+                os.utime(main_conf, None)
+            except Exception:
+                pass
+        
+        # 起動中のすべてのKittyにシグナルを送信
         subprocess.run(["pkill", "-USR1", "kitty"], stderr=subprocess.DEVNULL)
 
     def apply_css(self):

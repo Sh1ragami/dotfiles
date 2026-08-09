@@ -1,28 +1,28 @@
 /*
- * SwayNC (Sway Notification Center) Cocoa-Terracotta Glassmorphism Stylesheet
- * Matches the warm sunset theme (HyprLuna style layout)
+ * SwayNC (Sway Notification Center) Catppuccin Mocha Glassmorphism Stylesheet
+ * Lavender and blue accent colors for a cool aesthetic
  */
 
 * {
   font-family: "JetBrainsMono Nerd Font", "Ubuntu Nerd Font", sans-serif;
   transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  color: #dfd0b2; /* 暖かみのあるクリーム色 */
+  color: #cdd6f4; /* Catppuccin Text */
 }
 
 /* スライダー (音量・明るさ) の共通設定 */
 trough highlight {
-  background: #ea6962; /* 温かいレッド */
+  background: #cba6f7; /* Lavender */
 }
 
 scale trough {
   margin: 0rem 1rem;
-  background-color: rgba(45, 35, 33, 0.6);
+  background-color: rgba(49, 50, 68, 0.6);
   min-height: 8px;
   border-radius: 8px;
 }
 
 slider {
-  background-color: #d8a657; /* サンドイエロー */
+  background-color: #89b4fa; /* Blue */
   min-width: 16px;
   min-height: 16px;
   border-radius: 50%;
@@ -33,10 +33,10 @@ slider {
  */
 .floating-notifications.background .notification-row .notification-background {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(234, 105, 98, 0.25);
+  border: 1px solid rgba(203, 166, 247, 0.25);
   border-radius: 16px;
   margin: 10px;
-  background-color: rgba(36, 27, 25, 0.7); /* すりガラスココア (透明度を高めてすりガラス感を向上) */
+  background-color: rgba(30, 30, 46, 0.7); /* すりガラス Catppuccin Base */
   padding: 0;
 }
 
@@ -46,8 +46,8 @@ slider {
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  border-color: #ea6962;
-  box-shadow: inset 0 0 10px rgba(234, 105, 98, 0.2);
+  border-color: #f38ba8; /* Red */
+  box-shadow: inset 0 0 10px rgba(243, 139, 168, 0.2);
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content {
@@ -55,16 +55,16 @@ slider {
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .summary {
-  color: #dfd0b2;
+  color: #cdd6f4;
   font-weight: bold;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .time {
-  color: #928374;
+  color: #7f849c;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .body {
-  color: #dfd0b2;
+  color: #cdd6f4;
 }
 
 /* 
@@ -72,15 +72,15 @@ slider {
  */
 .control-center {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(234, 105, 98, 0.25);
+  border: 1px solid rgba(203, 166, 247, 0.25);
   border-radius: 20px;
   margin: 10px;
-  background-color: rgba(26, 20, 18, 0.65); /* 深めのココアブラウン半透明 (0.9 -> 0.65 で超すりガラス化) */
+  background-color: rgba(30, 30, 46, 0.65); /* すりガラス Catppuccin Base */
   padding: 16px;
 }
 
 .control-center .widget-title > label {
-  color: #dfd0b2;
+  color: #cdd6f4;
   font-size: 1.4em;
   font-weight: bold;
   padding: 8px 0;
@@ -89,23 +89,23 @@ slider {
 /* すべてクリアボタン */
 .control-center .widget-title button {
   border-radius: 10px;
-  color: #dfd0b2;
-  background-color: rgba(45, 35, 33, 0.6);
-  border: 1px solid rgba(234, 105, 98, 0.2);
+  color: #cdd6f4;
+  background-color: rgba(49, 50, 68, 0.6);
+  border: 1px solid rgba(203, 166, 247, 0.2);
   padding: 6px 14px;
 }
 
 .control-center .widget-title button:hover {
-  border-color: #ea6962;
-  background-color: rgba(234, 105, 98, 0.2);
+  border-color: #cba6f7;
+  background-color: rgba(203, 166, 247, 0.2);
 }
 
 /* コントロールセンター内の通知リスト */
 .control-center .notification-row .notification-background {
   border-radius: 12px;
-  color: #dfd0b2;
-  background-color: rgba(36, 27, 25, 0.5);
-  border: 1px solid rgba(234, 105, 98, 0.15);
+  color: #cdd6f4;
+  background-color: rgba(30, 30, 46, 0.5);
+  border: 1px solid rgba(203, 166, 247, 0.15);
   margin-top: 10px;
 }
 
@@ -115,33 +115,33 @@ slider {
 }
 
 .control-center .notification-row .notification-background .notification.critical {
-  border-color: #ea6962;
+  border-color: #f38ba8;
 }
 
 .control-center .notification-row .notification-background:hover {
-  background-color: rgba(45, 35, 33, 0.6);
-  border-color: rgba(234, 105, 98, 0.35);
+  background-color: rgba(49, 50, 68, 0.6);
+  border-color: rgba(203, 166, 247, 0.35);
 }
 
 .close-button {
   border-radius: 50%;
-  background-color: rgba(234, 105, 98, 0.2);
-  color: #ea6962;
+  background-color: rgba(243, 139, 168, 0.2);
+  color: #f38ba8;
   padding: 4px;
   margin: 4px;
 }
 
 .close-button:hover {
-  background-color: #ea6962;
-  color: #1e1e1e;
+  background-color: #f38ba8;
+  color: #11111b;
 }
 
 /* 
  * 👤 プロファイルヘッダーウィジェット
  */
 .widget-custom-profile {
-  background-color: rgba(45, 35, 33, 0.4);
-  border: 1px solid rgba(234, 105, 98, 0.15);
+  background-color: rgba(49, 50, 68, 0.4);
+  border: 1px solid rgba(203, 166, 247, 0.15);
   border-radius: 14px;
   padding: 14px;
   margin-bottom: 10px;
@@ -152,77 +152,77 @@ slider {
 }
 
 .widget-custom-profile label {
-  color: #dfd0b2;
+  color: #cdd6f4;
 }
 
 /* 
  * ⚙️ クイック設定グリッド (ボタンを丸型に配置)
  */
 .widget-buttons-grid {
-  background-color: rgba(45, 35, 33, 0.25);
+  background-color: rgba(49, 50, 68, 0.25);
   border-radius: 14px;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 50%; /* 丸いトグルボタン */
+  border-radius: 50%;
   min-width: 44px;
   min-height: 44px;
   margin: 6px;
-  background-color: rgba(45, 35, 33, 0.7);
-  border: 1px solid rgba(234, 105, 98, 0.15);
-  color: #dfd0b2;
+  background-color: rgba(49, 50, 68, 0.7);
+  border: 1px solid rgba(203, 166, 247, 0.15);
+  color: #cdd6f4;
   font-size: 1.3rem;
   padding: 0;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  border-color: #ea6962;
-  background-color: rgba(234, 105, 98, 0.2);
+  border-color: #cba6f7;
+  background-color: rgba(203, 166, 247, 0.2);
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:checked {
-  background-color: #d8a657; /* トグルON時はオレンジ・黄に光る */
-  color: #1e1e1e;
-  border-color: #d8a657;
+  background-color: #cba6f7; /* トグルON時はラベンダーに光る */
+  color: #11111b;
+  border-color: #cba6f7;
 }
 
 /* 
  * 🎨 テーマ切り替えウィジェット (下部ボタンリスト)
  */
 #themes.widget-buttons-grid {
-  background-color: rgba(45, 35, 33, 0.3);
-  border: 1px solid rgba(234, 105, 98, 0.15);
+  background-color: rgba(49, 50, 68, 0.3);
+  border: 1px solid rgba(203, 166, 247, 0.15);
   border-radius: 14px;
   padding: 12px;
   margin-top: 14px;
 }
 
 #themes.widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 10px; /* テーマ切替は押しやすい丸角長方形 */
+  border-radius: 10px;
   min-width: 100px;
   min-height: 38px;
   margin: 4px;
   font-size: 0.95rem;
   font-weight: bold;
-  background-color: rgba(36, 27, 25, 0.6);
-  border: 1px solid rgba(234, 105, 98, 0.15);
-  color: #dfd0b2;
+  background-color: rgba(30, 30, 46, 0.6);
+  border: 1px solid rgba(203, 166, 247, 0.15);
+  color: #cdd6f4;
 }
 
 #themes.widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  border-color: #ea6962;
-  background-color: rgba(234, 105, 98, 0.2);
-  color: #ea6962;
+  border-color: #cba6f7;
+  background-color: rgba(203, 166, 247, 0.2);
+  color: #cba6f7;
 }
 
 /* 
  * 🎵 MPRIS メディアプレイヤー
  */
 .widget-mpris {
-  background-color: rgba(45, 35, 33, 0.3);
-  border: 1px solid rgba(234, 105, 98, 0.15);
+  background-color: rgba(49, 50, 68, 0.3);
+  border: 1px solid rgba(203, 166, 247, 0.15);
   border-radius: 14px;
   padding: 10px;
   margin-bottom: 10px;
@@ -235,11 +235,11 @@ slider {
 
 .widget-mpris-title {
   font-weight: bold;
-  color: #dfd0b2;
+  color: #cdd6f4;
 }
 
 .widget-mpris-subtitle {
-  color: #928374;
+  color: #7f849c;
 }
 
 .widget-mpris-controller button {
@@ -247,19 +247,19 @@ slider {
   min-width: 32px;
   min-height: 32px;
   margin: 0 4px;
-  background-color: rgba(45, 35, 33, 0.5);
-  color: #dfd0b2;
+  background-color: rgba(49, 50, 68, 0.5);
+  color: #cdd6f4;
 }
 
 .widget-mpris-controller button:hover {
-  background-color: rgba(234, 105, 98, 0.2);
-  color: #ea6962;
+  background-color: rgba(203, 166, 247, 0.2);
+  color: #cba6f7;
 }
 
 /* 🔊 音量・明るさスライダーの調整 */
 .widget-volume,
 .widget-backlight {
-  background-color: rgba(45, 35, 33, 0.25);
+  background-color: rgba(49, 50, 68, 0.25);
   border-radius: 14px;
   padding: 10px 14px;
   margin-bottom: 8px;
@@ -267,7 +267,7 @@ slider {
 
 .widget-volume label,
 .widget-backlight label {
-  color: #d8a657;
+  color: #89b4fa;
   font-size: 1.2rem;
   margin-right: 8px;
 }

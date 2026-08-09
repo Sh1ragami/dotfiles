@@ -70,6 +70,7 @@ window#waybar.hidden {
 /* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 */
 #pulseaudio,
 #network,
+#memory,
 #battery,
 #custom-keyd,
 #custom-vibes,
@@ -91,6 +92,10 @@ window#waybar.hidden {
 
 #network.disconnected {
     color: #f7768e;
+}
+
+#memory {
+    color: #e0af68; /* Yellow */
 }
 
 #battery {

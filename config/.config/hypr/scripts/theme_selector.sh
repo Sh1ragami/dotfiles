@@ -27,7 +27,7 @@ cp "$HOME/dotfiles/themes/$theme/hypr/theme.conf" "$HOME/.config/hypr/theme.conf
 # デスクトップ環境のリロード
 hyprctl reload || true
 pkill waybar || true
-nohup waybar > /dev/null 2>&1 &
+hyprctl dispatch exec waybar
 
 # 起動中のKittyに設定再読み込みのシグナルを送信
 pkill -USR1 kitty || true

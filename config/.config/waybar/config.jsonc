@@ -28,10 +28,10 @@
         "on-click": "gsimplecal"
     },
 
-    // ハードウェア情報の島 (音量、ネットワーク、バッテリー)
+    // ハードウェア情報の島 (音量、ネットワーク、メモリ、バッテリー)
     "group/hardware": {
         "orientation": "horizontal",
-        "modules": ["pulseaudio", "network", "battery"]
+        "modules": ["pulseaudio", "network", "memory", "battery"]
     },
 
     // 便利ツールの島 (キーボードマッピング、Vibes、通知)
@@ -81,6 +81,12 @@
         "format-disconnected": "⚠  offline",
         "tooltip-format": "{ifname} via {gwaddr}\n{essid}",
         "on-click": "~/.config/hypr/scripts/toggle_wifi.sh"
+    },
+
+    "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 10,
+        "tooltip-format": "Memory: {used:0.1f}GiB / {total:0.1f}GiB"
     },
 
     "custom/notification": {

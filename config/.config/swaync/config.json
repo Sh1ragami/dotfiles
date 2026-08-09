@@ -21,7 +21,7 @@
   "fit-to-screen": true,
   "relative-timestamps": true,
   "control-center-width": 400,
-  "control-center-height": 850,
+  "control-center-height": 650,
   "notification-window-width": 400,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",

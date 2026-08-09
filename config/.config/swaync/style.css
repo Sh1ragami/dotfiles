@@ -9,6 +9,22 @@
   color: #dfd0b2; /* 暖かみのあるクリーム色 */
 }
 
+/* 極細で目立たないスクロールバー */
+scrollbar {
+  background: transparent;
+  width: 4px;
+}
+
+scrollbar slider {
+  background: rgba(234, 105, 98, 0.3); /* ほのかな赤 */
+  border-radius: 4px;
+  min-width: 4px;
+}
+
+scrollbar trough {
+  background: transparent;
+}
+
 /* スライダー (音量・明るさ) の共通設定 */
 trough highlight {
   background: #ea6962; /* 温かいレッド */
@@ -36,7 +52,7 @@ slider {
   border: 1px solid rgba(234, 105, 98, 0.25);
   border-radius: 16px;
   margin: 10px;
-  background-color: rgba(36, 27, 25, 0.7); /* すりガラスココア (透明度を高めてすりガラス感を向上) */
+  background-color: rgba(36, 27, 25, 0.82);
   padding: 0;
 }
 
@@ -75,7 +91,7 @@ slider {
   border: 1px solid rgba(234, 105, 98, 0.25);
   border-radius: 20px;
   margin: 10px;
-  background-color: rgba(26, 20, 18, 0.65); /* 深めのココアブラウン半透明 (0.9 -> 0.65 で超すりガラス化) */
+  background-color: rgba(26, 20, 18, 0.78); /* 不透明度を0.78に引き上げ、文字の読みやすさを確保 */
   padding: 16px;
 }
 
@@ -166,7 +182,7 @@ slider {
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 50%; /* 丸いトグルボタン */
+  border-radius: 50%;
   min-width: 44px;
   min-height: 44px;
   margin: 6px;
@@ -183,13 +199,13 @@ slider {
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:checked {
-  background-color: #d8a657; /* トグルON時はオレンジ・黄に光る */
+  background-color: #d8a657;
   color: #1e1e1e;
   border-color: #d8a657;
 }
 
 /* 
- * 🎨 テーマ切り替えウィジェット (下部ボタンリスト)
+ * 🎨 テーマ切り替えウィジェット (楕円ではなくシンプルな角丸四角形に変更)
  */
 #themes.widget-buttons-grid {
   background-color: rgba(45, 35, 33, 0.3);
@@ -200,7 +216,7 @@ slider {
 }
 
 #themes.widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 10px; /* テーマ切替は押しやすい丸角長方形 */
+  border-radius: 6px; /* 楕円からシンプルな角丸四角形に変更 */
   min-width: 100px;
   min-height: 38px;
   margin: 4px;

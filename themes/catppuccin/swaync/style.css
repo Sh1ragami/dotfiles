@@ -9,6 +9,22 @@
   color: #cdd6f4; /* Catppuccin Text */
 }
 
+/* 極細で目立たないスクロールバー */
+scrollbar {
+  background: transparent;
+  width: 4px;
+}
+
+scrollbar slider {
+  background: rgba(203, 166, 247, 0.3); /* ほのかなラベンダー */
+  border-radius: 4px;
+  min-width: 4px;
+}
+
+scrollbar trough {
+  background: transparent;
+}
+
 /* スライダー (音量・明るさ) の共通設定 */
 trough highlight {
   background: #cba6f7; /* Lavender */
@@ -36,7 +52,7 @@ slider {
   border: 1px solid rgba(203, 166, 247, 0.25);
   border-radius: 16px;
   margin: 10px;
-  background-color: rgba(30, 30, 46, 0.7); /* すりガラス Catppuccin Base */
+  background-color: rgba(30, 30, 46, 0.82);
   padding: 0;
 }
 
@@ -46,7 +62,7 @@ slider {
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  border-color: #f38ba8; /* Red */
+  border-color: #f38ba8;
   box-shadow: inset 0 0 10px rgba(243, 139, 168, 0.2);
 }
 
@@ -75,7 +91,7 @@ slider {
   border: 1px solid rgba(203, 166, 247, 0.25);
   border-radius: 20px;
   margin: 10px;
-  background-color: rgba(30, 30, 46, 0.65); /* すりガラス Catppuccin Base */
+  background-color: rgba(30, 30, 46, 0.78); /* 不透明度を0.78に引き上げ、文字の読みやすさを確保 */
   padding: 16px;
 }
 
@@ -183,13 +199,13 @@ slider {
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:checked {
-  background-color: #cba6f7; /* トグルON時はラベンダーに光る */
+  background-color: #cba6f7;
   color: #11111b;
   border-color: #cba6f7;
 }
 
 /* 
- * 🎨 テーマ切り替えウィジェット (下部ボタンリスト)
+ * 🎨 テーマ切り替えウィジェット (楕円ではなくシンプルな角丸四角形に変更)
  */
 #themes.widget-buttons-grid {
   background-color: rgba(49, 50, 68, 0.3);
@@ -200,7 +216,7 @@ slider {
 }
 
 #themes.widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 10px;
+  border-radius: 6px; /* 楕円からシンプルな角丸四角形に変更 */
   min-width: 100px;
   min-height: 38px;
   margin: 4px;

@@ -34,7 +34,6 @@ window#waybar.hidden {
     border-radius: 16px;
     padding: 3px 14px;
     margin: 4px 6px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4); /* 立体感を出す柔らかい影 */
     transition: all 0.3s ease;
 }
 
@@ -43,7 +42,6 @@ window#waybar.hidden {
 #group-hardware:hover,
 #group-tools:hover {
     border-color: rgba(203, 166, 247, 0.4); /* ホバー時にうっすらパープルに光る */
-    box-shadow: 0px 4px 20px rgba(203, 166, 247, 0.15);
 }
 
 /* ワークスペースボタン設定 */

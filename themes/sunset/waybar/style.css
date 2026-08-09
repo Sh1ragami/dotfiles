@@ -23,24 +23,37 @@ window#waybar.hidden {
 
 /* 
  * 🏝️ 各島（アイランド）の設定
- * 各モジュール（ワークスペース、時計、ハードウェア、ツール）のみをカプセルとして浮かせる
  */
+
+/* 左右に浮いている島 (ワークスペース、ハードウェア情報、通知) */
 #workspaces,
-#clock,
 #group-hardware,
-#group-tools {
+#custom-notification {
     background-color: rgba(36, 27, 25, 0.8); /* 落ち着いたココアブラウンの半透明背景 */
     border: 1px solid rgba(234, 105, 98, 0.25); /* テラコッタの細いボーダー */
     border-radius: 14px;
     padding: 3px 12px;
-    margin: 4px 6px;
+    margin: 6px 6px 4px 6px; /* 上部に隙間を作り、浮いているように配置 */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 🕒 中央の時計の島 (上に隙間を作らず画面端に密着、上角丸なし) */
+#clock {
+    background-color: rgba(36, 27, 25, 0.8);
+    border: 1px solid rgba(234, 105, 98, 0.25);
+    border-top: none; /* 上の境界線を排除 */
+    border-radius: 0px 0px 14px 14px; /* 下部のみ角丸 */
+    padding: 3px 18px;
+    margin: 0px 6px 4px 6px; /* 上部マージンを完全ゼロ化 */
+    color: #dfd0b2;
+    font-size: 13px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #workspaces:hover,
 #clock:hover,
 #group-hardware:hover,
-#group-tools:hover {
+#custom-notification:hover {
     border-color: rgba(234, 105, 98, 0.5); /* ホバー時に優しく光る */
 }
 
@@ -64,19 +77,11 @@ window#waybar.hidden {
     background-color: rgba(234, 105, 98, 0.1);
 }
 
-/* 🕒 中央の時計設定 */
-#clock {
-    color: #dfd0b2;
-    font-size: 13px;
-}
-
 /* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 */
 #pulseaudio,
 #network,
 #memory,
 #battery,
-#custom-keyd,
-#custom-vibes,
 #custom-notification {
     padding: 0 8px;
 }
@@ -125,23 +130,6 @@ window#waybar.hidden {
     animation-iteration-count: infinite;
     animation-direction: alternate;
     border-radius: 6px;
-}
-
-/* 便利ツール */
-#custom-keyd {
-    color: #dfd0b2;
-}
-
-#custom-keyd.inactive {
-    color: #727169;
-}
-
-#custom-vibes.on {
-    color: #d8a657;
-}
-
-#custom-vibes.off {
-    color: #727169;
 }
 
 #custom-notification {

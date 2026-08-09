@@ -2,7 +2,7 @@
     "layer": "top",
     "position": "top",
     "height": 40,
-    "margin-top": 6,
+    "margin-top": 0,
     "margin-left": 12,
     "margin-right": 12,
     "margin-bottom": 0,
@@ -12,7 +12,7 @@
     "modules-center": ["clock"],
     "modules-right": [
         "group/hardware",
-        "group/tools"
+        "custom/notification"
     ],
 
     "hyprland/workspaces": {
@@ -76,7 +76,7 @@
     },
 
     "network": {
-        "format-wifi": "  {signalStrength}%",
+        "format-wifi": "",
         "format-ethernet": "󰈀  wired",
         "format-disconnected": "⚠  offline",
         "tooltip-format": "{ifname} via {gwaddr}\n{essid}",

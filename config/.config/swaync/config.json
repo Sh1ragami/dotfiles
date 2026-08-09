@@ -76,6 +76,20 @@
           "update_command": "swaync-client -D"
         },
         {
+          "label": "󰌌",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && sudo systemctl start keyd || sudo systemctl stop keyd'",
+          "update_command": "sh -c 'systemctl is-active --quiet keyd && echo true || echo false'"
+        },
+        {
+          "label": "󰌐",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && wayvibes || pkill wayvibes'",
+          "update_command": "sh -c 'pgrep wayvibes >/dev/null && echo true || echo false'"
+        },
+        {
           "label": "🌅",
           "type": "button",
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh sunset"

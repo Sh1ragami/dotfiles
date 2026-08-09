@@ -1,6 +1,6 @@
 /*
- * Island-Style Waybar Theme (Catppuccin Mocha Theme)
- * Lavender and blue accent colors for a clean aesthetic
+ * Island-Style Waybar Theme (Terracotta / Cocoa Brown Sunset Theme)
+ * Matches glowing red/orange borders and warm desktop setups (HyprLuna concept)
  */
 
 * {
@@ -11,40 +11,56 @@
     border-radius: 0;
 }
 
-/* バー全体のコンテナは完全に透明 */
+/* バー全体のコンテナは完全に透明（余計な背景をすべて排除） */
 window#waybar {
     background-color: transparent;
-    color: #cdd6f4;
+    color: #dfd0b2;
 }
 
 window#waybar.hidden {
     opacity: 0.2;
 }
 
-/* 🏝️ 各島（アイランド）の設定 */
+/* 
+ * 🏝️ 各島（アイランド）の設定
+ */
+
+/* 左右に浮いている島 (ワークスペース、ハードウェア情報、通知) */
 #workspaces,
-#clock,
 #group-hardware,
-#group-tools {
-    background-color: rgba(30, 30, 46, 0.8); /* Catppuccin Mocha Base */
-    border: 1px solid rgba(203, 166, 247, 0.25); /* ラベンダー境界線 */
+#custom-notification {
+    background-color: rgba(36, 27, 25, 0.8); /* 落ち着いたココアブラウンの半透明背景 */
+    border: 1px solid rgba(234, 105, 98, 0.25); /* テラコッタの細いボーダー */
     border-radius: 14px;
     padding: 3px 12px;
-    margin: 4px 6px;
+    margin: 6px 6px 4px 6px; /* 上部に隙間を作り、浮いているように配置 */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 🕒 中央の時計の島 (上に隙間を作らず画面端に密着、上角丸なし) */
+#clock {
+    background-color: rgba(36, 27, 25, 0.8);
+    border: 1px solid rgba(234, 105, 98, 0.25);
+    border-top: none; /* 上の境界線を排除 */
+    border-radius: 0px 0px 14px 14px; /* 下部のみ角丸 */
+    padding: 3px 18px;
+    margin: 0px 6px 4px 6px; /* 上部マージンを完全ゼロ化 */
+    color: #dfd0b2;
+    font-size: 13px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #workspaces:hover,
 #clock:hover,
 #group-hardware:hover,
-#group-tools:hover {
-    border-color: rgba(203, 166, 247, 0.5); /* ホバー時に光る */
+#custom-notification:hover {
+    border-color: rgba(234, 105, 98, 0.5); /* ホバー時に優しく光る */
 }
 
 /* ワークスペースボタン設定 */
 #workspaces button {
     padding: 0px 8px;
-    color: #7f849c;
+    color: #928374;
     background-color: transparent;
     border-radius: 8px;
     transition: all 0.2s ease;
@@ -52,19 +68,13 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-    color: #cba6f7; /* ラベンダー */
-    background-color: rgba(203, 166, 247, 0.15);
+    color: #d8a657;
+    background-color: rgba(216, 166, 87, 0.15);
 }
 
 #workspaces button:hover {
-    color: #f5c2e7; /* ピンク */
-    background-color: rgba(245, 194, 231, 0.1);
-}
-
-/* 🕒 中央の時計設定 */
-#clock {
-    color: #cba6f7;
-    font-size: 13px;
+    color: #ea6962;
+    background-color: rgba(234, 105, 98, 0.1);
 }
 
 /* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 */
@@ -72,50 +82,48 @@ window#waybar.hidden {
 #network,
 #memory,
 #battery,
-#custom-keyd,
-#custom-vibes,
 #custom-notification {
     padding: 0 8px;
 }
 
 #pulseaudio {
-    color: #f5e0dc; /* Rosewater */
+    color: #ea6962;
 }
 
 #pulseaudio.muted {
-    color: #6c7086;
+    color: #727169;
 }
 
 #network {
-    color: #89b4fa; /* Blue */
+    color: #d8a657;
 }
 
 #network.disconnected {
-    color: #f38ba8; /* Red */
+    color: #ea6962;
 }
 
 #memory {
-    color: #f9e2af; /* Yellow */
+    color: #d8a657;
 }
 
 #battery {
-    color: #a6e3a1; /* Green */
+    color: #a9b665;
 }
 
 #battery.charging, #battery.plugged {
-    color: #f9e2af;
+    color: #d8a657;
 }
 
 @keyframes blink {
     to {
-        background-color: #f38ba8;
-        color: #11111b;
+        background-color: #ea6962;
+        color: #1e1e1e;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f38ba8;
-    color: #11111b;
+    background-color: #ea6962;
+    color: #1e1e1e;
     animation-name: blink;
     animation-duration: 0.8s;
     animation-timing-function: linear;
@@ -124,23 +132,6 @@ window#waybar.hidden {
     border-radius: 6px;
 }
 
-/* 便利ツール */
-#custom-keyd {
-    color: #cdd6f4;
-}
-
-#custom-keyd.inactive {
-    color: #6c7086;
-}
-
-#custom-vibes.on {
-    color: #b4befe;
-}
-
-#custom-vibes.off {
-    color: #6c7086;
-}
-
 #custom-notification {
-    color: #fab387;
+    color: #ea6962;
 }

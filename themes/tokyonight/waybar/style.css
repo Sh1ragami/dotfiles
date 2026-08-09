@@ -21,23 +21,39 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/* 🏝️ 各島（アイランド）の設定 */
+/* 
+ * 🏝️ 各島（アイランド）の設定
+ */
+
+/* 左右に浮いている島 (ワークスペース、ハードウェア情報、通知) */
 #workspaces,
-#clock,
 #group-hardware,
-#group-tools {
+#custom-notification {
     background-color: rgba(26, 27, 38, 0.8); /* Tokyo Night Dark */
     border: 1px solid rgba(122, 162, 247, 0.25); /* ブルー境界線 */
     border-radius: 14px;
     padding: 3px 12px;
-    margin: 4px 6px;
+    margin: 6px 6px 4px 6px; /* 上部に隙間を作り、浮いているように配置 */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 🕒 中央の時計の島 (上に隙間を作らず画面端に密着、上角丸なし) */
+#clock {
+    background-color: rgba(26, 27, 38, 0.8);
+    border: 1px solid rgba(122, 162, 247, 0.25);
+    border-top: none;
+    border-radius: 0px 0px 14px 14px;
+    padding: 3px 18px;
+    margin: 0px 6px 4px 6px;
+    color: #7aa2f7;
+    font-size: 13px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #workspaces:hover,
 #clock:hover,
 #group-hardware:hover,
-#group-tools:hover {
+#custom-notification:hover {
     border-color: rgba(122, 162, 247, 0.5); /* ホバー時に光る */
 }
 
@@ -61,19 +77,11 @@ window#waybar.hidden {
     background-color: rgba(125, 207, 255, 0.1);
 }
 
-/* 🕒 中央の時計設定 */
-#clock {
-    color: #7aa2f7;
-    font-size: 13px;
-}
-
 /* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 */
 #pulseaudio,
 #network,
 #memory,
 #battery,
-#custom-keyd,
-#custom-vibes,
 #custom-notification {
     padding: 0 8px;
 }
@@ -95,7 +103,7 @@ window#waybar.hidden {
 }
 
 #memory {
-    color: #e0af68; /* Yellow */
+    color: #e0af68;
 }
 
 #battery {
@@ -122,23 +130,6 @@ window#waybar.hidden {
     animation-iteration-count: infinite;
     animation-direction: alternate;
     border-radius: 6px;
-}
-
-/* 便利ツール */
-#custom-keyd {
-    color: #a9b1d6;
-}
-
-#custom-keyd.inactive {
-    color: #565f89;
-}
-
-#custom-vibes.on {
-    color: #7dcfff;
-}
-
-#custom-vibes.off {
-    color: #565f89;
 }
 
 #custom-notification {

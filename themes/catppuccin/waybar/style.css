@@ -45,7 +45,6 @@ window#waybar.hidden {
     min-height: 32px;
     padding: 0px; /* パディングを排除して歪みを防ぐ */
     margin: 6px 12px 4px 6px;
-    text-align: center;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

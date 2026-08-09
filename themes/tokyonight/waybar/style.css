@@ -199,7 +199,6 @@ window#waybar.hidden {
 #waybar.left #memory,
 #waybar.left #network,
 #waybar.left #custom-notification {
-    text-align: center;
     margin: 10px 0px;
 }
 
@@ -212,7 +211,6 @@ window#waybar.hidden {
     box-shadow: none;
     margin: 12px 0px;
     padding: 0px;
-    text-align: center;
 }
 
 /* ワークスペースボタンを縦型に中央揃えで最適化 */
@@ -220,5 +218,4 @@ window#waybar.hidden {
     margin: 4px auto;
     padding: 6px 0px;
     min-width: 36px;
-    text-align: center;
 }

@@ -1,12 +1,12 @@
 /*
- * SwayNC (Sway Notification Center) Tokyo Night Minimalist Stylesheet
- * Matches the blue/cyan Tokyo Night theme with spacious and clean layout
+ * SwayNC (Sway Notification Center) Catppuccin Mocha Minimalist Stylesheet
+ * Matches the lavender/blue Catppuccin theme with spacious and clean layout
  */
 
 * {
   font-family: "JetBrainsMono Nerd Font", "Ubuntu Nerd Font", sans-serif;
   transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
-  color: #a9b1d6; /* Tokyo Night Text */
+  color: #cdd6f4; /* Catppuccin Text */
 }
 
 /* スクロールバーを完全に非表示にして野暮ったさを排除 */
@@ -31,10 +31,10 @@ scrollbar trough {
  */
 .floating-notifications.background .notification-row .notification-background {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(122, 162, 247, 0.25);
+  border: 1px solid rgba(203, 166, 247, 0.25);
   border-radius: 12px;
   margin: 10px;
-  background-color: rgba(26, 27, 38, 0.9);
+  background-color: rgba(30, 30, 46, 0.9);
   padding: 0;
 }
 
@@ -44,16 +44,16 @@ scrollbar trough {
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  border-color: #f7768e;
+  border-color: #f38ba8;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .summary {
-  color: #a9b1d6;
+  color: #cdd6f4;
   font-weight: bold;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .time {
-  color: #565f89;
+  color: #7f849c;
 }
 
 /* 
@@ -61,10 +61,10 @@ scrollbar trough {
  */
 .control-center {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(122, 162, 247, 0.25);
+  border: 1px solid rgba(203, 166, 247, 0.25);
   border-radius: 20px; /* 四隅すべて丸くする */
   margin: 10px;
-  background-color: rgba(26, 27, 38, 0.92);
+  background-color: rgba(30, 30, 46, 0.92);
   padding: 20px;
 }
 
@@ -75,7 +75,7 @@ scrollbar trough {
 }
 
 .control-center .widget-title > label {
-  color: #a9b1d6;
+  color: #cdd6f4;
   font-size: 1.25em;
   font-weight: bold;
 }
@@ -83,24 +83,24 @@ scrollbar trough {
 /* すべてクリアボタン */
 .control-center .widget-title button {
   border-radius: 8px;
-  color: #a9b1d6;
-  background-color: rgba(30, 32, 48, 0.6);
-  border: 1px solid rgba(122, 162, 247, 0.2);
+  color: #cdd6f4;
+  background-color: rgba(49, 50, 68, 0.6);
+  border: 1px solid rgba(203, 166, 247, 0.2);
   padding: 6px 14px;
   font-size: 0.9em;
 }
 
 .control-center .widget-title button:hover {
-  border-color: #7aa2f7;
-  background-color: rgba(122, 162, 247, 0.2);
+  border-color: #cba6f7;
+  background-color: rgba(203, 166, 247, 0.2);
 }
 
 /* 通知アイテム */
 .control-center .notification-row .notification-background {
   border-radius: 10px;
-  color: #a9b1d6;
-  background-color: rgba(26, 27, 38, 0.5);
-  border: 1px solid rgba(122, 162, 247, 0.15);
+  color: #cdd6f4;
+  background-color: rgba(30, 30, 46, 0.5);
+  border: 1px solid rgba(203, 166, 247, 0.15);
   margin-top: 8px;
 }
 
@@ -110,29 +110,29 @@ scrollbar trough {
 }
 
 .control-center .notification-row .notification-background:hover {
-  background-color: rgba(30, 32, 48, 0.6);
-  border-color: rgba(122, 162, 247, 0.3);
+  background-color: rgba(49, 50, 68, 0.6);
+  border-color: rgba(203, 166, 247, 0.3);
 }
 
 .close-button {
   border-radius: 50%;
-  background-color: rgba(247, 118, 142, 0.15);
-  color: #f7768e;
+  background-color: rgba(243, 139, 168, 0.15);
+  color: #f38ba8;
   padding: 4px;
   margin: 4px;
 }
 
 .close-button:hover {
-  background-color: #f7768e;
-  color: #1a1b26;
+  background-color: #f38ba8;
+  color: #11111b;
 }
 
 /* 
  * 👤 プロファイルヘッダーウィジェット
  */
 .widget-custom-profile {
-  background-color: rgba(30, 32, 48, 0.4);
-  border: 1px solid rgba(122, 162, 247, 0.15);
+  background-color: rgba(49, 50, 68, 0.4);
+  border: 1px solid rgba(203, 166, 247, 0.15);
   border-radius: 14px;
   padding: 16px;
   margin-bottom: 20px;
@@ -143,14 +143,14 @@ scrollbar trough {
 }
 
 .widget-custom-profile label {
-  color: #a9b1d6;
+  color: #cdd6f4;
 }
 
 /* 
  * ⚙️ クイック設定 ＆ テーマグリッド (完全な美しい真円とアイコン中央揃え)
  */
 .widget-buttons-grid {
-  background-color: rgba(30, 32, 48, 0.25);
+  background-color: rgba(49, 50, 68, 0.25);
   border-radius: 14px;
   padding: 12px;
   margin-bottom: 24px;
@@ -160,9 +160,9 @@ scrollbar trough {
   border-radius: 10px !important; /* スタイリッシュな角丸長方形 */
   min-height: 38px;
   margin: 4px;
-  background-color: rgba(30, 32, 48, 0.6);
-  border: 1px solid rgba(122, 162, 247, 0.12);
-  color: #a9b1d6;
+  background-color: rgba(49, 50, 68, 0.6);
+  border: 1px solid rgba(203, 166, 247, 0.12);
+  color: #cdd6f4;
   font-size: 0.95rem;
   font-weight: 500;
   padding: 6px 12px !important;
@@ -177,12 +177,12 @@ scrollbar trough {
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  border-color: #7aa2f7;
-  background-color: rgba(122, 162, 247, 0.2);
+  border-color: #cba6f7;
+  background-color: rgba(203, 166, 247, 0.2);
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:checked {
-  background-color: #7aa2f7;
-  color: #1a1b26;
-  border-color: #7aa2f7;
+  background-color: #cba6f7;
+  color: #11111b;
+  border-color: #cba6f7;
 }

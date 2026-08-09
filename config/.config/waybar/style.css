@@ -1,6 +1,6 @@
 /*
- * Island-Style Waybar Theme (Tokyo Night Theme)
- * Blue and cyan accent colors for a cool digital aesthetic
+ * Island-Style Waybar Theme (Catppuccin Mocha Theme)
+ * Lavender and blue accent colors for a clean aesthetic
  */
 
 * {
@@ -14,7 +14,7 @@
 /* バー全体のコンテナは完全に透明 */
 window#waybar {
     background-color: transparent;
-    color: #a9b1d6;
+    color: #cdd6f4;
 }
 
 window#waybar.hidden {
@@ -28,8 +28,8 @@ window#waybar.hidden {
 /* 左右に浮いている島 (ワークスペース、ハードウェア情報) */
 #workspaces,
 #group-hardware {
-    background-color: rgba(26, 27, 38, 0.8); /* Tokyo Night Dark */
-    border: 1px solid rgba(122, 162, 247, 0.25); /* ブルー境界線 */
+    background-color: rgba(30, 30, 46, 0.8); /* Catppuccin Mocha Base */
+    border: 1px solid rgba(203, 166, 247, 0.25); /* ラベンダー境界線 */
     border-radius: 14px;
     padding: 3px 12px;
     margin: 6px 6px 4px 6px; /* 上部に隙間を作り、浮いているように配置 */
@@ -38,33 +38,33 @@ window#waybar.hidden {
 
 /* 🔔 独立した「通知ベル」の島 (カプセルではなく、完全な真円のボタンにする) */
 #custom-notification {
-    background-color: rgba(26, 27, 38, 0.8);
-    border: 1px solid rgba(122, 162, 247, 0.25);
+    background-color: rgba(30, 30, 46, 0.8);
+    border: 1px solid rgba(203, 166, 247, 0.25);
     border-radius: 50%; /* 真円にする */
     min-width: 32px;
     min-height: 32px;
     padding: 0px;
     margin: 6px 12px 4px 6px;
-    color: #bb9af7;
+    color: #fab387;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 🔔 通知がある（未読あり）状態の真円ボタン (背景がブルーになり、ベルが暗く反転する) */
+/* 🔔 通知がある（未読あり）状態の真円ボタン (背景がラベンダーになり、ベルが暗く反転する) */
 #custom-notification.some {
-    background-color: #7aa2f7;
-    border-color: #7aa2f7;
-    color: #1a1b26;
+    background-color: #cba6f7;
+    border-color: #cba6f7;
+    color: #11111b;
 }
 
 /* 🕒 中央の時計の島 (上に隙間を作らず画面端に密着、上角丸なし) */
 #clock {
-    background-color: rgba(26, 27, 38, 0.8);
-    border: 1px solid rgba(122, 162, 247, 0.25);
+    background-color: rgba(30, 30, 46, 0.8);
+    border: 1px solid rgba(203, 166, 247, 0.25);
     border-top: none;
     border-radius: 0px 0px 14px 14px;
     padding: 3px 18px;
     margin: 0px 6px 4px 6px;
-    color: #7aa2f7;
+    color: #cba6f7;
     font-size: 13px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -73,13 +73,13 @@ window#waybar.hidden {
 #clock:hover,
 #group-hardware:hover,
 #custom-notification:hover {
-    border-color: rgba(122, 162, 247, 0.5); /* ホバー時に光る */
+    border-color: rgba(203, 166, 247, 0.5); /* ホバー時に光る */
 }
 
 /* ワークスペースボタン設定 */
 #workspaces button {
     padding: 0px 8px;
-    color: #565f89;
+    color: #7f849c;
     background-color: transparent;
     border-radius: 8px;
     transition: all 0.2s ease;
@@ -87,13 +87,13 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-    color: #7aa2f7; /* ブルー */
-    background-color: rgba(122, 162, 247, 0.15);
+    color: #cba6f7; /* ラベンダー */
+    background-color: rgba(203, 166, 247, 0.15);
 }
 
 #workspaces button:hover {
-    color: #7dcfff; /* シアン */
-    background-color: rgba(125, 207, 255, 0.1);
+    color: #f5c2e7; /* ピンク */
+    background-color: rgba(245, 194, 231, 0.1);
 }
 
 /* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 (詰めすぎず 8px のゆとりを持たせる) */
@@ -105,43 +105,43 @@ window#waybar.hidden {
 }
 
 #pulseaudio {
-    color: #f7768e; /* Red */
+    color: #f5e0dc; /* Rosewater */
 }
 
 #pulseaudio.muted {
-    color: #565f89;
+    color: #6c7086;
 }
 
 #network {
-    color: #7dcfff; /* Cyan */
+    color: #89b4fa; /* Blue */
 }
 
 #network.disconnected {
-    color: #f7768e;
+    color: #f38ba8;
 }
 
 #memory {
-    color: #e0af68;
+    color: #f9e2af;
 }
 
 #battery {
-    color: #9ece6a; /* Green */
+    color: #a6e3a1; /* Green */
 }
 
 #battery.charging, #battery.plugged {
-    color: #e0af68;
+    color: #f9e2af;
 }
 
 @keyframes blink {
     to {
-        background-color: #f7768e;
-        color: #1a1b26;
+        background-color: #f38ba8;
+        color: #11111b;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f7768e;
-    color: #1a1b26;
+    background-color: #f38ba8;
+    color: #11111b;
     animation-name: blink;
     animation-duration: 0.8s;
     animation-timing-function: linear;
@@ -156,20 +156,15 @@ window#waybar.hidden {
 #waybar.left {
     border-radius: 0px 16px 16px 0px;
     margin: 0px;
-    border-right: 1px solid rgba(122, 162, 247, 0.15);
+    border-right: 1px solid rgba(203, 166, 247, 0.15);
     border-left: none;
     border-top: none;
     border-bottom: none;
 }
 
-#waybar.left box {
-    flex-direction: column;
-}
-
 #waybar.left .modules-left,
 #waybar.left .modules-center,
 #waybar.left .modules-right {
-    flex-direction: column;
     padding: 8px 4px;
 }
 

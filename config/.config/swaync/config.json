@@ -48,49 +48,61 @@
     }
   },
   "widgets": [
-    "inhibitors",
     "title",
     "dnd",
+    "mpris",
+    "volume",
+    "backlight",
+    "buttons-grid",
     "notifications"
   ],
   "widget-config": {
-    "inhibitors": {
-      "text": "Inhibitors",
-      "button-text": "Clear All",
-      "clear-all-button": true
-    },
     "title": {
-      "text": "Notifications",
+      "text": "コントロールセンター",
       "clear-all-button": true,
-      "button-text": "Clear All"
+      "button-text": "すべてクリア"
     },
     "dnd": {
       "text": "Do Not Disturb"
-    },
-    "label": {
-      "max-lines": 5,
-      "text": "Label Text"
     },
     "mpris": {
       "image-size": 96,
       "image-radius": 12
     },
+    "volume": {
+      "label": ""
+    },
+    "backlight": {
+      "label": ""
+    },
     "buttons-grid": {
       "actions": [
         {
-          "label": "直",
+          "label": "  Wi-Fi",
           "type": "toggle",
           "active": true,
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
           "update_command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
         },
-	{
-	  "label": "WiFi",
-	  "type": "toggle",
-	  "active": true,
-	  "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
-	  "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
-	}
+        {
+          "label": "󰂯 Bluetooth",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && bluetoothctl power on || bluetoothctl power off'",
+          "update_command": "sh -c '[[ $(bluetoothctl show | grep \"PowerState\") == *\"on\"* ]] && echo true || echo false'"
+        },
+        {
+          "label": "󰌌  Vibes",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && wayvibes || pkill wayvibes'",
+          "update_command": "sh -c 'pgrep wayvibes >/dev/null && echo true || echo false'"
+        },
+        {
+          "label": "🎨 テーマ切替",
+          "type": "button",
+          "command": "sh -c 'sleep 0.1 && swaync-client -cp && /home/sh1ragami/.config/hypr/scripts/theme_selector.sh'"
+        }
       ]
     }
   }

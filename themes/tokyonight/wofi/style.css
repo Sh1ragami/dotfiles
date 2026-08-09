@@ -1,0 +1,58 @@
+/*
+ * Wofi Glassmorphism Tokyo Night Theme
+ * Matches the blue/cyan Waybar design
+ */
+
+window {
+    background-color: rgba(26, 27, 38, 0.75); /* 半透明なTokyo Night */
+    border: 1px solid rgba(122, 162, 247, 0.2); /* ブルーに光る細いボーダー */
+    border-radius: 16px;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* 検索ボックス */
+#input {
+    margin: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background-color: rgba(35, 35, 50, 0.5);
+    color: #a9b1d6;
+    padding: 10px;
+    font-size: 15px;
+}
+
+#input:focus {
+    border-color: #7aa2f7; /* フォーカス時にブルーに光る */
+}
+
+/* 各アプリアイテム */
+#entry {
+    margin: 4px 15px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+/* 選択時 */
+#entry:selected {
+    background-color: rgba(122, 162, 247, 0.15); /* ほのかなブルーの背景 */
+    border: 1px solid rgba(122, 162, 247, 0.4);
+}
+
+/* アイコン */
+img {
+    margin-right: 12px;
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.5));
+}
+
+/* アプリ名テキスト */
+#text {
+    color: #a9b1d6;
+    font-size: 15px;
+}
+
+#entry:selected #text {
+    color: #7dcfff; /* 選択時はシアンに光る */
+    font-weight: bold;
+}

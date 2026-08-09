@@ -1,0 +1,141 @@
+/*
+ * Island-Style Waybar Theme (Catppuccin Mocha Theme)
+ * Lavender and blue accent colors for a clean aesthetic
+ */
+
+* {
+    font-family: "JetBrains Mono Nerd Font", "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+}
+
+/* バー全体のコンテナは完全に透明 */
+window#waybar {
+    background-color: transparent;
+    color: #cdd6f4;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* 🏝️ 各島（アイランド）の設定 */
+#workspaces,
+#clock,
+#group-hardware,
+#group-tools {
+    background-color: rgba(30, 30, 46, 0.8); /* Catppuccin Mocha Base */
+    border: 1px solid rgba(203, 166, 247, 0.25); /* ラベンダー境界線 */
+    border-radius: 14px;
+    padding: 3px 12px;
+    margin: 4px 6px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#workspaces:hover,
+#clock:hover,
+#group-hardware:hover,
+#group-tools:hover {
+    border-color: rgba(203, 166, 247, 0.5); /* ホバー時に光る */
+}
+
+/* ワークスペースボタン設定 */
+#workspaces button {
+    padding: 0px 8px;
+    color: #7f849c;
+    background-color: transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    margin: 2px 1px;
+}
+
+#workspaces button.active {
+    color: #cba6f7; /* ラベンダー */
+    background-color: rgba(203, 166, 247, 0.15);
+}
+
+#workspaces button:hover {
+    color: #f5c2e7; /* ピンク */
+    background-color: rgba(245, 194, 231, 0.1);
+}
+
+/* 🕒 中央の時計設定 */
+#clock {
+    color: #cba6f7;
+    font-size: 13px;
+}
+
+/* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 */
+#pulseaudio,
+#network,
+#battery,
+#custom-keyd,
+#custom-vibes,
+#custom-notification {
+    padding: 0 8px;
+}
+
+#pulseaudio {
+    color: #f5e0dc; /* Rosewater */
+}
+
+#pulseaudio.muted {
+    color: #6c7086;
+}
+
+#network {
+    color: #89b4fa; /* Blue */
+}
+
+#network.disconnected {
+    color: #f38ba8; /* Red */
+}
+
+#battery {
+    color: #a6e3a1; /* Green */
+}
+
+#battery.charging, #battery.plugged {
+    color: #f9e2af;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f38ba8;
+        color: #11111b;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f38ba8;
+    color: #11111b;
+    animation-name: blink;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    border-radius: 6px;
+}
+
+/* 便利ツール */
+#custom-keyd {
+    color: #cdd6f4;
+}
+
+#custom-keyd.inactive {
+    color: #6c7086;
+}
+
+#custom-vibes.on {
+    color: #b4befe;
+}
+
+#custom-vibes.off {
+    color: #6c7086;
+}
+
+#custom-notification {
+    color: #fab387;
+}

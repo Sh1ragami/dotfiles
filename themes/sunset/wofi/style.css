@@ -1,0 +1,58 @@
+/*
+ * Wofi Glassmorphism Cocoa-Sunset Theme
+ * Matches the warm Terracotta Waybar design
+ */
+
+window {
+    background-color: rgba(36, 27, 25, 0.85); /* 半透明なココアブラウン */
+    border: 1px solid rgba(234, 105, 98, 0.2); /* テラコッタに光る細いボーダー */
+    border-radius: 16px;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* 検索ボックス */
+#input {
+    margin: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background-color: rgba(45, 35, 33, 0.5);
+    color: #dfd0b2;
+    padding: 10px;
+    font-size: 15px;
+}
+
+#input:focus {
+    border-color: #ea6962; /* フォーカス時にテラコッタレッドに光る */
+}
+
+/* 各アプリアイテム */
+#entry {
+    margin: 4px 15px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+/* 選択時 */
+#entry:selected {
+    background-color: rgba(216, 166, 87, 0.15); /* ほのかな黄・オレンジの背景 */
+    border: 1px solid rgba(216, 166, 87, 0.4);
+}
+
+/* アイコン */
+img {
+    margin-right: 12px;
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.5));
+}
+
+/* アプリ名テキスト */
+#text {
+    color: #dfd0b2;
+    font-size: 15px;
+}
+
+#entry:selected #text {
+    color: #ea6962; /* 選択時はテラコッタレッドに光る */
+    font-weight: bold;
+}

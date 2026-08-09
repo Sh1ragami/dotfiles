@@ -23,7 +23,8 @@
 
     "clock": {
         "format": "  {0:%H:%M}  |    {0:%m/%d}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "gsimplecal"
     },
 
     // ハードウェア情報の島 (音量、ネットワーク、バッテリー)

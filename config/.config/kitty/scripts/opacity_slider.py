@@ -72,8 +72,10 @@ class OpacitySlider(Gtk.Window):
         # 設定ファイル書き込み
         with open(self.conf_file, "w") as f:
             f.write(f"background_opacity {val}\n")
-        # 起動中のKittyにリロードシグナル送信
-        subprocess.run(["pkill", "-USR1", "kitty"])
+        # リモートコントロールによるリアルタイム変更
+        subprocess.run(["kitty", "@", "set-background-opacity", str(val)], stderr=subprocess.DEVNULL)
+        # 互換用のシグナル送信
+        subprocess.run(["pkill", "-USR1", "kitty"], stderr=subprocess.DEVNULL)
 
     def apply_css(self):
         screen = Gdk.Screen.get_default()

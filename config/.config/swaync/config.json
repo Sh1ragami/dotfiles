@@ -102,6 +102,11 @@
           "label": "󰈉  透過調整",
           "type": "button",
           "command": "/home/sh1ragami/.config/kitty/scripts/opacity_slider.py"
+        },
+        {
+          "label": "  バー位置",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/waybar/scripts/toggle_position.sh"
         }
       ]
     }

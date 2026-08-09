@@ -149,3 +149,33 @@ window#waybar.hidden {
     animation-direction: alternate;
     border-radius: 6px;
 }
+
+/* ==========================================================
+ * 垂直（左端）配置用のスタイル調整
+ * ========================================================== */
+#waybar.left {
+    border-radius: 0px 16px 16px 0px;
+    margin: 0px;
+    border-right: 1px solid rgba(203, 166, 247, 0.15);
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+#waybar.left box {
+    flex-direction: column;
+}
+
+#waybar.left .modules-left,
+#waybar.left .modules-center,
+#waybar.left .modules-right {
+    flex-direction: column;
+    padding: 8px 4px;
+}
+
+/* ワークスペースボタンを縦型に最適化 */
+#waybar.left #workspaces button {
+    margin: 4px 0px;
+    padding: 8px 0px;
+    min-width: 32px;
+}

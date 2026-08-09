@@ -169,33 +169,56 @@ window#waybar.hidden {
     padding: 8px 4px;
 }
 
-/* 縦型のときは各モジュールを縦長のカプセルコンテナにまとめて美しくパッケージ */
+/* 縦型のときは二重背景（カプセル背景）を廃止し、超薄い水平線でモジュールを区切る */
 #waybar.left #workspaces,
 #waybar.left #clock,
 #waybar.left #hardware,
-#waybar.left #custom-notification {
-    background-color: rgba(203, 166, 247, 0.05);
-    border: 1px solid rgba(203, 166, 247, 0.12);
-    border-radius: 12px;
-    margin: 8px 4px;
-    padding: 10px 0px;
+#waybar.left #network {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(203, 166, 247, 0.12); /* Catppuccinラベンダーブレンドの薄い境界線 */
+    box-shadow: none;
+    margin: 0px 4px 12px 4px;
+    padding: 0px 0px 12px 0px;
+    border-radius: 0px;
 }
 
-/* ハードウェアグループ内の個別モジュールは背景を透過して一体化 */
-#waybar.left #hardware #battery,
-#waybar.left #hardware #pulseaudio,
-#waybar.left #hardware #memory,
-#waybar.left #hardware #network {
+#waybar.left #custom-notification {
     background: transparent;
     border: none;
     box-shadow: none;
-    margin: 4px 0px;
-    padding: 6px 0px;
+    margin: 0px 4px;
+    padding: 0px;
+    border-radius: 0px;
 }
 
-/* ワークスペースボタンを縦型に最適化 */
+/* 縦軸のアライン（完璧な中央揃え）調整 */
+#waybar.left #clock,
+#waybar.left #battery,
+#waybar.left #pulseaudio,
+#waybar.left #memory,
+#waybar.left #network,
+#waybar.left #custom-notification {
+    text-align: center;
+    margin: 10px 0px;
+}
+
+/* ハードウェアグループ内部の配置調整 */
+#waybar.left #hardware #battery,
+#waybar.left #hardware #pulseaudio,
+#waybar.left #hardware #memory {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 12px 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+/* ワークスペースボタンを縦型に中央揃えで最適化 */
 #waybar.left #workspaces button {
-    margin: 4px 0px;
-    padding: 8px 0px;
-    min-width: 32px;
+    margin: 4px auto;
+    padding: 6px 0px;
+    min-width: 36px;
+    text-align: center;
 }

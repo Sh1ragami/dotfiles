@@ -68,7 +68,17 @@ class DockedSliders(Gtk.Window):
         self.monitor_thread.start()
 
     def update_position(self):
-        # 画面の右上（SwayNCサイドバーの左隣）に配置する
+        # swaync の config から positionX を取得
+        position_x = "right"
+        swaync_conf = os.path.expanduser("~/.config/swaync/config.json")
+        if os.path.exists(swaync_conf):
+            try:
+                with open(swaync_conf, "r") as f:
+                    data = json.load(f)
+                    position_x = data.get("positionX", "right")
+            except:
+                pass
+
         display = Gdk.Display.get_default()
         monitor = display.get_primary_monitor() if display else None
         
@@ -78,17 +88,26 @@ class DockedSliders(Gtk.Window):
         if monitor:
             try:
                 geom = monitor.get_geometry()
-                # SwayNCは幅400px、マージン等考慮してその左隣に置く
-                win_x = geom.width - 240 - 415
+                if position_x == "left":
+                    # 左端にサイドバーがある場合：マージン12px + 幅380px + 隙間13px = 405px
+                    win_x = 405
+                else:
+                    win_x = geom.width - 240 - 415
                 win_y = 80
             except Exception:
                 pass
         else:
             screen = Gdk.Screen.get_default()
             if screen:
-                win_x = screen.get_width() - 240 - 415
-                win_y = 80
-        
+                try:
+                    width = screen.get_width()
+                    if position_x == "left":
+                        win_x = 405
+                    else:
+                        win_x = width - 240 - 415
+                    win_y = 80
+                except:
+                    pass
         self.move(win_x, win_y)
 
     def load_opacity(self):

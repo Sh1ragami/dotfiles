@@ -2,20 +2,16 @@
     "layer": "top",
     "position": "top",
     "margin-top": 6,
-    "margin-left": 10,
-    "margin-right": 10,
+    "margin-left": 12,
+    "margin-right": 12,
     "margin-bottom": 0,
-    "spacing": 4,
+    "spacing": 0,
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": [
-        "custom/keyd",
-        "custom/vibes",
-        "pulseaudio",
-        "network",
-        "battery",
-        "custom/notification"
+        "group/hardware",
+        "group/tools"
     ],
 
     "hyprland/workspaces": {
@@ -26,8 +22,20 @@
     },
 
     "clock": {
-        "format": "  {0:%H:%M}   📅  {0:%m/%d (%a)}",
+        "format": "  {0:%H:%M}  |    {0:%m/%d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    // ハードウェア情報の島 (音量、ネットワーク、バッテリー)
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": ["pulseaudio", "network", "battery"]
+    },
+
+    // 便利ツールの島 (キーボードマッピング、Vibes、通知)
+    "group/tools": {
+        "orientation": "horizontal",
+        "modules": ["custom/keyd", "custom/vibes", "custom/notification"]
     },
 
     "custom/vibes": {
@@ -45,8 +53,8 @@
     },
 
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "  Muted",
+        "format": "{icon}  {volume}%",
+        "format-muted": "   Muted",
         "format-icons": {
             "default": ["", "", ""]
         },
@@ -58,9 +66,9 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}  {capacity}%",
+        "format": "{icon} {capacity}%",
         "format-charging": "󱐋 {capacity}%",
-        "format-plugged": "  {capacity}%",
+        "format-plugged": " {capacity}%",
         "format-alt": "{icon} {time}",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
@@ -68,7 +76,7 @@
     "network": {
         "format-wifi": "  {signalStrength}%",
         "format-ethernet": "󰈀  wired",
-        "format-disconnected": "⚠  disconnected",
+        "format-disconnected": "⚠  offline",
         "tooltip-format": "{ifname} via {gwaddr}\n{essid}",
         "on-click": "~/.config/hypr/scripts/toggle_wifi.sh"
     },

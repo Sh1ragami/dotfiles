@@ -14,7 +14,8 @@ return {
       vim.g.vimtex_quickfix_mode = 2
       vim.g.vimtex_quickfix_open_on_warning = 0
 
-
+      -- 初期起動時に自動同期
+      vim.g.vimtex_view_forward_search_on_start = true
 
       -- クリーンアップ時に削除する中間ファイルの拡張子を指定（数学書は中間ファイルが増えがち）
       vim.g.vimtex_compiler_clean_plugins = {
@@ -27,6 +28,21 @@ return {
         "log",
         "out",
       }
+    end,
+    config = function()
+      -- Neovim のカーソル位置に合わせて Zathura (PDF) 側を自動追従スクロールさせる
+      -- カーソル移動後、300ms 静止したタイミングで自動同期
+      vim.opt.updatetime = 300
+
+      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+        group = vim.api.nvim_create_augroup("VimtexAutoView", { clear = true }),
+        pattern = "*.tex",
+        callback = function()
+          if vim.b.vimtex and vim.b.vimtex.viewer then
+            vim.cmd("VimtexView")
+          end
+        end,
+      })
     end,
   },
 }

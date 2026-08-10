@@ -31,3 +31,7 @@ set recolor-keephue "true"         # 画像・図形のカラーを維持
 
 set render-loading "false"
 set scroll-step "50"
+
+# 派手な黄色ハイライトを無効化（透明化）
+set highlight-color "rgba(0, 0, 0, 0)"
+set highlight-active-color "rgba(0, 0, 0, 0)"

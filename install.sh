@@ -64,4 +64,15 @@ for dir in "${stow_dirs[@]}"; do
     stow -d "$DOTFILES_DIR" -t "$HOME" "$dir"
 done
 
+# 5. Git 個人設定テンプレート (~/.gitconfig.local) の作成
+if [ ! -f "$HOME/.gitconfig.local" ]; then
+    echo "Creating template ~/.gitconfig.local..."
+    cat << 'EOF' > "$HOME/.gitconfig.local"
+[user]
+	name = Your Name
+	email = your-email@example.com
+EOF
+    echo "  -> Created ~/.gitconfig.local. Please edit it with your own name and email!"
+fi
+
 echo "=== Dotfiles installation completed successfully! ==="

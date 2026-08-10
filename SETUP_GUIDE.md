@@ -1,66 +1,66 @@
-# Setup Guide
+# セットアップガイド
 
-Step-by-step setup instructions for reproducing this environment on a fresh Arch Linux installation.
+新しい Arch Linux 環境に本環境を再構築する手順です。
 
-## Prerequisites
+## 前提条件
 
-Ensure Git is installed on your fresh system:
+事前に `git` がインストールされていることを確認してください：
 
 ```bash
 sudo pacman -Syu --needed git
 ```
 
-## Setup Steps
+## セットアップ手順
 
-### 1. SSH Authentication for GitHub
+### 1. SSH 鍵の作成と GitHub 登録
 
-Generate an SSH key:
+SSH 鍵を生成します：
 
 ```bash
 ssh-keygen -t ed25519 -C "your-email@example.com"
 ```
 
-Display and copy the public key:
+公開鍵を表示してコピーします：
 
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
 
-Add the key to your [GitHub SSH Settings](https://github.com/settings/keys) and verify:
+[GitHub SSH Settings](https://github.com/settings/keys) に公開鍵を追加し、接続を確認します：
 
 ```bash
 ssh -T git@github.com
 ```
 
-### 2. Clone Repository
+### 2. リポジトリのクローン
 
 ```bash
 git clone git@github.com:<your-username>/dotfiles.git ~/dotfiles
 ```
 
-### 3. Run Installer
+### 3. インストーラーの実行
 
 ```bash
 cd ~/dotfiles
 ./install.sh
 ```
 
-The installer will:
-- Install `stow`, `base-devel`, and `paru` (if absent).
-- Install official packages from `pkglist.txt` and AUR packages from `aurlist.txt`.
-- Backup conflicting config files to `*.backup`.
-- Symlink configs via GNU Stow.
-- Generate a `~/.gitconfig.local` template.
+`install.sh` が行う自動処理：
+- `stow`, `base-devel`, `paru` のセットアップ
+- `pkglist.txt` および `aurlist.txt` からのパッケージ一括導入
+- 既存の同名設定ファイルの自動退避 (`*.backup`)
+- GNU Stow によるシンボリックリンク適用
+- `~/.gitconfig.local` テンプレートの生成
 
-### 4. Post-Setup
+### 4. インストール後の設定
 
-Set your default shell to Zsh:
+デフォルトシェルを Zsh に変更：
 
 ```bash
 chsh -s $(which zsh)
 ```
 
-Configure your local Git identity:
+Git の個人情報を設定：
 
 ```bash
 git config --file ~/.gitconfig.local user.name "Your Name"

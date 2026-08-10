@@ -1,5 +1,8 @@
 # dotfiles
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9ecf1680-116d-4603-88a0-99db409cad0b" />
+
+
 Hyprland + Neovim 向けの環境設定。GNU Stow で管理。
 
 ## 概要

@@ -1,27 +1,27 @@
 # dotfiles
 
-Arch Linux dotfiles managed with GNU Stow. Designed for a keyboard-driven workflow using Hyprland and Neovim.
+GNU Stow で管理された Arch Linux 用の dotfiles リポジトリです。Hyprland と Neovim を中心としたキーボード駆動の環境を構築します。
 
-## Overview
+## 構成要素
 
-| Component | Tool |
+| カテゴリ | ツール |
 | --- | --- |
 | **OS** | Arch Linux |
-| **Window Manager** | Hyprland (Wayland) |
-| **Editor** | Neovim |
-| **Terminal** | Kitty |
-| **Shell** | Zsh (Starship, zoxide, mise) |
-| **PDF Viewer** | Zathura |
-| **Bar** | Waybar |
-| **Launcher** | Wofi |
+| **ウィンドウマネージャー** | Hyprland (Wayland) |
+| **エディタ** | Neovim |
+| **ターミナル** | Kitty |
+| **シェル** | Zsh (Starship, zoxide, mise) |
+| **PDFビューア** | Zathura |
+| **バー** | Waybar |
+| **ランチャー** | Wofi |
 
-## Key Features
+## 主な機能
 
-- **Floating Gemini Scratchpad**: Toggles a floating Gemini window on `$mainMod + Space`.
-- **Neovim & Zathura SyncTeX**: Auto-scroll SyncTeX forward search without obtrusive highlights.
-- **Stow Integration**: Modular symlink management with `install.sh`.
+- **フローティング Gemini (スクラッチパッド)**: `$mainMod + Space` で常駐型 Gemini ウィンドウを即座に表示・非表示。
+- **Neovim ↔ Zathura SyncTeX 連動**: カーソル静止位置に合わせた PDF 自動スクロール追従。
+- **Stow 管理**: `install.sh` によるパッケージ一括導入と設定シンボリックリンク展開。
 
-## Installation
+## インストール
 
 ```bash
 git clone https://github.com/Sh1ragami/dotfiles.git ~/dotfiles
@@ -29,29 +29,29 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-### Post-Installation
+### インストール後の設定
 
-Set your local Git configuration:
+各環境の Git 個人情報を設定してください：
 
 ```bash
 git config --file ~/.gitconfig.local user.name "Your Name"
 git config --file ~/.gitconfig.local user.email "your-email@example.com"
 ```
 
-## Keybindings
+## 主なキーバインド
 
-| Shortcut | Function |
+| ショートカット | 機能 |
 | --- | --- |
-| `$mainMod + Space` | Toggle floating Gemini |
-| `$mainMod + G` | Open tiled Gemini |
-| `$mainMod + T` | Open terminal |
-| `$mainMod + E` | Open file manager |
-| `$mainMod + V` | Toggle floating window |
-| `$mainMod + Q` | Close window |
+| `$mainMod + Space` | フローティング Gemini の表示 / 非表示 |
+| `$mainMod + G` | タイル型 Gemini の起動 |
+| `$mainMod + T` | ターミナルの起動 |
+| `$mainMod + E` | ファイルマネージャーの起動 |
+| `$mainMod + V` | フローティング表示のトグル |
+| `$mainMod + Q` | ウィンドウを閉じる |
 
-## Maintenance
+## メンテナンス
 
-Update package lists:
+インストール済みパッケージリストの更新：
 
 ```bash
 pacman -Qqen > ~/dotfiles/pkglist.txt

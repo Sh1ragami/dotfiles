@@ -1,0 +1,12 @@
+# ~/.config/wofi/config
+show=drun
+allow_images=true
+image_size=32
+insensitive=true
+width=680
+height=380
+location=bottom
+yoffset=0
+prompt=アプリを検索...
+layer=top
+hide_scroll=true

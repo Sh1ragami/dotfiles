@@ -26,7 +26,8 @@
     "clock": {
         "format": "\n{0:%H\n%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "on-click": "gsimplecal"
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "gsimplecal"
     },
 
     "group/hardware": {

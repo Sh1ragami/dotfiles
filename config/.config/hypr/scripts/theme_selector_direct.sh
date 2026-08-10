@@ -7,7 +7,10 @@ if [[ -z "$theme" ]]; then
     exit 1
 fi
 
-# 設定ファイルの上書き（Stowのシンボリックリンク経由で実体も更新されます）
+# 現在のテーマを記録
+echo "$theme" > /tmp/current_theme.txt
+
+# 1. 設定ファイル・壁紙の上書き (Stowのシンボリックリンク経由でテーマファイルを一括更新)
 cp "$HOME/dotfiles/themes/$theme/waybar/style.css" "$HOME/.config/waybar/style.css" 2>/dev/null || true
 cp "$HOME/dotfiles/themes/$theme/wofi/style.css" "$HOME/.config/wofi/style.css" 2>/dev/null || true
 cp "$HOME/dotfiles/themes/$theme/kitty/theme.conf" "$HOME/.config/kitty/theme.conf" 2>/dev/null || true
@@ -19,56 +22,28 @@ cp "$HOME/dotfiles/themes/$theme/nvim/lualine.lua" "$HOME/.config/nvim/lua/plugi
 cp "$HOME/dotfiles/themes/$theme/nvim/options.lua" "$HOME/.config/nvim/lua/config/options.lua" 2>/dev/null || true
 cp "$HOME/dotfiles/themes/$theme/hypr/wallpaper.png" "$HOME/.config/hypr/wallpaper.png" 2>/dev/null || true
 
-# 壁紙の動的リロード
-hyprctl hyprpaper unload all || true
-hyprctl hyprpaper preload "$HOME/.config/hypr/wallpaper.png" || true
-hyprctl hyprpaper wallpaper ",$HOME/.config/hypr/wallpaper.png" || true
+# 2. Hyprland の gaps / borders / rounding / shadow 設定を一括同期リロード (20ms)
+hyprctl reload 2>/dev/null || true
 
-# デスクトップ環境のリロード（まず基本設定を読み込む）
-hyprctl reload || true
+# 3. Waybar & SwayNC & Kitty の即時シグナル・カラーパレットリロード (5ms)
+pkill -SIGUSR2 waybar 2>/dev/null || true
+swaync-client -R 2>/dev/null || true
+swaync-client -rs 2>/dev/null || true
+pkill -USR1 kitty 2>/dev/null || true
+kitty @ set-colors -a -c "$HOME/.config/kitty/theme.conf" 2>/dev/null || true
 
-# リロード後にテーマ固有の gaps / borders / shadow / opacity を適用
-if [[ "$theme" == "study" ]]; then
-    # 📚 学習用テーマ：囲い線なし(border_size 0)・隙間ゼロ・ベタ塗り・文字視認性＆作業効率最重視
-    kitty @ set-background-opacity 1.0 2>/dev/null || true
-    hyprctl keyword decoration:blur:enabled false
-    hyprctl keyword decoration:active_opacity 1.0
-    hyprctl keyword decoration:inactive_opacity 1.0
-    hyprctl keyword decoration:dim_inactive false
-    hyprctl keyword general:gaps_in 0
-    hyprctl keyword general:gaps_out 0
-    hyprctl keyword general:border_size 0
-    hyprctl keyword general:col.active_border "rgba(282a3aff)"
-    hyprctl keyword general:col.inactive_border "rgba(282a3aff)"
-    hyprctl keyword decoration:rounding 0
-    hyprctl keyword decoration:shadow:enabled false
-else
-    # 🎨 通常テーマ(夕暮れ/星空/東京夜)：極細(1px)の洗練グラデーションボーダー・角丸12px・すりガラス
-    kitty @ set-background-opacity 0.85 2>/dev/null || true
-    hyprctl keyword decoration:blur:enabled true
-    hyprctl keyword decoration:blur:size 8
-    hyprctl keyword decoration:blur:passes 4
-    hyprctl keyword decoration:active_opacity 0.93
-    hyprctl keyword decoration:inactive_opacity 0.85
-    hyprctl keyword decoration:dim_inactive false
-    hyprctl keyword general:gaps_in 6
-    hyprctl keyword general:gaps_out 12
-    hyprctl keyword general:border_size 1
-    hyprctl keyword general:col.active_border "rgba(7aa2f7ff) rgba(bb9af7ff) 45deg"
-    hyprctl keyword general:col.inactive_border "rgba(1f233566)"
-    hyprctl keyword decoration:rounding 12
-    hyprctl keyword decoration:shadow:enabled true
-    hyprctl keyword decoration:shadow:range 25
-    hyprctl keyword decoration:shadow:render_power 4
-fi
-
-pkill waybar || true
-hyprctl dispatch exec waybar
-swaync-client -R || true
-swaync-client -rs || true
-
-# 起動中のKittyに設定再読み込みのシグナルを送信
-pkill -USR1 kitty || true
-
-# SwayNCの通知として完了を知らせる
-notify-send "Theme Changed" "Successfully applied $theme theme!"
+# 4. 壁紙 (GTK Layer Shell デーモン) のソケット即時再描画 ＋ 自動起動フォールバック (0ms)
+python3 -c '
+import socket, os, subprocess
+sock = "/tmp/hypr_wallpaper.sock"
+if os.path.exists(sock):
+    try:
+        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        s.connect(sock)
+        s.sendall(b"reload")
+        s.close()
+    except Exception:
+        pass
+else:
+    subprocess.Popen(["python3", os.path.expanduser("~/.config/hypr/scripts/wallpaper_daemon.py")])
+' 2>/dev/null || true

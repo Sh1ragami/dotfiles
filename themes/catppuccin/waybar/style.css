@@ -28,11 +28,11 @@ window#waybar.hidden {
 /* 左右に浮いている島 (ワークスペース、ハードウェア情報) */
 #workspaces,
 #group-hardware {
-    background-color: rgba(30, 30, 46, 0.8); /* Catppuccin Mocha Base */
-    border: 1px solid rgba(203, 166, 247, 0.25); /* ラベンダー境界線 */
+    background-color: rgba(24, 24, 37, 0.95); /* 高視認性 Catppuccin Mocha */
+    border: 1px solid rgba(203, 166, 247, 0.5); /* ラベンダー境界線 */
     border-radius: 14px;
     padding: 3px 12px;
-    margin: 6px 6px 4px 6px; /* 上部に隙間を作り、浮いているように配置 */
+    margin: 6px 6px 4px 6px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -58,8 +58,8 @@ window#waybar.hidden {
 
 /* 🕒 中央の時計の島 (上に隙間を作らず画面端に密着、上角丸なし) */
 #clock {
-    background-color: rgba(30, 30, 46, 0.8);
-    border: 1px solid rgba(203, 166, 247, 0.25);
+    background-color: rgba(24, 24, 37, 0.95);
+    border: 1px solid rgba(203, 166, 247, 0.5);
     border-top: none;
     border-radius: 0px 0px 14px 14px;
     padding: 3px 18px;

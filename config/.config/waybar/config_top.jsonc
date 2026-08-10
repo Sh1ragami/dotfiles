@@ -1,6 +1,7 @@
 {
     "layer": "top",
     "position": "top",
+    "exclusive": true,
     "height": 40,
     "margin-top": 0,
     "margin-left": 0,
@@ -25,7 +26,8 @@
     "clock": {
         "format": "  {0:%H:%M}  |    {0:%m/%d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "on-click": "gsimplecal"
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "gsimplecal"
     },
 
     "group/hardware": {

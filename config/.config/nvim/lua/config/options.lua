@@ -1,2 +1,2 @@
--- Study Theme Specific Neovim Options (Hide statusline completely)
-vim.opt.laststatus = 0
+-- Normal Theme Options
+vim.opt.laststatus = 3

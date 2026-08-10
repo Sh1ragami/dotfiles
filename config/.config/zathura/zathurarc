@@ -1,37 +1,20 @@
-# =========================================================================
-# 📚 STUDY THEME ZATHURA CONFIG (Soft Dark Mode - Not Too Dark)
-# =========================================================================
-
-# 変なステータスバーを完全消去
 set guioptions ""
-
-# クリップボード共有
 set selection-clipboard clipboard
-
-# PDF両端ジャストフィット ＆ 余白ゼロ
 set adjust-open "width"
 set page-padding 0
 
-# 濃すぎず目に優しいソフトダークカラー(#282a3a)
-set default-bg "#282a3a"
-set default-fg "#d5ddf6"
-set statusBar-bg "#282a3a"
-set statusBar-fg "#d5ddf6"
-set inputbar-bg "#282a3a"
-set inputbar-fg "#d5ddf6"
-set notification-bg "#282a3a"
-set notification-fg "#d5ddf6"
+set default-bg "#1a102f"
+set default-fg "#f8f8f2"
+set statusBar-bg "#1a102f"
+set statusBar-fg "#f8f8f2"
+set inputbar-bg "#1a102f"
+set inputbar-fg "#f8f8f2"
+set notification-bg "#1a102f"
+set notification-fg "#f8f8f2"
 
-# ダークモード(Recolor)有効化
 set recolor "true"
-set recolor-lightcolor "#282a3a"   # 濃すぎない目に優しい背景色(#282a3a)
-set recolor-darkcolor "#d5ddf6"    # クッキリ見やすい文字色(#d5ddf6)
+set recolor-lightcolor "#1a102f"
+set recolor-darkcolor "#f8f8f2"
 set recolor-reverse-video "true"
-set recolor-keephue "true"         # 画像・図形のカラーを維持
-
+set recolor-keephue "true"
 set render-loading "false"
-set scroll-step "50"
-
-# 派手な黄色ハイライトを無効化（透明化）
-set highlight-color "rgba(0, 0, 0, 0)"
-set highlight-active-color "rgba(0, 0, 0, 0)"

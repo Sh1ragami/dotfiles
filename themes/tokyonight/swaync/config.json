@@ -1,0 +1,116 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "center",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "cssPriority": "application",
+  "control-center-margin-top": 6,
+  "control-center-margin-bottom": 12,
+  "control-center-margin-right": 0,
+  "control-center-margin-left": 0,
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
+  "notification-icon-size": 64,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 200,
+  "timeout": 10,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "fit-to-screen": true,
+  "relative-timestamps": true,
+  "control-center-width": 480,
+  "control-center-height": 600,
+  "notification-window-width": 380,
+  "keyboard-shortcuts": true,
+  "image-visibility": "when-available",
+  "transition-time": 200,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "script-fail-notify": true,
+
+  "widgets": [
+    "custom/profile",
+    "buttons-grid#quick",
+    "mpris",
+    "title",
+    "notifications"
+  ],
+
+  "widget-config": {
+    "title": {
+      "text": "通知センター",
+      "clear-all-button": true,
+      "button-text": "すべてクリア"
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "custom/profile": {
+      "exec": "/home/sh1ragami/.config/swaync/scripts/profile.sh",
+      "return-type": "json",
+      "interval": 30,
+      "escape": false
+    },
+    "buttons-grid#quick": {
+      "n-cols": 2,
+      "actions": [
+        {
+          "label": "  Wi-Fi",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
+          "update_command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
+        },
+        {
+          "label": "󰂯  Bluetooth",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && bluetoothctl power on || bluetoothctl power off'",
+          "update_command": "sh -c '[[ $(bluetoothctl show | grep \"PowerState\") == *\"on\"* ]] && echo true || echo false'"
+        },
+        {
+          "label": "󰍶  通知消音",
+          "type": "toggle",
+          "active": false,
+          "command": "swaync-client -d",
+          "update_command": "swaync-client -D"
+        },
+        {
+          "label": "󰌐  タイプ音",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && wayvibes || pkill wayvibes'",
+          "update_command": "sh -c 'pgrep wayvibes >/dev/null && echo true || echo false'"
+        },
+        {
+          "label": "🌅  夕暮れ",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh sunset"
+        },
+        {
+          "label": "🍇  星空",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh catppuccin"
+        },
+        {
+          "label": "🌃  東京夜",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh tokyonight"
+        },
+        {
+          "label": "📚  学習用",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh study"
+        },
+        {
+          "label": "  バー位置",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/waybar/scripts/toggle_position.sh"
+        }
+
+      ]
+    }
+  }
+}

@@ -1,188 +1,299 @@
 /*
- * SwayNC (Sway Notification Center) Catppuccin Mocha Minimalist Stylesheet
- * Matches the lavender/blue Catppuccin theme with spacious and clean layout
+ * =========================================================================
+ * 💎 Zero-Base State-of-the-Art Glassmorphic GUI Control Center
+ * =========================================================================
  */
 
 * {
-  font-family: "JetBrainsMono Nerd Font", "Ubuntu Nerd Font", sans-serif;
+  font-family: "JetBrainsMono Nerd Font", "Inter", "Noto Sans CJK JP", sans-serif;
   transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
-  color: #cdd6f4; /* Catppuccin Text */
+  color: #dfd0b2;
 }
 
-/* スクロールバーを完全に非表示にして野暮ったさを排除 */
-scrollbar,
-scrollbar button,
-scrollbar slider,
-scrollbar trough {
+/* 🙈 スクロールバー完全無効化 */
+scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   width: 0px !important;
   height: 0px !important;
-  min-width: 0px !important;
-  min-height: 0px !important;
   opacity: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 
-/* 
- * 🎴 フローティング通知 (通知ポップアップ)
- */
+/* 🎴 フローティング通知 */
 .floating-notifications.background .notification-row .notification-background {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(203, 166, 247, 0.25);
-  border-radius: 12px;
-  margin: 10px;
-  background-color: rgba(30, 30, 46, 0.9);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(234, 105, 98, 0.3);
+  border-radius: 18px;
+  margin: 10px 14px;
+  background-color: rgba(36, 27, 25, 0.95);
   padding: 0;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification {
-  padding: 12px;
-  border-radius: 12px;
+  padding: 12px 16px;
+  border-radius: 18px;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  border-color: #f38ba8;
+  border: 1px solid #ea6962;
+  box-shadow: 0 0 20px rgba(234, 105, 98, 0.4);
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content .summary {
-  color: #cdd6f4;
-  font-weight: bold;
-}
-
-.floating-notifications.background .notification-row .notification-background .notification .notification-content .time {
-  color: #7f849c;
+  color: #d8a657;
+  font-weight: 800;
+  font-size: 1.05rem;
 }
 
 /* 
- * 🎛️ コントロールセンター (サイドバー本体 - 浮遊デザイン)
+ * 🏝️ コントロールセンター (Waybar時計アイランド直下に100%密着)
  */
 .control-center {
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(203, 166, 247, 0.25);
-  border-radius: 20px; /* 四隅すべて丸くする */
-  margin: 10px;
-  background-color: rgba(30, 30, 46, 0.92);
-  padding: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(234, 105, 98, 0.3);
+  border-top: none;
+  border-radius: 0px 0px 24px 24px;
+  margin-top: -46px !important;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: rgba(30, 24, 28, 0.96);
+  padding: 50px 22px 22px 22px;
 }
 
-/* コントロールセンターのタイトルエリア */
-.control-center .widget-title {
-  margin-top: 10px;
+/* 👤 プロファイル・ヘッダーカード */
+.widget-custom-profile {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(234, 105, 98, 0.2);
+  border-radius: 16px;
+  padding: 12px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* 📑 タブ切替セグメントバー (Segmented Pill Tab Bar) */
+.widget-menubar {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(234, 105, 98, 0.18);
+  padding: 4px;
+  margin-bottom: 16px;
+}
+
+.widget-menubar > box > button {
+  border-radius: 12px !important;
+  padding: 8px 18px !important;
+  margin: 2px 4px !important;
+  background-color: transparent;
+  border: none;
+  color: #a89984;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.widget-menubar > box > button:hover {
+  background-color: rgba(234, 105, 98, 0.18);
+  color: #dfd0b2;
+}
+
+.widget-menubar > box > button:checked,
+.widget-menubar > box > button:active {
+  background: linear-gradient(135deg, #d8a657, #ea6962);
+  color: #1e1e1e;
+  border-color: transparent;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(234, 105, 98, 0.35);
+}
+
+/* ⚡ クイック設定 GUI カードグリッド (2x2 Tile Cards) */
+.widget-buttons-grid {
+  background: transparent !important;
+  border: none !important;
+  padding: 0px;
   margin-bottom: 14px;
 }
 
-.control-center .widget-title > label {
-  color: #cdd6f4;
-  font-size: 1.25em;
-  font-weight: bold;
+.widget-buttons-grid flowbox {
+  padding: 2px;
 }
 
-/* すべてクリアボタン */
+.widget-buttons-grid flowboxchild {
+  padding: 3px;
+}
+
+.widget-buttons-grid flowboxchild > button {
+  border-radius: 16px !important;
+  min-width: 145px;
+  min-height: 52px;
+  margin: 3px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(234, 105, 98, 0.2);
+  color: #dfd0b2;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 10px 16px !important;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.widget-buttons-grid flowboxchild > button:hover {
+  border-color: #ea6962;
+  background: linear-gradient(135deg, rgba(234, 105, 98, 0.25), rgba(216, 166, 87, 0.25));
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(234, 105, 98, 0.35);
+}
+
+.widget-buttons-grid flowboxchild > button:checked {
+  background: linear-gradient(135deg, #d8a657, #ea6962);
+  color: #1e1e1e;
+  border-color: transparent;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(216, 166, 87, 0.4);
+}
+
+/* 🎚️ 音量・明るさ スライダーカード */
+.widget-volume, .widget-backlight {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(234, 105, 98, 0.18);
+  border-radius: 16px;
+  padding: 8px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.widget-volume label, .widget-backlight label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #ea6962;
+  margin-right: 12px;
+}
+
+.widget-volume scale trough,
+.widget-backlight scale trough {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  min-height: 8px;
+  border: none;
+}
+
+.widget-volume scale highlight,
+.widget-backlight scale highlight {
+  background: linear-gradient(90deg, #ea6962, #d8a657);
+  border-radius: 8px;
+}
+
+.widget-volume scale slider,
+.widget-backlight scale slider {
+  background-color: #dfd0b2;
+  border-radius: 50%;
+  min-width: 14px;
+  min-height: 14px;
+  border: none;
+}
+
+/* 🎵 MPRIS Spotify メディアプレーヤー・カード */
+.widget-mpris {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(234, 105, 98, 0.2);
+  border-radius: 18px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.widget-mpris-player {
+  padding: 4px;
+  margin: 0px;
+}
+
+.widget-mpris-album-art {
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.widget-mpris-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #d8a657;
+}
+
+.widget-mpris-subtitle {
+  font-size: 0.9rem;
+  color: #a89984;
+}
+
+.widget-mpris-button {
+  border-radius: 50% !important;
+  padding: 6px !important;
+  margin: 0 4px !important;
+  background-color: rgba(234, 105, 98, 0.15);
+  color: #ea6962;
+  border: 1px solid rgba(234, 105, 98, 0.2);
+}
+
+.widget-mpris-button:hover {
+  background-color: #ea6962;
+  color: #1e1e1e;
+  transform: scale(1.1);
+}
+
+/* 🏷️ タイトル ＆ すべてクリアボタン */
+.control-center .widget-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.control-center .widget-title > label {
+  color: #dfd0b2;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
 .control-center .widget-title button {
   border-radius: 8px;
-  color: #cdd6f4;
-  background-color: rgba(49, 50, 68, 0.6);
-  border: 1px solid rgba(203, 166, 247, 0.2);
-  padding: 6px 14px;
-  font-size: 0.9em;
+  color: #dfd0b2;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(234, 105, 98, 0.2);
+  padding: 3px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
 .control-center .widget-title button:hover {
-  border-color: #cba6f7;
-  background-color: rgba(203, 166, 247, 0.2);
+  border-color: #ea6962;
+  background-color: rgba(234, 105, 98, 0.2);
 }
 
-/* 通知アイテム */
+/* 📩 通知ストリームカード */
 .control-center .notification-row .notification-background {
-  border-radius: 10px;
-  color: #cdd6f4;
-  background-color: rgba(30, 30, 46, 0.5);
-  border: 1px solid rgba(203, 166, 247, 0.15);
-  margin-top: 8px;
+  border-radius: 14px;
+  color: #dfd0b2;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(234, 105, 98, 0.15);
+  margin-top: 6px;
 }
 
 .control-center .notification-row .notification-background .notification {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
 }
 
 .control-center .notification-row .notification-background:hover {
-  background-color: rgba(49, 50, 68, 0.6);
-  border-color: rgba(203, 166, 247, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(234, 105, 98, 0.35);
 }
 
 .close-button {
   border-radius: 50%;
-  background-color: rgba(243, 139, 168, 0.15);
-  color: #f38ba8;
-  padding: 4px;
-  margin: 4px;
+  background-color: rgba(234, 105, 98, 0.15);
+  color: #ea6962;
+  padding: 3px;
+  margin: 3px;
 }
 
 .close-button:hover {
-  background-color: #f38ba8;
-  color: #11111b;
-}
-
-/* 
- * 👤 プロファイルヘッダーウィジェット
- */
-.widget-custom-profile {
-  background-color: rgba(49, 50, 68, 0.4);
-  border: 1px solid rgba(203, 166, 247, 0.15);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 20px;
-  background-image: url("file:///home/sh1ragami/.config/swaync/assets/profile-bg.png");
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: contain;
-}
-
-.widget-custom-profile label {
-  color: #cdd6f4;
-}
-
-/* 
- * ⚙️ クイック設定 ＆ テーマグリッド (完全な美しい真円とアイコン中央揃え)
- */
-.widget-buttons-grid {
-  background-color: rgba(49, 50, 68, 0.25);
-  border-radius: 14px;
-  padding: 12px;
-  margin-bottom: 24px;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 10px !important; /* スタイリッシュな角丸長方形 */
-  min-height: 38px;
-  margin: 4px;
-  background-color: rgba(49, 50, 68, 0.6);
-  border: 1px solid rgba(203, 166, 247, 0.12);
-  color: #cdd6f4;
-  font-size: 0.95rem;
-  font-weight: 500;
-  padding: 6px 12px !important;
-  text-align: center;
-  box-shadow: none;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button > label {
-  margin: 0px !important;
-  padding: 0px !important;
-  text-align: center;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  border-color: #cba6f7;
-  background-color: rgba(203, 166, 247, 0.2);
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:checked {
-  background-color: #cba6f7;
-  color: #11111b;
-  border-color: #cba6f7;
+  background-color: #ea6962;
+  color: #1e1e1e;
 }

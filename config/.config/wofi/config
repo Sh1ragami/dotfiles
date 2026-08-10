@@ -3,10 +3,10 @@ show=drun
 allow_images=true
 image_size=32
 insensitive=true
-width=600
-height=450
-location=center
-prompt=Search Apps...
-# その他の設定（お好みで）
-layer=overlay
+width=680
+height=380
+location=bottom
+yoffset=0
+prompt=アプリを検索...
+layer=top
 hide_scroll=true

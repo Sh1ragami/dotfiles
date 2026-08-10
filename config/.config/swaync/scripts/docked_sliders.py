@@ -89,11 +89,14 @@ class DockedSliders(Gtk.Window):
             try:
                 geom = monitor.get_geometry()
                 if position_x == "left":
-                    # 左端にサイドバーがある場合：マージン12px + 幅380px + 隙間13px = 405px
+                    # 左端にサイドバーがある場合
                     win_x = 405
+                elif position_x == "center":
+                    # 中央上部にパネルがある場合：中央パネルの右側に配置
+                    win_x = int((geom.width + 820) / 2) + 16
                 else:
                     win_x = geom.width - 240 - 415
-                win_y = 80
+                win_y = 45
             except Exception:
                 pass
         else:
@@ -103,9 +106,11 @@ class DockedSliders(Gtk.Window):
                     width = screen.get_width()
                     if position_x == "left":
                         win_x = 405
+                    elif position_x == "center":
+                        win_x = int((width + 820) / 2) + 16
                     else:
                         win_x = width - 240 - 415
-                    win_y = 80
+                    win_y = 45
                 except:
                     pass
         self.move(win_x, win_y)

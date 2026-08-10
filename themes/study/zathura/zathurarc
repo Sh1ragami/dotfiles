@@ -1,0 +1,33 @@
+# =========================================================================
+# 📚 STUDY THEME ZATHURA CONFIG (Soft Dark Mode - Not Too Dark)
+# =========================================================================
+
+# 変なステータスバーを完全消去
+set guioptions ""
+
+# クリップボード共有
+set selection-clipboard clipboard
+
+# PDF両端ジャストフィット ＆ 余白ゼロ
+set adjust-open "width"
+set page-padding 0
+
+# 濃すぎず目に優しいソフトダークカラー(#282a3a)
+set default-bg "#282a3a"
+set default-fg "#d5ddf6"
+set statusBar-bg "#282a3a"
+set statusBar-fg "#d5ddf6"
+set inputbar-bg "#282a3a"
+set inputbar-fg "#d5ddf6"
+set notification-bg "#282a3a"
+set notification-fg "#d5ddf6"
+
+# ダークモード(Recolor)有効化
+set recolor "true"
+set recolor-lightcolor "#282a3a"   # 濃すぎない目に優しい背景色(#282a3a)
+set recolor-darkcolor "#d5ddf6"    # クッキリ見やすい文字色(#d5ddf6)
+set recolor-reverse-video "true"
+set recolor-keephue "true"         # 画像・図形のカラーを維持
+
+set render-loading "false"
+set scroll-step "50"

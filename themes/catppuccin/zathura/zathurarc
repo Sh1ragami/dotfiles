@@ -1,0 +1,20 @@
+set guioptions ""
+set selection-clipboard clipboard
+set adjust-open "width"
+set page-padding 0
+
+set default-bg "#1e1e2e"
+set default-fg "#cdd6f4"
+set statusBar-bg "#1e1e2e"
+set statusBar-fg "#cdd6f4"
+set inputbar-bg "#1e1e2e"
+set inputbar-fg "#cdd6f4"
+set notification-bg "#1e1e2e"
+set notification-fg "#cdd6f4"
+
+set recolor "true"
+set recolor-lightcolor "#1e1e2e"
+set recolor-darkcolor "#cdd6f4"
+set recolor-reverse-video "true"
+set recolor-keephue "true"
+set render-loading "false"

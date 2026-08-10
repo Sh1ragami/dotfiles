@@ -215,7 +215,7 @@ window#waybar.hidden {
 
 /* ワークスペースボタンを縦型に中央揃えで最適化 */
 #waybar.left #workspaces button {
-    margin: 4px auto;
+    margin: 4px 0px;
     padding: 6px 0px;
     min-width: 36px;
 }

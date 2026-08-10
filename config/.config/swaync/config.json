@@ -100,10 +100,16 @@
           "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh tokyonight"
         },
         {
+          "label": "📚  学習用",
+          "type": "button",
+          "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh study"
+        },
+        {
           "label": "  バー位置",
           "type": "button",
           "command": "/home/sh1ragami/.config/waybar/scripts/toggle_position.sh"
         }
+
       ]
     }
   }

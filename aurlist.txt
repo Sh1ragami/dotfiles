@@ -14,3 +14,5 @@ teams-for-linux
 wayland-idle-inhibitor-git
 wayvibes-git
 wlogout
+sddm-sugar-candy-git
+

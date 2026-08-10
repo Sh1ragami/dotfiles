@@ -111,7 +111,12 @@ showtime
 simple-scan
 socat
 sof-firmware
+sddm
+qt5-graphicaleffects
+qt5-quickcontrols2
+qt5-svg
 starship
+
 stow
 swaync
 swtpm

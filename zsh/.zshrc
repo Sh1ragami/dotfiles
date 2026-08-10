@@ -12,6 +12,12 @@ zstyle ':completion:*' menu select
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh-history
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
 
 alias ls='eza --color=always --icons=always --group-directories-first --hyperlink'
 alias vi='nvim'

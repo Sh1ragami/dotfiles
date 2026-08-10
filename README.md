@@ -1,57 +1,63 @@
 # dotfiles
 
-GNU Stow で管理された Arch Linux 用の dotfiles リポジトリです。Hyprland と Neovim を中心としたキーボード駆動の環境を構築します。
+Hyprland + Neovim 向けの環境設定。GNU Stow で管理。
 
-## 構成要素
+## 概要
 
-| カテゴリ | ツール |
-| --- | --- |
-| **OS** | Arch Linux |
-| **ウィンドウマネージャー** | Hyprland (Wayland) |
-| **エディタ** | Neovim |
-| **ターミナル** | Kitty |
-| **シェル** | Zsh (Starship, zoxide, mise) |
-| **PDFビューア** | Zathura |
-| **バー** | Waybar |
-| **ランチャー** | Wofi |
+- **WM**: Hyprland (Wayland)
+- **Terminal**: Kitty
+- **Shell**: Zsh (Starship)
+- **Editor**: Neovim (LazyVim)
+- **PDF Viewer**: Zathura
+- **Bar**: Waybar
 
-## 主な機能
+## 構成・動作
 
-- **フローティング Gemini (スクラッチパッド)**: `$mainMod + Space` で常駐型 Gemini ウィンドウを即座に表示・非表示。
-- **Neovim ↔ Zathura SyncTeX 連動**: カーソル静止位置に合わせた PDF 自動スクロール追従。
-- **Stow 管理**: `install.sh` によるパッケージ一括導入と設定シンボリックリンク展開。
+- **Gemini (Scratchpad)**: `$mainMod + Space` で常駐型 Gemini ウィンドウをトグル表示（Hyprland Special Workspace）。
+- **Neovim & Zathura**: SyncTeX によるカーソル自動連動スクロール（ハイライト透明化処理済み）。
 
-## インストール
+## セットアップ
+
+### 1. SSH鍵の準備
 
 ```bash
-git clone https://github.com/Sh1ragami/dotfiles.git ~/dotfiles
+ssh-keygen -t ed25519 -C "your-email@example.com"
+cat ~/.ssh/id_ed25519.pub
+# 公開鍵を GitHub に登録後、接続確認
+ssh -T git@github.com
+```
+
+### 2. クローンとインストール
+
+```bash
+git clone git@github.com:<your-username>/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh
 ```
 
-### インストール後の設定
+`install.sh` はパッケージ導入、既存設定のバックアップ (`*.backup`)、Stow によるシンボリックリンク作成を自動で行います。
 
-各環境の Git 個人情報を設定してください：
+### 3. 個別設定
+
+シェル変更と Git ローカル情報の設定：
 
 ```bash
+chsh -s $(which zsh)
+
 git config --file ~/.gitconfig.local user.name "Your Name"
 git config --file ~/.gitconfig.local user.email "your-email@example.com"
 ```
 
-## 主なキーバインド
+## キーバインド
 
-| ショートカット | 機能 |
-| --- | --- |
-| `$mainMod + Space` | フローティング Gemini の表示 / 非表示 |
-| `$mainMod + G` | タイル型 Gemini の起動 |
-| `$mainMod + T` | ターミナルの起動 |
-| `$mainMod + E` | ファイルマネージャーの起動 |
-| `$mainMod + V` | フローティング表示のトグル |
-| `$mainMod + Q` | ウィンドウを閉じる |
+- `$mainMod + Space`: フローティング Gemini トグル
+- `$mainMod + G`: タイル型 Gemini 起動
+- `$mainMod + T`: ターミナル起動
+- `$mainMod + E`: ファイルマネージャー起動
+- `$mainMod + V`: フローティングトグル
+- `$mainMod + Q`: ウィンドウ閉じる
 
-## メンテナンス
-
-インストール済みパッケージリストの更新：
+## パッケージ更新
 
 ```bash
 pacman -Qqen > ~/dotfiles/pkglist.txt

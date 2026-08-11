@@ -1,2 +1,29 @@
 [manager]
 show_hidden = true
+
+[opener]
+edit = [
+	{ run = 'nvim "$@"', block = true, for = "unix" }
+]
+pdf = [
+	{ run = 'zathura "$@"', orphan = true, for = "linux" }
+]
+video = [
+	{ run = 'mpv "$@"', orphan = true, for = "linux" }
+]
+image = [
+	{ run = 'xdg-open "$1"', orphan = true, for = "linux" }
+]
+open = [
+	{ run = 'xdg-open "$1"', orphan = true, for = "linux" }
+]
+
+[open]
+rules = [
+	{ mime = "application/pdf", use = [ "pdf", "open" ] },
+	{ mime = "text/*", use = [ "edit", "open" ] },
+	{ mime = "image/*", use = [ "image", "open" ] },
+	{ mime = "video/*", use = [ "video", "open" ] },
+	{ mime = "audio/*", use = [ "video", "open" ] },
+	{ url = "*", use = [ "edit", "open" ] }
+]

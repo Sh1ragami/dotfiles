@@ -38,7 +38,7 @@ if [ -f "$DOTFILES_DIR/aurlist.txt" ] && [ -n "$AUR_HELPER" ]; then
 fi
 
 # 4. 競合する既存ファイルの退避とStowの適用
-stow_dirs=(zsh tmux git config)
+stow_dirs=(zsh git config)
 
 echo "Applying GNU Stow..."
 for dir in "${stow_dirs[@]}"; do

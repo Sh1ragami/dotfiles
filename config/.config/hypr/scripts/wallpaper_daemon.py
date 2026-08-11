@@ -41,7 +41,7 @@ class WallpaperWindow(Gtk.Window):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
 
         GtkLayerShell.init_for_window(self)
-        # Hyprland wallpaper layer is Layer.BOTTOM (Layer 1)
+        # Hyprland wallpaper layer is Layer.BOTTOM
         GtkLayerShell.set_layer(self, GtkLayerShell.Layer.BOTTOM)
         GtkLayerShell.set_anchor(self, GtkLayerShell.Edge.TOP, True)
         GtkLayerShell.set_anchor(self, GtkLayerShell.Edge.BOTTOM, True)
@@ -63,17 +63,66 @@ class WallpaperWindow(Gtk.Window):
 
     def reload_wallpaper(self):
         wall_path = os.path.expanduser("~/.config/hypr/wallpaper.png")
-        if os.path.exists(wall_path):
+        if not os.path.exists(wall_path):
+            return
+
+        try:
+            # モニターの解像度を正確に取得
+            screen = Gdk.Screen.get_default()
+            monitor_num = screen.get_primary_monitor()
+            if monitor_num < 0:
+                monitor_num = 0
+            geom = screen.get_monitor_geometry(monitor_num)
+
+            alloc = self.get_allocation()
+            w = max(geom.width, alloc.width if alloc.width > 100 else 0, 1920)
+            h = max(geom.height, alloc.height if alloc.height > 100 else 0, 1080)
+
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(wall_path)
+            orig_w = pixbuf.get_width()
+            orig_h = pixbuf.get_height()
+
+            # アスペクト比を維持して画面全体をカバー (Fill / Cover モード)
+            scale_w = w / orig_w
+            scale_h = h / orig_h
+            scale = max(scale_w, scale_h)
+
+            target_w = max(1, int(orig_w * scale))
+            target_h = max(1, int(orig_h * scale))
+
+            scaled = pixbuf.scale_simple(target_w, target_h, GdkPixbuf.InterpType.BILINEAR)
+
+            # 中央寄せトリミング
+            offset_x = (target_w - w) // 2
+            offset_y = (target_h - h) // 2
+
+            sub_pb = GdkPixbuf.Pixbuf.new(
+                pixbuf.get_colorspace(),
+                pixbuf.get_has_alpha(),
+                pixbuf.get_bits_per_sample(),
+                w,
+                h
+            )
+            scaled.copy_area(offset_x, offset_y, w, h, sub_pb, 0, 0)
+
+            self.img.set_from_pixbuf(sub_pb)
+        except Exception as e:
             try:
-                alloc = self.get_allocation()
-                w = alloc.width if alloc.width > 100 else 1920
-                h = alloc.height if alloc.height > 100 else 1080
-                
-                pb = GdkPixbuf.Pixbuf.new_from_file_at_scale(wall_path, w, h, False)
+                pb = GdkPixbuf.Pixbuf.new_from_file_at_scale(wall_path, 1920, 1080, False)
                 self.img.set_from_pixbuf(pb)
             except Exception:
                 pass
+
         self.queue_draw()
+
+    def schedule_reload(self):
+        self.reload_wallpaper()
+        # レイアウト確定後の遅延リロード（拡大ズレの防止）
+        GLib.timeout_add(150, self.reload_wallpaper_once)
+
+    def reload_wallpaper_once(self):
+        self.reload_wallpaper()
+        return False
 
     def on_configure(self, widget, event):
         self.reload_wallpaper()
@@ -94,7 +143,7 @@ def start_ipc_server(win):
             conn, _ = server.accept()
             conn.recv(1024)
             conn.close()
-            win.reload_wallpaper()
+            win.schedule_reload()
         except Exception:
             pass
         return True

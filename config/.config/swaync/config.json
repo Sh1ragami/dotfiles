@@ -7,23 +7,23 @@
   "control-center-exclusive-zone": false,
   "layer-shell": true,
   "cssPriority": "application",
-  "control-center-margin-top": -46,
+  "control-center-margin-top": 12,
   "control-center-margin-bottom": 12,
   "control-center-margin-right": 0,
   "control-center-margin-left": 0,
   "notification-2fa-action": true,
   "notification-inline-replies": false,
-  "notification-icon-size": 64,
+  "notification-icon-size": 54,
   "notification-body-image-height": 100,
   "notification-body-image-width": 200,
-  "timeout": 10,
-  "timeout-low": 5,
+  "timeout": 8,
+  "timeout-low": 4,
   "timeout-critical": 0,
   "fit-to-screen": false,
   "relative-timestamps": true,
-  "control-center-width": 680,
-  "control-center-height": 520,
-  "notification-window-width": 380,
+  "control-center-width": 640,
+  "control-center-height": 560,
+  "notification-window-width": 360,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
   "transition-time": 200,
@@ -33,7 +33,6 @@
 
   "widgets": [
     "custom/profile",
-    "menubar",
     "buttons-grid",
     "volume",
     "backlight",
@@ -54,92 +53,6 @@
       "interval": 30,
       "escape": false
     },
-    "menubar": {
-      "menu#dashboard": {
-        "label": "󰋜 Dashboard",
-        "position": "left",
-        "actions": [
-          {
-            "label": "󰋜 Clear Notifications",
-            "type": "button",
-            "command": "swaync-client -C"
-          }
-        ]
-      },
-      "menu#media": {
-        "label": "󰎈 Media Player",
-        "position": "left",
-        "actions": [
-          {
-            "label": "󰓇 Launch Spotify Player",
-            "type": "button",
-            "command": "spotify"
-          },
-          {
-            "label": "󰐊 Play / Pause",
-            "type": "button",
-            "command": "playerctl play-pause"
-          },
-          {
-            "label": "󰒮 Next Track",
-            "type": "button",
-            "command": "playerctl next"
-          },
-          {
-            "label": "󰒫 Previous Track",
-            "type": "button",
-            "command": "playerctl previous"
-          }
-        ]
-      },
-      "menu#performance": {
-        "label": "󰓅 Performance",
-        "position": "left",
-        "actions": [
-          {
-            "label": "󰨇 Launch Btop System Monitor",
-            "type": "button",
-            "command": "kitty -e btop"
-          },
-          {
-            "label": "󰍛 Launch Pavucontrol Audio",
-            "type": "button",
-            "command": "pavucontrol"
-          },
-          {
-            "label": "󰂯 Launch Blueman Manager",
-            "type": "button",
-            "command": "blueman-manager"
-          }
-        ]
-      },
-      "menu#themes": {
-        "label": "󰔎 Themes",
-        "position": "left",
-        "actions": [
-          {
-            "label": "󰖔 Sunset Theme",
-            "type": "button",
-            "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh sunset"
-          },
-          {
-            "label": "󰄛 Catppuccin Theme",
-            "type": "button",
-            "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh catppuccin"
-          },
-          {
-            "label": "󰄛 Tokyo Night Theme",
-            "type": "button",
-            "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh tokyonight"
-          },
-          {
-            "label": "󰂺 Study Mode Theme",
-            "type": "button",
-            "command": "/home/sh1ragami/.config/hypr/scripts/theme_selector_direct.sh study"
-          }
-        ]
-      }
-    },
     "buttons-grid": {
       "actions": [
         {
@@ -157,24 +70,23 @@
           "update_command": "sh -c '[[ $(bluetoothctl show | grep \"PowerState\") == *\"on\"* ]] && echo true || echo false'"
         },
         {
-          "label": "󰍶  Do Not Disturb",
+          "label": "󰍶  DND",
           "type": "toggle",
           "active": false,
-          "command": "swaync-client -d",
-          "update_command": "swaync-client -D"
+          "command": "sh -c 'swaync-client -d -sw && pkill -SIGUSR2 waybar'",
+          "update_command": "sh -c '[[ $(swaync-client -D) == \"true\" ]] && echo true || echo false'"
         },
         {
-          "label": "󰌐  Key Sounds",
+          "label": "🎚️  Sliders",
           "type": "toggle",
           "active": true,
-          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && wayvibes || pkill wayvibes'",
-          "update_command": "sh -c 'pgrep wayvibes >/dev/null && echo true || echo false'"
+          "command": "python3 /home/sh1ragami/.config/swaync/scripts/docked_sliders_toggle.py"
         }
       ]
     },
     "mpris": {
-      "image-size": 85,
-      "image-radius": 14
+      "image-size": 70,
+      "image-radius": 12
     },
     "volume": {
       "label": "󰕾 Volume"

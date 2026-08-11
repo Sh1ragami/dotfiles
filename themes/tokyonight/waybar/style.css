@@ -1,221 +1,90 @@
 /*
- * Island-Style Waybar Theme (Catppuccin Mocha Theme)
- * Lavender and blue accent colors for a clean aesthetic
+ * Island-Style Waybar Theme (Tokyo Night Theme)
+ * Perfectly Equalized Size & Height Across Left and Right Islands
  */
 
 * {
     font-family: "JetBrains Mono Nerd Font", "Inter", sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     border: none;
     border-radius: 0;
 }
 
-/* バー全体のコンテナは完全に透明 */
 window#waybar {
     background-color: transparent;
-    color: #cdd6f4;
+    color: #a9b1d6;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-/* 
- * 🏝️ 各島（アイランド）の設定
- */
-
-/* 左右に浮いている島 (ワークスペース、ハードウェア情報) */
-#workspaces,
-#group-hardware {
-    background-color: rgba(24, 24, 37, 0.95); /* 高視認性 Catppuccin Mocha */
-    border: 1px solid rgba(203, 166, 247, 0.5); /* ラベンダー境界線 */
+/* 1. 左島 (ワークスペース) */
+#workspaces {
+    background-color: rgba(26, 27, 38, 0.85);
     border-radius: 14px;
-    padding: 3px 12px;
-    margin: 6px 6px 4px 6px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 2px 8px;
+    margin: 3px 10px 0px 10px;
+    min-height: 22px;
 }
 
-/* 🔔 独立した「通知ベル」の島 (カプセルではなく、完全な真円のボタンにする) */
-#custom-notification {
-    background-color: rgba(30, 30, 46, 0.8);
-    border: 1px solid rgba(203, 166, 247, 0.25);
-    border-radius: 50%; /* 真円にする */
-    min-width: 32px;
-    min-height: 32px;
-    padding: 0px;
-    margin: 6px 12px 4px 6px;
-    color: #fab387;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* 2. 中央島 (時計 & DND) */
+#custom-clock_dnd {
+    background-color: rgba(26, 27, 38, 0.85);
+    border-radius: 0 0 14px 14px;
+    padding: 2px 18px;
+    margin: 0px 10px;
+    color: #a9b1d6;
+    font-size: 12px;
+    min-height: 22px;
 }
 
-/* 🔔 通知がある（未読あり）状態の真円ボタン (背景がラベンダーになり、ベルが暗く反転する) */
-#custom-notification.some {
-    background-color: #cba6f7;
-    border-color: #cba6f7;
-    color: #11111b;
+/* 3. 右島 (ハードウェア群) */
+#group-hardware,
+.modules-right widget,
+.modules-right #group-hardware {
+    background-color: rgba(26, 27, 38, 0.85);
+    border-radius: 14px;
+    padding: 2px 10px;
+    margin: 3px 10px 0px 10px;
+    min-height: 22px;
 }
 
-/* 🕒 中央の時計の島 (上に隙間を作らず画面端に密着、上角丸なし) */
-#clock {
-    background-color: rgba(24, 24, 37, 0.95);
-    border: 1px solid rgba(203, 166, 247, 0.5);
-    border-top: none;
-    border-radius: 0px 0px 14px 14px;
-    padding: 3px 18px;
-    margin: 0px 6px 4px 6px;
-    color: #cba6f7;
-    font-size: 13px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-#workspaces:hover,
-#clock:hover,
-#group-hardware:hover,
-#custom-notification:hover {
-    border-color: rgba(203, 166, 247, 0.5); /* ホバー時に光る */
-}
-
-/* ワークスペースボタン設定 */
+/* ワークスペースボタンサイズ */
 #workspaces button {
-    padding: 0px 8px;
-    color: #7f849c;
-    background-color: transparent;
+    padding: 0 6px;
+    color: #565f89;
+    background: transparent;
     border-radius: 8px;
-    transition: all 0.2s ease;
-    margin: 2px 1px;
+    min-height: 20px;
+    font-size: 12px;
 }
 
 #workspaces button.active {
-    color: #cba6f7; /* ラベンダー */
-    background-color: rgba(203, 166, 247, 0.15);
+    color: #7aa2f7;
+    background-color: rgba(122, 162, 247, 0.25);
 }
 
 #workspaces button:hover {
-    color: #f5c2e7; /* ピンク */
-    background-color: rgba(245, 194, 231, 0.1);
+    color: #7dcfff;
 }
 
-/* 🔊 右側モジュール（ハードウェア・便利ツール）の内側調整 (詰めすぎず 8px のゆとりを持たせる) */
+/* 🔊 右側モジュール群の間隔をゆったり心地よい10pxに拡大 */
 #pulseaudio,
+#bluetooth,
 #network,
 #memory,
 #battery {
-    padding: 0 8px;
-}
-
-#pulseaudio {
-    color: #f5e0dc; /* Rosewater */
-}
-
-#pulseaudio.muted {
-    color: #6c7086;
-}
-
-#network {
-    color: #89b4fa; /* Blue */
-}
-
-#network.disconnected {
-    color: #f38ba8;
-}
-
-#memory {
-    color: #f9e2af;
-}
-
-#battery {
-    color: #a6e3a1; /* Green */
-}
-
-#battery.charging, #battery.plugged {
-    color: #f9e2af;
-}
-
-@keyframes blink {
-    to {
-        background-color: #f38ba8;
-        color: #11111b;
-    }
-}
-
-#battery.critical:not(.charging) {
-    background-color: #f38ba8;
-    color: #11111b;
-    animation-name: blink;
-    animation-duration: 0.8s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    border-radius: 6px;
-}
-
-/* ==========================================================
- * 垂直（左端）配置用のスタイル調整
- * ========================================================== */
-#waybar.left {
-    background-color: rgba(30, 30, 46, 0.92);
-    border-radius: 0px 16px 16px 0px;
-    margin: 0px;
-    border-right: 2px solid #cba6f7;
-    border-left: none;
-    border-top: none;
-    border-bottom: none;
-}
-
-#waybar.left .modules-left,
-#waybar.left .modules-center,
-#waybar.left .modules-right {
-    padding: 8px 4px;
-}
-
-/* 縦型のときは二重背景（カプセル背景）を廃止し、超薄い水平線でモジュールを区切る */
-#waybar.left #workspaces,
-#waybar.left #clock,
-#waybar.left #hardware,
-#waybar.left #network {
+    padding: 0 10px;
+    margin: 0 2px;
     background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(203, 166, 247, 0.12); /* Catppuccinラベンダーブレンドの薄い境界線 */
-    box-shadow: none;
-    margin: 0px 4px 12px 4px;
-    padding: 0px 0px 12px 0px;
-    border-radius: 0px;
+    min-height: 20px;
+    font-size: 12px;
 }
 
-#waybar.left #custom-notification {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    margin: 0px 4px;
-    padding: 0px;
-    border-radius: 0px;
-}
-
-/* 縦軸のアライン（完璧な中央揃え）調整 */
-#waybar.left #clock,
-#waybar.left #battery,
-#waybar.left #pulseaudio,
-#waybar.left #memory,
-#waybar.left #network,
-#waybar.left #custom-notification {
-    margin: 10px 0px;
-}
-
-/* ハードウェアグループ内部の配置調整 */
-#waybar.left #hardware #battery,
-#waybar.left #hardware #pulseaudio,
-#waybar.left #hardware #memory {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    margin: 12px 0px;
-    padding: 0px;
-}
-
-/* ワークスペースボタンを縦型に中央揃えで最適化 */
-#waybar.left #workspaces button {
-    margin: 4px 0px;
-    padding: 6px 0px;
-    min-width: 36px;
-}
+#pulseaudio { color: #7dcfff; }
+#pulseaudio.muted { color: #565f89; }
+#bluetooth { color: #b4f9f8; }
+#bluetooth.disabled { color: #565f89; }
+#network { color: #7aa2f7; }
+#network.disconnected { color: #f7768e; }
+#memory { color: #e0af68; }
+#battery { color: #9ece6a; }
+#battery.charging, #battery.plugged { color: #e0af68; }

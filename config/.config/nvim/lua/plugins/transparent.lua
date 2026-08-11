@@ -1,20 +1,36 @@
 return {
   "xiyaowong/transparent.nvim",
   lazy = false,
+  priority = 1000,
   config = function()
     require("transparent").setup({
-      -- 基本の透明化グループ
       extra_groups = {
         "NormalFloat",
+        "FloatBorder",
         "NvimTreeNormal",
-        "StatusLine", -- ここから下がバーの透明化に重要
+        "NvimTreeNormalNC",
+        "NvimTreeWinSeparator",
+        "StatusLine",
         "StatusLineNC",
-        "lualine_c_normal",
-        "lualine_c_inactive",
-        "lualine_c_insert",
-        "lualine_c_visual",
-        "lualine_c_replace",
-        "lualine_c_command",
+        -- 📁 エクスプローラー (NeoTree / NvimTree) の黒枠・ヘッダー・背景透過
+        "NeoTreeNormal",
+        "NeoTreeNormalNC",
+        "NeoTreeTabActive",
+        "NeoTreeTabInactive",
+        "NeoTreeTabLineFill",
+        "NeoTreeWinSeparator",
+        "NeoTreeEndOfBuffer",
+        -- 📑 Bufferline / Tabline の透過
+        "BufferLineFill",
+        "BufferLineBackground",
+        "BufferLineTab",
+        "BufferLineTabSelected",
+        "BufferLineTabClose",
+        "BufferLineBufferSelected",
+        "BufferLineBufferVisible",
+        "TabLine",
+        "TabLineFill",
+        "TabLineSel",
       },
     })
   end,

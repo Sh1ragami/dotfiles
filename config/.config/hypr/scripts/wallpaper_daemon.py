@@ -37,10 +37,12 @@ gi.require_version("GtkLayerShell", "0.1")
 from gi.repository import Gtk, Gdk, GdkPixbuf, GtkLayerShell, GLib
 
 class WallpaperWindow(Gtk.Window):
-    def __init__(self):
+    def __init__(self, monitor):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
+        self.monitor = monitor
 
         GtkLayerShell.init_for_window(self)
+        GtkLayerShell.set_monitor(self, monitor)
         # Hyprland wallpaper layer is Layer.BOTTOM
         GtkLayerShell.set_layer(self, GtkLayerShell.Layer.BOTTOM)
         GtkLayerShell.set_anchor(self, GtkLayerShell.Edge.TOP, True)
@@ -50,8 +52,7 @@ class WallpaperWindow(Gtk.Window):
         GtkLayerShell.set_exclusive_zone(self, -1)
 
         self.set_app_paintable(True)
-        screen = Gdk.Screen.get_default()
-        visual = screen.get_rgba_visual()
+        visual = self.get_screen().get_rgba_visual()
         if visual:
             self.set_visual(visual)
 
@@ -67,13 +68,7 @@ class WallpaperWindow(Gtk.Window):
             return
 
         try:
-            # モニターの解像度を正確に取得
-            screen = Gdk.Screen.get_default()
-            monitor_num = screen.get_primary_monitor()
-            if monitor_num < 0:
-                monitor_num = 0
-            geom = screen.get_monitor_geometry(monitor_num)
-
+            geom = self.monitor.get_geometry()
             alloc = self.get_allocation()
             w = max(geom.width, alloc.width if alloc.width > 100 else 0, 1920)
             h = max(geom.height, alloc.height if alloc.height > 100 else 0, 1080)
@@ -127,7 +122,49 @@ class WallpaperWindow(Gtk.Window):
     def on_configure(self, widget, event):
         self.reload_wallpaper()
 
-def start_ipc_server(win):
+class WallpaperManager:
+    def __init__(self):
+        self.windows = {}  # monitor -> WallpaperWindow
+        self.display = Gdk.Display.get_default()
+
+        for i in range(self.display.get_n_monitors()):
+            mon = self.display.get_monitor(i)
+            self.add_monitor(mon)
+
+        self.display.connect("monitor-added", lambda d, m: self.add_monitor(m))
+        self.display.connect("monitor-removed", lambda d, m: self.remove_monitor(m))
+
+        screen = Gdk.Screen.get_default()
+        if screen:
+            screen.connect("monitors-changed", lambda s: self.reload_all())
+
+    def add_monitor(self, monitor):
+        if monitor in self.windows:
+            return
+        win = WallpaperWindow(monitor)
+        win.show_all()
+        self.windows[monitor] = win
+
+    def remove_monitor(self, monitor):
+        win = self.windows.pop(monitor, None)
+        if win:
+            win.destroy()
+
+    def reload_all(self):
+        current_monitors = set()
+        for i in range(self.display.get_n_monitors()):
+            m = self.display.get_monitor(i)
+            current_monitors.add(m)
+            if m not in self.windows:
+                self.add_monitor(m)
+            else:
+                self.windows[m].schedule_reload()
+
+        for m in list(self.windows.keys()):
+            if m not in current_monitors:
+                self.remove_monitor(m)
+
+def start_ipc_server(manager):
     if os.path.exists(SOCKET_PATH):
         try:
             os.remove(SOCKET_PATH)
@@ -143,7 +180,7 @@ def start_ipc_server(win):
             conn, _ = server.accept()
             conn.recv(1024)
             conn.close()
-            win.schedule_reload()
+            manager.reload_all()
         except Exception:
             pass
         return True
@@ -152,9 +189,8 @@ def start_ipc_server(win):
 
 if __name__ == "__main__":
     try:
-        win = WallpaperWindow()
-        win.show_all()
-        start_ipc_server(win)
+        manager = WallpaperManager()
+        start_ipc_server(manager)
         Gtk.main()
     finally:
         cleanup()

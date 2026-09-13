@@ -137,6 +137,7 @@ trash-cli
 ttf-cascadia-code-nerd
 ttf-jetbrains-mono-nerd
 ttf-meslo-nerd
+tumbler
 unzip
 usbutils
 vde2

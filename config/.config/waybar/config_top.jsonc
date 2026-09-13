@@ -72,7 +72,7 @@
         "format-ethernet": "󰈀 wired",
         "format-disconnected": "⚠ offline",
         "tooltip-format": "{ifname} via {gwaddr}\n{essid}",
-        "on-click": "gnome-control-center wifi || nm-connection-editor"
+        "on-click": "~/.config/waybar/scripts/wifi-menu.sh"
     },
 
     "memory": {

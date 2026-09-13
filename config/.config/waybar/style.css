@@ -73,7 +73,14 @@ window#waybar {
     box-shadow: none;
 }
 
-/* 外部モニターが占有しているワークスペースの文字色（背景はそのまま・緑） */
+/* もう一方の画面（現在フォーカスしていない画面）で開いているワークスペースの表示 */
+#workspaces button.visible:not(.active) {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+/* 外部モニターが占有しているワークスペースの文字色（緑） */
 window#waybar.eDP-1 #workspaces button:not(.hosting-monitor),
 window#waybar:not(.eDP-1) #workspaces button.hosting-monitor {
     color: #9ece6a;
@@ -83,6 +90,13 @@ window#waybar.eDP-1 #workspaces button:not(.hosting-monitor).active,
 window#waybar:not(.eDP-1) #workspaces button.hosting-monitor.active {
     color: #9ece6a;
     background-color: rgba(122, 162, 247, 0.35);
+}
+
+window#waybar.eDP-1 #workspaces button:not(.hosting-monitor).visible:not(.active),
+window#waybar:not(.eDP-1) #workspaces button.hosting-monitor.visible:not(.active) {
+    color: #9ece6a;
+    background-color: rgba(158, 206, 106, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(158, 206, 106, 0.4);
 }
 
 #workspaces button:hover {

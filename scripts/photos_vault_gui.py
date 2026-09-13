@@ -45,7 +45,13 @@ def notify(summary, body, icon="security-high", urgency="normal"):
         pass
 
 def mount_photos():
-    os.makedirs(MOUNT_DIR, exist_ok=True)
+    if not os.path.exists(MOUNT_DIR):
+        os.makedirs(MOUNT_DIR, exist_ok=True)
+    try:
+        os.chmod(MOUNT_DIR, 0o755)
+    except Exception:
+        pass
+        
     subprocess.Popen([
         "rclone", "mount", "gdrive:スマホ写真", MOUNT_DIR,
         "--vfs-cache-mode", "full",
@@ -54,24 +60,35 @@ def mount_photos():
         "--dir-cache-time", "72h",
         "--daemon"
     ])
-    for _ in range(12):
+    for _ in range(15):
         if is_mounted():
             break
-        time.sleep(0.5)
+        time.sleep(0.3)
     subprocess.Popen(["thunar", MOUNT_DIR])
-    notify("スマホ写真", "🔓 ロック解除しました\n見終わったらもう一度ロックできます", "security-low")
+    notify("スマホ写真", "🔓 ロック解除しました\n見終わったらもう一度アプリや右クリックから施錠できます", "security-low")
 
 def unmount_photos():
-    if is_mounted():
-        subprocess.run(["fusermount3", "-u", MOUNT_DIR])
-        # Recreate placeholder if unmounted
-        os.makedirs(MOUNT_DIR, exist_ok=True)
-        desktop_file = os.path.join(MOUNT_DIR, "🔒_PINを入力してロック解除.desktop")
-        if not os.path.exists(desktop_file):
-            with open(desktop_file, "w") as f:
-                f.write("[Desktop Entry]\nName=🔒 PINを入力してロック解除\nExec=/home/sh1ragami/.local/bin/toggle_photos.sh\nIcon=security-high\nTerminal=false\nType=Application\n")
-            os.chmod(desktop_file, 0o755)
-        notify("スマホ写真", "🔒 ロックしました（マウント解除）", "security-high")
+    # 1. Thunar がフォルダを掴んでいるとビジーになるため、ホームに移動させる
+    try:
+        subprocess.Popen(["thunar", os.path.expanduser("~")])
+    except Exception:
+        pass
+    time.sleep(0.3)
+    
+    # 2. 強制遅延アンマウント (-u -z)
+    subprocess.run(["fusermount3", "-u", "-z", MOUNT_DIR], capture_output=True)
+    subprocess.run(["pkill", "-f", "rclone mount gdrive:スマホ写真"], capture_output=True)
+    time.sleep(0.3)
+    
+    # 3. 未マウント時は他人が中身やフォルダを開けないよう権限を閉鎖
+    if not is_mounted():
+        try:
+            os.chmod(MOUNT_DIR, 0o000)
+        except Exception:
+            pass
+        notify("スマホ写真", "🔒 ロックしました（施錠完了）", "security-high")
+    else:
+        notify("スマホ写真", "⚠️ ロックに失敗しました。再度お試しください。", "dialog-error", "critical")
 
 def prompt_pin_dialog(prompt_text="PINを入力してください:"):
     dialog = Gtk.MessageDialog(
@@ -112,11 +129,11 @@ def prompt_unlocked_dialog():
         buttons=Gtk.ButtonsType.NONE,
         message_format="🔒 スマホ写真（現在ロック解除中）"
     )
-    dialog.format_secondary_text("フォルダは現在開かれています。どうしますか？")
+    dialog.format_secondary_text("スマホ写真は現在閲覧可能です。どうしますか？")
     dialog.set_position(Gtk.WindowPosition.CENTER)
     dialog.add_button("📂 フォルダを開く", Gtk.ResponseType.APPLY)
-    dialog.add_button("🔒 ロックする (施錠)", Gtk.ResponseType.CLOSE)
-    dialog.add_button("閉じる", Gtk.ResponseType.CANCEL)
+    dialog.add_button("🔒 今すぐロックする (施錠)", Gtk.ResponseType.CLOSE)
+    dialog.add_button("キャンセル", Gtk.ResponseType.CANCEL)
     
     dialog.show_all()
     response = dialog.run()
@@ -142,7 +159,7 @@ def main():
             notify("スマホ写真", "❌ PINが一致しませんでした。設定を中止します。", "dialog-error", "critical")
             return
         save_pin(pin)
-        notify("スマホ写真", "PINを設定しました。マウントを開始します。", "security-high")
+        notify("スマホ写真", "PINを設定しました。ロック解除を開始します。", "security-high")
         mount_photos()
         return
 

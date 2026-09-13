@@ -40,10 +40,10 @@ class WallpaperWindow(Gtk.Window):
     def __init__(self, monitor):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
         self.monitor = monitor
+        self.pixbuf = None
 
         GtkLayerShell.init_for_window(self)
         GtkLayerShell.set_monitor(self, monitor)
-        # Hyprland wallpaper layer is Layer.BOTTOM
         GtkLayerShell.set_layer(self, GtkLayerShell.Layer.BOTTOM)
         GtkLayerShell.set_anchor(self, GtkLayerShell.Edge.TOP, True)
         GtkLayerShell.set_anchor(self, GtkLayerShell.Edge.BOTTOM, True)
@@ -56,11 +56,15 @@ class WallpaperWindow(Gtk.Window):
         if visual:
             self.set_visual(visual)
 
-        self.img = Gtk.Image()
-        self.add(self.img)
-
+        self.connect("draw", self.on_draw)
         self.connect("configure-event", self.on_configure)
         self.reload_wallpaper()
+
+    def on_draw(self, widget, cr):
+        if self.pixbuf:
+            Gdk.cairo_set_source_pixbuf(cr, self.pixbuf, 0, 0)
+            cr.paint()
+        return True
 
     def reload_wallpaper(self):
         wall_path = os.path.expanduser("~/.config/hypr/wallpaper.png")
@@ -69,15 +73,13 @@ class WallpaperWindow(Gtk.Window):
 
         try:
             geom = self.monitor.get_geometry()
-            alloc = self.get_allocation()
-            w = max(geom.width, alloc.width if alloc.width > 100 else 0, 1920)
-            h = max(geom.height, alloc.height if alloc.height > 100 else 0, 1080)
+            w = max(geom.width, 100)
+            h = max(geom.height, 100)
 
             pixbuf = GdkPixbuf.Pixbuf.new_from_file(wall_path)
             orig_w = pixbuf.get_width()
             orig_h = pixbuf.get_height()
 
-            # アスペクト比を維持して画面全体をカバー (Fill / Cover モード)
             scale_w = w / orig_w
             scale_h = h / orig_h
             scale = max(scale_w, scale_h)
@@ -87,9 +89,8 @@ class WallpaperWindow(Gtk.Window):
 
             scaled = pixbuf.scale_simple(target_w, target_h, GdkPixbuf.InterpType.BILINEAR)
 
-            # 中央寄せトリミング
-            offset_x = (target_w - w) // 2
-            offset_y = (target_h - h) // 2
+            offset_x = max(0, (target_w - w) // 2)
+            offset_y = max(0, (target_h - h) // 2)
 
             sub_pb = GdkPixbuf.Pixbuf.new(
                 pixbuf.get_colorspace(),
@@ -99,70 +100,47 @@ class WallpaperWindow(Gtk.Window):
                 h
             )
             scaled.copy_area(offset_x, offset_y, w, h, sub_pb, 0, 0)
-
-            self.img.set_from_pixbuf(sub_pb)
-        except Exception as e:
+            self.pixbuf = sub_pb
+        except Exception:
             try:
-                pb = GdkPixbuf.Pixbuf.new_from_file_at_scale(wall_path, 1920, 1080, False)
-                self.img.set_from_pixbuf(pb)
+                self.pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(wall_path, 1920, 1080, False)
             except Exception:
                 pass
 
         self.queue_draw()
-
-    def schedule_reload(self):
-        self.reload_wallpaper()
-        # レイアウト確定後の遅延リロード（拡大ズレの防止）
-        GLib.timeout_add(150, self.reload_wallpaper_once)
-
-    def reload_wallpaper_once(self):
-        self.reload_wallpaper()
-        return False
 
     def on_configure(self, widget, event):
         self.reload_wallpaper()
 
 class WallpaperManager:
     def __init__(self):
-        self.windows = {}  # monitor -> WallpaperWindow
-        self.display = Gdk.Display.get_default()
+        self.windows = []
+        self.setup_monitors()
 
-        for i in range(self.display.get_n_monitors()):
-            mon = self.display.get_monitor(i)
-            self.add_monitor(mon)
+        display = Gdk.Display.get_default()
+        display.connect("monitor-added", lambda d, m: GLib.idle_add(self.setup_monitors))
+        display.connect("monitor-removed", lambda d, m: GLib.idle_add(self.setup_monitors))
 
-        self.display.connect("monitor-added", lambda d, m: self.add_monitor(m))
-        self.display.connect("monitor-removed", lambda d, m: self.remove_monitor(m))
-
-        screen = Gdk.Screen.get_default()
-        if screen:
-            screen.connect("monitors-changed", lambda s: self.reload_all())
-
-    def add_monitor(self, monitor):
-        if monitor in self.windows:
-            return
-        win = WallpaperWindow(monitor)
-        win.show_all()
-        self.windows[monitor] = win
-
-    def remove_monitor(self, monitor):
-        win = self.windows.pop(monitor, None)
-        if win:
+    def setup_monitors(self):
+        for win in self.windows:
             win.destroy()
+        self.windows.clear()
+
+        display = Gdk.Display.get_default()
+        for i in range(display.get_n_monitors()):
+            mon = display.get_monitor(i)
+            win = WallpaperWindow(mon)
+            win.show_all()
+            self.windows.append(win)
+        return False
 
     def reload_all(self):
-        current_monitors = set()
-        for i in range(self.display.get_n_monitors()):
-            m = self.display.get_monitor(i)
-            current_monitors.add(m)
-            if m not in self.windows:
-                self.add_monitor(m)
-            else:
-                self.windows[m].schedule_reload()
-
-        for m in list(self.windows.keys()):
-            if m not in current_monitors:
-                self.remove_monitor(m)
+        display = Gdk.Display.get_default()
+        if len(self.windows) != display.get_n_monitors():
+            self.setup_monitors()
+            return
+        for win in self.windows:
+            win.reload_wallpaper()
 
 def start_ipc_server(manager):
     if os.path.exists(SOCKET_PATH):

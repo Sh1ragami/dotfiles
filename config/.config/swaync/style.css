@@ -1,12 +1,12 @@
 /*
- * Dynamic Island Morphing SwayNC Control Center (Sunset Theme)
+ * Dynamic Island Morphing SwayNC Control Center (Tokyo Night Theme)
  * Force Negative Top Margin (-65px !important) to Seamlessly Merge with Top Clock Island
  */
 
 * {
   font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
   transition: all 260ms cubic-bezier(0.16, 1, 0.3, 1);
-  color: #dfd0b2;
+  color: #c0caf5;
   border: none;
   box-shadow: none;
 }
@@ -20,7 +20,7 @@ scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
   opacity: 0 !important;
 }
 
-/* 🔔 Modern Minimalist Floating Notifications (Single unified glass card) */
+/* 🔔 Modern Minimalist Floating Notifications */
 .floating-notifications.background {
   background: transparent;
 }
@@ -39,23 +39,23 @@ scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
 }
 
 .floating-notifications .notification-row .notification-background .notification {
-  background: rgba(26, 24, 38, 0.88) !important;
+  background: rgba(26, 27, 38, 0.88) !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
-  padding: 4px 5px !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  padding: 14px 16px !important;
   margin: 0 !important;
 }
 
 .floating-notifications .notification-row .notification-background .notification:hover {
-  background: rgba(32, 28, 44, 0.94) !important;
-  border-color: rgba(216, 166, 87, 0.35) !important;
+  background: rgba(36, 40, 59, 0.94) !important;
+  border-color: rgba(122, 162, 247, 0.4) !important;
   box-shadow: 0 14px 38px rgba(0, 0, 0, 0.65) !important;
 }
 
 .floating-notifications .notification-row .notification-background .notification.critical {
-  border: 1px solid rgba(234, 105, 98, 0.8) !important;
-  background: rgba(45, 20, 24, 0.92) !important;
+  border: 1px solid rgba(247, 118, 142, 0.8) !important;
+  background: rgba(45, 25, 35, 0.92) !important;
 }
 
 .floating-notifications .notification-row .notification-background .notification .notification-default-action {
@@ -77,37 +77,29 @@ scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
 }
 
 .floating-notifications .notification-row .notification-background .notification .notification-content .summary {
-  color: #d8a657 !important;
+  color: #7aa2f7 !important;
   font-weight: 700 !important;
   font-size: 1.02rem !important;
   margin-bottom: 4px;
 }
 
 .floating-notifications .notification-row .notification-background .notification .notification-content .time {
-  color: rgba(223, 208, 178, 0.45) !important;
+  color: rgba(169, 177, 214, 0.45) !important;
   font-size: 0.75rem !important;
   font-weight: 500;
   margin-right: 24px;
 }
 
 .floating-notifications .notification-row .notification-background .notification .notification-content .body {
-  color: #dfd0b2 !important;
+  color: #c0caf5 !important;
   font-size: 0.88rem !important;
   line-height: 1.45;
 }
 
 .floating-notifications .notification-row .notification-background .notification .image {
   border-radius: 12px !important;
-  margin: 2px 0 !important;
+  margin: 10px 0 6px 0;
   border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.floating-notifications .notification-row .notification-background .notification .body-image {
-  border-radius: 14px !important;
-  margin: 0 !important;
-  background-color: transparent !important;
-  border: none !important;
-  -gtk-icon-filter: none;
 }
 
 .floating-notifications .notification-row .notification-background .notification .app-icon {
@@ -116,25 +108,23 @@ scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
   -gtk-icon-shadow: none !important;
 }
 
-/* ✖ Clean Round Close Button */
 .floating-notifications .notification-row .notification-background .notification .close-button {
   background: rgba(255, 255, 255, 0.08) !important;
-  color: rgba(223, 208, 178, 0.7) !important;
+  color: rgba(192, 202, 245, 0.7) !important;
   border-radius: 100% !important;
   border: none !important;
-  min-width: 20px !important;
-  min-height: 20px !important;
-  margin-top: 4px !important;
-  margin-right: 4px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  margin-top: 8px !important;
+  margin-right: 8px !important;
   box-shadow: none !important;
 }
 
 .floating-notifications .notification-row .notification-background .notification .close-button:hover {
-  background: rgba(234, 105, 98, 0.4) !important;
+  background: rgba(247, 118, 142, 0.4) !important;
   color: #ffffff !important;
 }
 
-/* 🔘 Modern Action Buttons */
 .floating-notifications .notification-row .notification-background .notification .notification-alt-actions {
   background: transparent !important;
   padding-top: 8px !important;
@@ -146,7 +136,7 @@ scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
   background: rgba(255, 255, 255, 0.07) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 10px !important;
-  color: #dfd0b2 !important;
+  color: #c0caf5 !important;
   font-size: 0.85rem !important;
   font-weight: 600 !important;
   padding: 6px 14px !important;
@@ -155,113 +145,85 @@ scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
 }
 
 .floating-notifications .notification-row .notification-background .notification .notification-action > button:hover {
-  background: rgba(216, 166, 87, 0.22) !important;
-  border-color: rgba(216, 166, 87, 0.45) !important;
+  background: rgba(122, 162, 247, 0.25) !important;
+  border-color: rgba(122, 162, 247, 0.5) !important;
   color: #ffffff !important;
 }
 
-/* 📜 Control Center Notification Rows */
-.control-center .control-center-list .notification-row .notification-background {
-  background: transparent !important;
-  padding: 4px 6px !important;
-  border: none !important;
-  box-shadow: none !important;
-  margin: 0 !important;
-}
-
-.control-center .control-center-list .notification-row .notification-background .notification {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.07) !important;
-  border-radius: 14px !important;
-  box-shadow: none !important;
-  padding: 10px 14px !important;
-}
-
-.control-center .control-center-list .notification-row .notification-background .notification:hover {
-  background: rgba(255, 255, 255, 0.09) !important;
-  border-color: rgba(216, 166, 87, 0.3) !important;
-}
-
-.control-center .control-center-list .notification-row .notification-background .notification .notification-default-action {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-
-/* 🎛️ Modern Floating Control Center */
 .control-center {
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px !important;
-  background-color: rgba(26, 24, 38, 0.94);
-  padding: 18px;
-  margin-top: 8px !important;
+  box-shadow: none;
+  border: none;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  background-color: rgba(26, 27, 38, 0.78);
+  padding: 24px;
+  margin-top: -65px !important;
 }
 
 .widget-custom-profile {
   background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   border-radius: 16px;
-  padding: 10px 16px;
-  margin-bottom: 12px;
+  padding: 12px 18px;
+  margin-bottom: 14px;
 }
 
 .widget-buttons-grid flowboxchild > button {
   border-radius: 14px !important;
-  min-width: 110px;
-  min-height: 44px;
+  min-width: 135px;
+  min-height: 48px;
   margin: 3px;
   background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: #dfd0b2;
-  font-size: 0.9rem;
+  border: none;
+  color: #c0caf5;
+  font-size: 0.92rem;
   font-weight: 700;
-  padding: 8px 14px !important;
+  padding: 10px 16px !important;
   box-shadow: none;
 }
 
 .widget-buttons-grid flowboxchild > button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(122, 162, 247, 0.3);
   color: #ffffff;
 }
 
 .widget-buttons-grid flowboxchild > button:checked {
-  background: #89b4fa;
-  color: #11111b;
+  background: #7aa2f7;
+  color: #1a1b26;
   font-weight: 800;
 }
 
 .widget-volume, .widget-backlight {
   background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   border-radius: 16px;
   padding: 8px 16px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   box-shadow: none;
 }
 
 .widget-volume label, .widget-backlight label {
   font-weight: 700;
-  font-size: 0.9rem;
-  color: #89b4fa;
+  font-size: 0.92rem;
+  color: #7aa2f7;
 }
 
 .widget-volume scale highlight, .widget-backlight scale highlight {
-  background: #89b4fa;
-  border-radius: 8px;
+  background: #7aa2f7;
 }
 
 .widget-mpris {
   background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   border-radius: 18px;
-  padding: 12px 16px;
+  padding: 14px 18px;
   box-shadow: none;
 }
 
 .control-center .widget-title > label {
-  color: #dfd0b2;
+  color: #c0caf5;
   font-size: 1.08rem;
   font-weight: 800;
 }

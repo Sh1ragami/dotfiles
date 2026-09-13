@@ -1,5 +1,5 @@
 /*
- * Island-Style Waybar Theme (Sunset Theme)
+ * Island-Style Waybar Theme (Tokyo Night Theme)
  * Pure Transparent Capsule - ZERO Box Shadow (Eliminated Gray/Brown Shadow Blur)
  */
 
@@ -14,7 +14,7 @@
 
 window#waybar {
     background-color: transparent;
-    color: #dfd0b2;
+    color: #c0caf5;
     box-shadow: none;
 }
 
@@ -25,7 +25,7 @@ window#waybar {
     box-shadow: none;
 }
 
-/* 1. 左島 (ワークスペース): 影(box-shadow)を完全にゼロ化して灰茶色のモヤを消去 */
+/* 1. 左島 (ワークスペース) */
 #workspaces {
     background-color: rgba(0, 0, 0, 0.18);
     border-radius: 14px;
@@ -59,7 +59,7 @@ window#waybar {
 
 #workspaces button {
     padding: 0 6px;
-    color: #dfd0b2;
+    color: #a9b1d6;
     background: transparent;
     border-radius: 8px;
     min-height: 20px;
@@ -69,20 +69,20 @@ window#waybar {
 
 #workspaces button.active {
     color: #ffffff;
-    background-color: rgba(234, 105, 98, 0.35);
+    background-color: rgba(122, 162, 247, 0.35);
     box-shadow: none;
 }
 
 /* 外部モニターが占有しているワークスペースの文字色（背景はそのまま・緑） */
 window#waybar.eDP-1 #workspaces button:not(.hosting-monitor),
 window#waybar:not(.eDP-1) #workspaces button.hosting-monitor {
-    color: #a9b665;
+    color: #9ece6a;
 }
 
 window#waybar.eDP-1 #workspaces button:not(.hosting-monitor).active,
 window#waybar:not(.eDP-1) #workspaces button.hosting-monitor.active {
-    color: #a9b665;
-    background-color: rgba(234, 105, 98, 0.35);
+    color: #9ece6a;
+    background-color: rgba(122, 162, 247, 0.35);
 }
 
 #workspaces button:hover {
@@ -105,11 +105,11 @@ window#waybar:not(.eDP-1) #workspaces button.hosting-monitor.active {
 }
 
 #pulseaudio { color: #ffffff; }
-#pulseaudio.muted { color: #dfd0b2; }
+#pulseaudio.muted { color: #565f89; }
 #bluetooth { color: #ffffff; }
-#bluetooth.disabled { color: #dfd0b2; }
+#bluetooth.disabled { color: #565f89; }
 #network { color: #ffffff; }
-#network.disconnected { color: #ea6962; }
+#network.disconnected { color: #f7768e; }
 #memory { color: #ffffff; }
 #battery { color: #ffffff; }
 #battery.charging, #battery.plugged { color: #ffffff; }

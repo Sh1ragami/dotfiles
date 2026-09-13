@@ -3,14 +3,14 @@ set selection-clipboard clipboard
 set adjust-open "width"
 set page-padding 0
 
-set default-bg "#1a102f"
-set default-fg "#f8f8f2"
-set statusBar-bg "#1a102f"
-set statusBar-fg "#f8f8f2"
-set inputbar-bg "#1a102f"
-set inputbar-fg "#f8f8f2"
-set notification-bg "#1a102f"
-set notification-fg "#f8f8f2"
+set default-bg "#1a1b26"
+set default-fg "#a9b1d6"
+set statusBar-bg "#1a1b26"
+set statusBar-fg "#a9b1d6"
+set inputbar-bg "#1a1b26"
+set inputbar-fg "#a9b1d6"
+set notification-bg "#1a1b26"
+set notification-fg "#a9b1d6"
 
 set recolor "false"
 set render-loading "false"

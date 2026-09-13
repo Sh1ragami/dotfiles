@@ -40,14 +40,6 @@ else
     # 2回目以降：すでに表示中なら閉じるときに他ウィンドウが巻き込まれないようフォーカスを合わせる
     if [ -n "$IS_SPECIAL_OPEN" ]; then
         hyprctl dispatch focuswindow "class:^${THUNAR_CLASS}$" >/dev/null 2>&1
-        # Thunar 収納時にスマホ写真を自動ロック
-        if mountpoint -q "$HOME/スマホ写真"; then
-            fusermount3 -u -z "$HOME/スマホ写真" 2>/dev/null || true
-            pkill -f "rclone mount gdrive:スマホ写真" 2>/dev/null || true
-            chmod 000 "$HOME/スマホ写真" 2>/dev/null || true
-            thunar -q 2>/dev/null || true
-            notify-send -i security-high "スマホ写真" "🔒 Thunar収納に伴い自動ロックしました" &
-        fi
     fi
     hyprctl dispatch togglespecialworkspace thunar
 fi

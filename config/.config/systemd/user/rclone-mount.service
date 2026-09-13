@@ -11,7 +11,6 @@ ExecStart=%h/.local/bin/rclone mount gdrive: %h/GoogleDrive \
     --vfs-cache-max-age 24h \
     --dir-cache-time 72h \
     --drive-export-formats link.html \
-    --exclude "/スマホ写真/**" \
     --log-file %h/.local/state/rclone/mount.log \
     --log-level NOTICE
 ExecStop=/bin/fusermount3 -u %h/GoogleDrive

@@ -22,7 +22,7 @@ setopt HIST_REDUCE_BLANKS
 alias ls='eza --color=always --icons=always --group-directories-first --hyperlink'
 alias vi='nvim'
 alias rm='trash-put'
-alias coffee='wayland-idle-inhibitor.py'
+alias coffee='~/dotfiles/scripts/coffee'
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
@@ -31,4 +31,4 @@ export PATH="$PATH:$HOME/flutter/bin"
 export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
 
 # Created by `pipx` on 2026-07-18 10:58:38
-export PATH="$PATH:/home/sh1ragami/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"

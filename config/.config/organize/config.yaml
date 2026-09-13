@@ -1,0 +1,172 @@
+# organize configuration file
+# https://organize.readthedocs.io
+
+rules:
+  # 1. ドキュメント類の自動振り分け -> ~/Documents
+  - name: "Move documents"
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - extension:
+          - pdf
+          - doc
+          - docx
+          - txt
+          - md
+          - xls
+          - xlsx
+          - ppt
+          - pptx
+          - csv
+          - odt
+          - ods
+          - odp
+    actions:
+      - move:
+          dest: ~/Documents/{now().strftime('%Y-%m')}/
+          on_conflict: rename_new
+
+  # 2. 画像ファイルの自動振り分け -> ~/Pictures
+  - name: "Move pictures"
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - extension:
+          - png
+          - jpg
+          - jpeg
+          - webp
+          - gif
+          - svg
+          - avif
+          - heic
+          - ico
+          - bmp
+    actions:
+      - move:
+          dest: ~/Pictures/{now().strftime('%Y-%m')}/
+          on_conflict: rename_new
+
+  # 3. 3Dモデルファイルの自動振り分け -> ~/Documents/3D_Models
+  - name: "Move 3D models"
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - extension:
+          - glb
+          - gltf
+          - obj
+          - fbx
+          - blend
+          - stl
+          - dae
+          - 3ds
+    actions:
+      - move:
+          dest: ~/Documents/3D_Models/
+          on_conflict: rename_new
+
+  # 4. 動画ファイルの自動振り分け -> ~/Videos
+  - name: "Move videos"
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - extension:
+          - mp4
+          - mkv
+          - webm
+          - mov
+          - avi
+          - wmv
+          - flv
+    actions:
+      - move:
+          dest: ~/Videos/
+          on_conflict: rename_new
+
+  # 5. 音声・音楽ファイルの自動振り分け -> ~/Music
+  - name: "Move audio"
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - extension:
+          - mp3
+          - wav
+          - flac
+          - m4a
+          - aac
+          - ogg
+          - opus
+    actions:
+      - move:
+          dest: ~/Music/
+          on_conflict: rename_new
+
+  # 6. 電子書籍の自動振り分け -> ~/Documents/Books
+  - name: "Move books"
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - extension:
+          - epub
+          - azw3
+          - mobi
+          - cbr
+          - cbz
+    actions:
+      - move:
+          dest: ~/Documents/Books/
+          on_conflict: rename_new
+
+  # 7. 圧縮ファイル（zip等）の自動振り分け -> ~/Downloads/Archives
+  - name: "Move archives"
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - extension:
+          - zip
+          - tar
+          - gz
+          - bz2
+          - xz
+          - 7z
+          - rar
+      - regex: "^(?!\\.).*$"
+    actions:
+      - move:
+          dest: ~/Downloads/Archives/
+          on_conflict: rename_new
+
+  # 8. 放置されたフォルダの自動圧縮保存 -> zipにして ~/Downloads/Archives へ移動
+  - name: "Compress and archive old folders"
+    targets: dirs
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - lastmodified:
+          days: 30
+          mode: older
+      - regex: "^(?!\\.)(?!Archives$).*$"
+    actions:
+      - shell: 'mkdir -p "$HOME/Downloads/Archives" && (cd "$HOME/Downloads" && zip -r -q "$HOME/Downloads/Archives/{path.name}.zip" "{path.name}") && trash-put "{path}"'
+
+  # 9. 1ヶ月 (30日) 以上経過したその他古いダウンロードファイルのゴミ箱移動
+  - name: "Trash old files in Downloads"
+    locations:
+      - path: ~/Downloads
+    subfolders: false
+    filters:
+      - lastmodified:
+          days: 30
+          mode: older
+      - regex: "^(?!\\.)(?!.*\\.(part|crdownload|tmp|iso|img|qcow2)$).*$"
+    actions:
+      - trash

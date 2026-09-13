@@ -1,6 +1,6 @@
 /*
  * Island-Style Waybar Theme (Tokyo Night Theme)
- * Perfectly Equalized Size & Height Across Left and Right Islands
+ * Pure Transparent Capsule - ZERO Box Shadow (Eliminated Gray/Brown Shadow Blur)
  */
 
 * {
@@ -9,82 +9,95 @@
     font-weight: bold;
     border: none;
     border-radius: 0;
+    box-shadow: none;
 }
 
 window#waybar {
     background-color: transparent;
-    color: #a9b1d6;
+    color: #c0caf5;
+    box-shadow: none;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background-color: transparent;
+    box-shadow: none;
 }
 
 /* 1. 左島 (ワークスペース) */
 #workspaces {
-    background-color: rgba(26, 27, 38, 0.85);
+    background-color: rgba(0, 0, 0, 0.18);
     border-radius: 14px;
     padding: 2px 8px;
     margin: 3px 10px 0px 10px;
     min-height: 22px;
+    box-shadow: none;
 }
 
 /* 2. 中央島 (時計 & DND) */
 #custom-clock_dnd {
-    background-color: rgba(26, 27, 38, 0.85);
+    background-color: rgba(0, 0, 0, 0.18);
     border-radius: 0 0 14px 14px;
     padding: 2px 18px;
     margin: 0px 10px;
-    color: #a9b1d6;
+    color: #ffffff;
     font-size: 12px;
     min-height: 22px;
+    box-shadow: none;
 }
 
 /* 3. 右島 (ハードウェア群) */
-#group-hardware,
-.modules-right widget,
-.modules-right #group-hardware {
-    background-color: rgba(26, 27, 38, 0.85);
+.modules-right {
+    background-color: rgba(0, 0, 0, 0.18);
     border-radius: 14px;
-    padding: 2px 10px;
+    padding: 2px 8px;
     margin: 3px 10px 0px 10px;
     min-height: 22px;
+    box-shadow: none;
 }
 
-/* ワークスペースボタンサイズ */
 #workspaces button {
     padding: 0 6px;
-    color: #565f89;
+    color: #a9b1d6;
     background: transparent;
     border-radius: 8px;
     min-height: 20px;
     font-size: 12px;
+    box-shadow: none;
 }
 
 #workspaces button.active {
-    color: #7aa2f7;
-    background-color: rgba(122, 162, 247, 0.25);
+    color: #ffffff;
+    background-color: rgba(122, 162, 247, 0.35);
+    box-shadow: none;
 }
 
 #workspaces button:hover {
-    color: #7dcfff;
+    color: #ffffff;
 }
 
-/* 🔊 右側モジュール群の間隔をゆったり心地よい10pxに拡大 */
+#group-hardware,
 #pulseaudio,
 #bluetooth,
 #network,
 #memory,
 #battery {
-    padding: 0 10px;
-    margin: 0 2px;
+    padding: 0 8px;
+    margin: 0 1px;
     background: transparent;
+    color: #ffffff;
     min-height: 20px;
     font-size: 12px;
+    box-shadow: none;
 }
 
-#pulseaudio { color: #7dcfff; }
+#pulseaudio { color: #ffffff; }
 #pulseaudio.muted { color: #565f89; }
-#bluetooth { color: #b4f9f8; }
+#bluetooth { color: #ffffff; }
 #bluetooth.disabled { color: #565f89; }
-#network { color: #7aa2f7; }
+#network { color: #ffffff; }
 #network.disconnected { color: #f7768e; }
-#memory { color: #e0af68; }
-#battery { color: #9ece6a; }
-#battery.charging, #battery.plugged { color: #e0af68; }
+#memory { color: #ffffff; }
+#battery { color: #ffffff; }
+#battery.charging, #battery.plugged { color: #ffffff; }

@@ -3,9 +3,9 @@
 THUNAR_CLASS="thunar"
 TARGET_SPECIAL="special:thunar"
 
-# 1. すでに special:thunar に紛れ込んだ他のウィンドウを現在のワークスペースへ救出
+# 1. すでに special:thunar に紛れ込んだ他のウィンドウを現在のワークスペースへ救出 (ただし関連ツール file-roller, loupe 等は維持)
 ACTIVE_WS=$(hyprctl activeworkspace -j | jq -r '.id')
-hyprctl clients -j | jq -r ".[] | select(.workspace.name == \"$TARGET_SPECIAL\" and .class != \"$THUNAR_CLASS\") | .address" | while read -r addr; do
+hyprctl clients -j | jq -r ".[] | select(.workspace.name == \"$TARGET_SPECIAL\" and .class != \"$THUNAR_CLASS\" and .class != \"file-roller\" and .class != \"org.gnome.FileRoller\" and .class != \"loupe\" and .class != \"org.gnome.Loupe\") | .address" | while read -r addr; do
     if [ -n "$addr" ] && [ "$addr" != "null" ]; then
         hyprctl dispatch movetoworkspacesilent "$ACTIVE_WS,address:$addr"
     fi

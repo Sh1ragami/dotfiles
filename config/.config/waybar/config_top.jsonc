@@ -27,8 +27,8 @@
         "return-type": "json",
         "interval": 1,
         "exec": "~/.config/waybar/scripts/clock_dnd.sh",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "pavucontrol"
+        "on-click": "~/.config/waybar/scripts/toggle_control_center.sh",
+        "on-click-right": "gnome-calendar"
     },
 
     "group/hardware": {
@@ -43,7 +43,7 @@
         "tooltip-format": "{controller_alias}\t{controller_address}",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "blueman-manager || rfkill toggle bluetooth"
+        "on-click": "overskride || blueman-manager"
     },
 
     "pulseaudio": {
@@ -52,7 +52,7 @@
         "format-icons": {
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pwvucontrol || pavucontrol"
     },
 
     "battery": {
@@ -72,13 +72,14 @@
         "format-ethernet": "󰈀 wired",
         "format-disconnected": "⚠ offline",
         "tooltip-format": "{ifname} via {gwaddr}\n{essid}",
-        "on-click": "~/.config/hypr/scripts/toggle_wifi.sh"
+        "on-click": "gnome-control-center wifi || nm-connection-editor"
     },
 
     "memory": {
         "format": "󰍛 {percentage}%",
         "interval": 10,
-        "tooltip-format": "Memory: {used:0.1f}GiB / {total:0.1f}GiB"
+        "tooltip-format": "Memory: {used:0.1f}GiB / {total:0.1f}GiB",
+        "on-click": "~/.config/hypr/scripts/toggle_btop.sh"
     },
 
     "custom/notification": {

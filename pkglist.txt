@@ -7,6 +7,7 @@ base-devel
 bat
 batsignal
 bc
+blanket
 blueman
 bluez
 bluez-utils
@@ -16,7 +17,7 @@ cava
 clang
 conky
 cups
-decibels
+curtail
 dialog
 docker
 docker-compose
@@ -33,13 +34,17 @@ fd
 ffmpegthumbnailer
 file-roller
 firefox
+flameshot
 flatpak
+foliate
 fzf
 geary
 git
 github-cli
 gnome-backgrounds
+gnome-calendar
 gnome-clocks
+gnome-control-center
 graphviz
 grilo-plugins
 grub
@@ -60,6 +65,7 @@ hyprpaper
 hyprshot
 iw
 john
+kdeconnect
 keyd
 kitty
 kvantum
@@ -72,6 +78,7 @@ libreoffice-fresh-ja
 libvirt
 linux
 linux-firmware
+loupe
 lua51
 luarocks
 ly
@@ -80,7 +87,6 @@ mise
 mpv
 mupdf-tools
 neovim
-netctl
 network-manager-applet
 networkmanager
 noto-fonts-cjk
@@ -89,9 +95,11 @@ noto-fonts-extra
 nsxiv
 nwg-displays
 nwg-look
+ollama
 onefetch
 openbsd-netcat
 openscad
+papirus-icon-theme
 pavucontrol
 pipewire-alsa
 pipewire-jack
@@ -107,18 +115,14 @@ qt6-wayland
 qt6ct
 ripgrep
 rustup
-showtime
+sddm
 simple-scan
 socat
 sof-firmware
-sddm
-qt5-graphicaleffects
-qt5-quickcontrols2
-qt5-svg
 starship
-
 stow
 swaync
+switcheroo
 swtpm
 system-config-printer
 terminus-font
@@ -126,6 +130,7 @@ tesseract-data-jpn
 tesseract-data-jpn_vert
 texlive-langjapanese
 texlive-meta
+thermald
 thunar
 tk
 trash-cli
@@ -140,7 +145,6 @@ virt-manager
 virt-viewer
 vivid
 waybar
-waydroid
 wget
 wine
 wireplumber
@@ -151,6 +155,7 @@ wpa_supplicant
 xdg-desktop-portal-hyprland
 xdg-user-dirs-gtk
 yazi
+ydotool
 zathura
 zathura-pdf-mupdf
 zellij

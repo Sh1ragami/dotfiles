@@ -1,29 +1,31 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
-  "positionX": "center",
-  "positionY": "top",
+  "positionX": "right",
+  "positionY": "bottom",
+  "control-center-positionX": "center",
+  "control-center-positionY": "top",
   "layer": "overlay",
   "control-center-layer": "overlay",
   "control-center-exclusive-zone": false,
   "layer-shell": true,
   "cssPriority": "application",
-  "control-center-margin-top": 12,
+  "control-center-margin-top": 8,
   "control-center-margin-bottom": 12,
   "control-center-margin-right": 0,
   "control-center-margin-left": 0,
   "notification-2fa-action": true,
   "notification-inline-replies": false,
-  "notification-icon-size": 54,
-  "notification-body-image-height": 100,
-  "notification-body-image-width": 200,
+  "notification-icon-size": 64,
+  "notification-body-image-height": 160,
+  "notification-body-image-width": 280,
   "timeout": 8,
   "timeout-low": 4,
   "timeout-critical": 0,
   "fit-to-screen": false,
   "relative-timestamps": true,
-  "control-center-width": 640,
-  "control-center-height": 560,
-  "notification-window-width": 360,
+  "control-center-width": 420,
+  "control-center-height": 620,
+  "notification-window-width": 300,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
   "transition-time": 200,
@@ -77,10 +79,26 @@
           "update_command": "sh -c '[[ $(swaync-client -D) == \"true\" ]] && echo true || echo false'"
         },
         {
-          "label": "🎚️  Sliders",
+          "label": "󰕾  Mixer",
+          "type": "normal",
+          "command": "pwvucontrol"
+        },
+        {
+          "label": "󰌌  Key Sound",
           "type": "toggle",
-          "active": true,
+          "active": false,
+          "command": "/home/sh1ragami/.config/waybar/scripts/wayvibes_toggle.sh",
+          "update_command": "sh -c 'pgrep -x wayvibes >/dev/null && echo true || echo false'"
+        },
+        {
+          "label": "󱡁  Effects",
+          "type": "normal",
           "command": "python3 /home/sh1ragami/.config/swaync/scripts/docked_sliders_toggle.py"
+        },
+        {
+          "label": "  Power",
+          "type": "normal",
+          "command": "wlogout"
         }
       ]
     },

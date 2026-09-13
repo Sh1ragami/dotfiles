@@ -1,0 +1,21 @@
+[Unit]
+Description=RClone Mount Google Drive to ~/GoogleDrive
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStart=%h/.local/bin/rclone mount gdrive: %h/GoogleDrive \
+    --vfs-cache-mode full \
+    --vfs-cache-max-size 10G \
+    --vfs-cache-max-age 24h \
+    --dir-cache-time 72h \
+    --drive-export-formats link.html \
+    --log-file %h/.local/state/rclone/mount.log \
+    --log-level NOTICE
+ExecStop=/bin/fusermount3 -u %h/GoogleDrive
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

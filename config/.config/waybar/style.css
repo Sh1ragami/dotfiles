@@ -1,6 +1,6 @@
 /*
- * Full-Width Solid Topbar (Study Theme)
- * Pure White Minimalist Icons & Text, 100% Exact Terminal Background Match (#282a3a)
+ * Island-Style Waybar Theme (Sunset Theme)
+ * Pure Transparent Capsule - ZERO Box Shadow (Eliminated Gray/Brown Shadow Blur)
  */
 
 * {
@@ -9,66 +9,95 @@
     font-weight: bold;
     border: none;
     border-radius: 0;
+    box-shadow: none;
 }
 
 window#waybar {
-    background-color: #282a3a; /* ターミナル背景色 #282a3a と100%完全一致 */
-    color: #ffffff;
-    border: none;
+    background-color: transparent;
+    color: #dfd0b2;
+    box-shadow: none;
 }
 
 .modules-left,
 .modules-center,
 .modules-right {
     background-color: transparent;
+    box-shadow: none;
 }
 
-/* 島を分けずに横幅いっぱいに統一 */
-#workspaces,
-#custom-clock_dnd,
-#group-hardware {
-    background-color: transparent;
-    border-radius: 0;
-    padding: 0 4px;
-    margin: 0 8px;
+/* 1. 左島 (ワークスペース): 影(box-shadow)を完全にゼロ化して灰茶色のモヤを消去 */
+#workspaces {
+    background-color: rgba(0, 0, 0, 0.18);
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin: 3px 10px 0px 10px;
+    min-height: 22px;
+    box-shadow: none;
+}
+
+/* 2. 中央島 (時計 & DND) */
+#custom-clock_dnd {
+    background-color: rgba(0, 0, 0, 0.18);
+    border-radius: 0 0 14px 14px;
+    padding: 2px 18px;
+    margin: 0px 10px;
+    color: #ffffff;
+    font-size: 12px;
+    min-height: 22px;
+    box-shadow: none;
+}
+
+/* 3. 右島 (ハードウェア群) */
+.modules-right {
+    background-color: rgba(0, 0, 0, 0.18);
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin: 3px 10px 0px 10px;
+    min-height: 22px;
     box-shadow: none;
 }
 
 #workspaces button {
-    padding: 0 8px;
-    color: #888888;
+    padding: 0 6px;
+    color: #dfd0b2;
     background: transparent;
-    border-radius: 6px;
-    min-height: 22px;
+    border-radius: 8px;
+    min-height: 20px;
+    font-size: 12px;
+    box-shadow: none;
 }
 
 #workspaces button.active {
     color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.18);
+    background-color: rgba(234, 105, 98, 0.35);
+    box-shadow: none;
 }
 
 #workspaces button:hover {
     color: #ffffff;
 }
 
-#custom-clock_dnd {
-    color: #ffffff;
-}
-
+#group-hardware,
 #pulseaudio,
 #bluetooth,
 #network,
 #memory,
 #battery {
-    padding: 0 10px;
-    margin: 0 2px;
+    padding: 0 8px;
+    margin: 0 1px;
     background: transparent;
     color: #ffffff;
+    min-height: 20px;
     font-size: 12px;
+    box-shadow: none;
 }
 
-#pulseaudio.muted,
-#bluetooth.disabled,
-#network.disconnected {
-    color: #777777;
-}
+#pulseaudio { color: #ffffff; }
+#pulseaudio.muted { color: #dfd0b2; }
+#bluetooth { color: #ffffff; }
+#bluetooth.disabled { color: #dfd0b2; }
+#network { color: #ffffff; }
+#network.disconnected { color: #ea6962; }
+#memory { color: #ffffff; }
+#battery { color: #ffffff; }
+#battery.charging, #battery.plugged { color: #ffffff; }

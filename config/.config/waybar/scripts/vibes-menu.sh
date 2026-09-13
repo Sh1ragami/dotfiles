@@ -42,13 +42,13 @@ fi
 
 # 3. 共通の実行関数（コードの重複を削減）
 run_wayvibes() {
-  pkill wayvibes
+  pkill -x wayvibes
   PIPEWIRE_LATENCY="32/48000" wayvibes "$1" -v "$2" -bg
 }
 
 case "$CHOICE" in
 *"Toggle"*)
-  pgrep wayvibes && pkill wayvibes || run_wayvibes "$CUR_PACK" "$CUR_VOL"
+  pgrep -x wayvibes && pkill -x wayvibes || run_wayvibes "$CUR_PACK" "$CUR_VOL"
   ;;
 *"Volume Up"*)
   NEW_VOL=$(echo "$CUR_VOL + 0.5" | bc)

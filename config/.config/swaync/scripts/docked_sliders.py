@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-# docked_sliders.py - iPhone (iOS) スタイルのターミナル透明度・ブラー調整パネル (Resetボタン付き)
+# docked_sliders.py - iPhone (iOS) スタイルのターミナル・Waybar・SwayNC連動 透明度・ブラー調整パネル (Resetボタン付き)
 
 import sys
 import os
 import json
+import re
 import subprocess
 import gi
 gi.require_version('Gtk', '3.0')
@@ -37,7 +38,7 @@ class DockedSliders(Gtk.Window):
         header.set_halign(Gtk.Align.START)
         header.get_style_context().add_class("header-title")
 
-        # リセットボタン (デフォルト値: Opacity 0.82 / Blur 8 に即時戻す)
+        # リセットボタン (デフォルト値: Opacity 0.75 / Blur 8 に復元)
         reset_btn = Gtk.Button(label="↺ Reset")
         reset_btn.set_halign(Gtk.Align.END)
         reset_btn.get_style_context().add_class("reset-btn")
@@ -53,20 +54,20 @@ class DockedSliders(Gtk.Window):
         top_box.pack_end(close_btn, False, False, 0)
         top_box.pack_end(reset_btn, False, False, 0)
 
-        # 1. ターミナル透過度スライダー
-        self.opacity_label = Gtk.Label(label="󰞌 Terminal Opacity")
+        # 1. ターミナル・Waybar・SwayNC 透過度連動スライダー
+        self.opacity_label = Gtk.Label(label="󰞌 Terminal & Bar & Menu Opacity")
         self.opacity_label.set_halign(Gtk.Align.START)
         
         self.opacity_conf = os.path.expanduser("~/.config/kitty/opacity.conf")
         cur_opacity = self.load_opacity()
         
-        self.opacity_scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0.3, 1.0, 0.05)
+        self.opacity_scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0.1, 1.0, 0.05)
         self.opacity_scale.set_value(cur_opacity)
         self.opacity_scale.set_digits(2)
         self.opacity_scale.connect("value-changed", self.on_opacity_changed)
 
         # 2. ブラー調整スライダー
-        self.blur_label = Gtk.Label(label="󱡁 Window Blur Strength")
+        self.blur_label = Gtk.Label(label="󱡁 Window & Menu Blur Strength")
         self.blur_label.set_halign(Gtk.Align.START)
         
         cur_blur = self.load_blur()
@@ -95,7 +96,7 @@ class DockedSliders(Gtk.Window):
                             return float(line.split()[1])
             except:
                 pass
-        return 0.82
+        return 0.75
 
     def load_blur(self):
         try:
@@ -108,9 +109,50 @@ class DockedSliders(Gtk.Window):
         return 8
 
     def on_reset_clicked(self, widget):
-        # デフォルト初期値 (Opacity: 0.82, Blur: 8) に復元
-        self.opacity_scale.set_value(0.82)
+        self.opacity_scale.set_value(0.75)
         self.blur_scale.set_value(8)
+
+    def update_styles_opacity(self, opacity_val):
+        # 1. Waybar の透明度同期
+        waybar_css = os.path.expanduser("~/.config/waybar/style.css")
+        if os.path.exists(waybar_css):
+            try:
+                with open(waybar_css, "r") as f:
+                    content = f.read()
+                
+                def replacer(match):
+                    r, g, b, _ = match.groups()
+                    return f"rgba({r}, {g}, {b}, {opacity_val})"
+                
+                new_css = re.sub(r'rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*[\d\.]+\s*\)', replacer, content)
+                
+                with open(waybar_css, "w") as f:
+                    f.write(new_css)
+                
+                subprocess.Popen(["pkill", "-SIGUSR2", "waybar"], stderr=subprocess.DEVNULL)
+            except Exception:
+                pass
+
+        # 2. SwayNC (タップ時のメニューバー) の透明度同期
+        swaync_css = os.path.expanduser("~/.config/swaync/style.css")
+        if os.path.exists(swaync_css):
+            try:
+                with open(swaync_css, "r") as f:
+                    content = f.read()
+                
+                def replacer(match):
+                    r, g, b, _ = match.groups()
+                    return f"rgba({r}, {g}, {b}, {opacity_val})"
+                
+                new_css = re.sub(r'rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*[\d\.]+\s*\)', replacer, content)
+                
+                with open(waybar_css, "w") as f:
+                    f.write(new_css)
+                
+                subprocess.Popen(["swaync-client", "-R"], stderr=subprocess.DEVNULL)
+                subprocess.Popen(["swaync-client", "-rs"], stderr=subprocess.DEVNULL)
+            except Exception:
+                pass
 
     def on_opacity_changed(self, scale):
         val = round(scale.get_value(), 2)
@@ -124,17 +166,21 @@ class DockedSliders(Gtk.Window):
             except:
                 pass
         
-        subprocess.run(["pkill", "-USR1", "kitty"], stderr=subprocess.DEVNULL)
+        subprocess.Popen(["pkill", "-USR1", "kitty"], stderr=subprocess.DEVNULL)
+        self.update_styles_opacity(val)
 
     def on_blur_changed(self, scale):
         val = int(scale.get_value())
         if val == 0:
-            subprocess.run(["hyprctl", "keyword", "decoration:blur:enabled", "false"])
+            subprocess.Popen(["hyprctl", "keyword", "decoration:blur:enabled", "false"], stderr=subprocess.DEVNULL)
         else:
-            subprocess.run(["hyprctl", "keyword", "decoration:blur:enabled", "true"])
-            subprocess.run(["hyprctl", "keyword", "decoration:blur:size", str(val)])
+            subprocess.Popen(["hyprctl", "keyword", "decoration:blur:enabled", "true"], stderr=subprocess.DEVNULL)
+            subprocess.Popen(["hyprctl", "keyword", "decoration:blur:size", str(val)], stderr=subprocess.DEVNULL)
             passes = max(1, val // 2)
-            subprocess.run(["hyprctl", "keyword", "decoration:blur:passes", str(passes)])
+            subprocess.Popen(["hyprctl", "keyword", "decoration:blur:passes", str(passes)], stderr=subprocess.DEVNULL)
+        
+        subprocess.Popen(["pkill", "-SIGUSR2", "waybar"], stderr=subprocess.DEVNULL)
+        subprocess.Popen(["swaync-client", "-R"], stderr=subprocess.DEVNULL)
 
     def apply_css(self):
         screen = Gdk.Screen.get_default()

@@ -1,3 +1,16 @@
+# Credentials & Secrets
+rclone.conf
+**/rclone/rclone.conf
+*.key
+*.pem
+*.token
+.env
+.env.*
+credentials.json
+client_secret*.json
+
+# Temporary & Cache files
+node_modules/
 __pycache__/
 *.pyc
 *.pyo
@@ -5,3 +18,4 @@ __pycache__/
 *.tmp
 *.backup
 .DS_Store
+profile_*

@@ -46,6 +46,7 @@ swaync-client -R 2>/dev/null || true
 swaync-client -rs 2>/dev/null || true
 pkill -USR1 kitty 2>/dev/null || true
 kitty @ set-colors -a -c "$HOME/.config/kitty/theme.conf" 2>/dev/null || true
+ags request "theme $theme" 2>/dev/null || true
 
 # 5. Hyprland の設定リロード
 hyprctl reload 2>/dev/null || true

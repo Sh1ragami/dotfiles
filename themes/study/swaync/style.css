@@ -1,7 +1,9 @@
 * {
   font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
   transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
-  color: #dfd0b2;
+  color: #ffffff;
+  border: none;
+  box-shadow: none;
 }
 
 scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
@@ -13,95 +15,207 @@ scrollbar, scrollbar button, scrollbar slider, scrollbar trough {
   opacity: 0 !important;
 }
 
-.floating-notifications.background .notification-row .notification-background {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(169, 182, 101, 0.3);
-  border-radius: 18px;
-  margin: 10px 14px;
-  background-color: rgba(40, 44, 52, 0.95);
-  padding: 0;
+/* 🔔 Modern Minimalist Floating Notifications */
+.floating-notifications.background {
+  background: transparent;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification {
-  padding: 12px 16px;
-  border-radius: 18px;
+.floating-notifications .notification-row {
+  outline: none;
+  background: transparent;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification .notification-content .summary {
-  color: #a9b665;
-  font-weight: 800;
-  font-size: 1.05rem;
+.floating-notifications .notification-row .notification-background {
+  background: transparent !important;
+  padding: 6px 12px !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
 }
 
+.floating-notifications .notification-row .notification-background .notification {
+  background: rgba(40, 42, 58, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  padding: 14px 16px !important;
+  margin: 0 !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification:hover {
+  background: rgba(48, 50, 70, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.65) !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification.critical {
+  border: 1px solid rgba(255, 117, 127, 0.8) !important;
+  background: rgba(50, 25, 35, 0.92) !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-default-action {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 18px !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-default-action:hover {
+  background: transparent !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-default-action .notification-content {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-content .summary {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 1.02rem !important;
+  margin-bottom: 4px;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-content .time {
+  color: rgba(255, 255, 255, 0.45) !important;
+  font-size: 0.75rem !important;
+  font-weight: 500;
+  margin-right: 24px;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-content .body {
+  color: #c8d3f5 !important;
+  font-size: 0.88rem !important;
+  line-height: 1.45;
+}
+
+.floating-notifications .notification-row .notification-background .notification .image {
+  border-radius: 12px !important;
+  margin: 10px 0 6px 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.floating-notifications .notification-row .notification-background .notification .app-icon {
+  border-radius: 8px !important;
+  margin-right: 12px;
+  -gtk-icon-shadow: none !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .close-button {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 100% !important;
+  border: none !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  margin-top: 8px !important;
+  margin-right: 8px !important;
+  box-shadow: none !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .close-button:hover {
+  background: rgba(255, 117, 127, 0.4) !important;
+  color: #ffffff !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-alt-actions {
+  background: transparent !important;
+  padding-top: 8px !important;
+  margin-top: 8px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-action > button {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  padding: 6px 14px !important;
+  margin: 2px 6px 2px 0 !important;
+  box-shadow: none !important;
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-action > button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: #ffffff !important;
+}
+
+/* Study テーマ: ターミナルと同じ完全に統一された #282a3a ソリッド背景 */
 .control-center {
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(169, 182, 101, 0.35);
+  box-shadow: none;
+  border: none;
   border-radius: 20px;
-  background-color: rgba(40, 44, 52, 0.96);
+  background-color: #282a3a;
   padding: 22px;
 }
 
 .widget-custom-profile {
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(169, 182, 101, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
   border-radius: 16px;
   padding: 12px 18px;
   margin-bottom: 14px;
 }
 
 .widget-buttons-grid flowboxchild > button {
-  border-radius: 16px !important;
+  border-radius: 14px !important;
   min-width: 135px;
   min-height: 48px;
   margin: 3px;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(169, 182, 101, 0.2);
-  color: #dfd0b2;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #ffffff;
   font-size: 0.92rem;
   font-weight: 700;
   padding: 10px 16px !important;
+  box-shadow: none;
 }
 
 .widget-buttons-grid flowboxchild > button:hover {
-  border-color: #a9b665;
-  background: linear-gradient(135deg, rgba(169, 182, 101, 0.25), rgba(216, 166, 87, 0.25));
+  background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 
 .widget-buttons-grid flowboxchild > button:checked {
-  background: linear-gradient(135deg, #a9b665, #d8a657);
-  color: #1e1e1e;
-  border-color: transparent;
+  background: #ffffff;
+  color: #282a3a;
   font-weight: 800;
 }
 
 .widget-volume, .widget-backlight {
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(169, 182, 101, 0.18);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
   border-radius: 16px;
   padding: 8px 16px;
   margin-bottom: 12px;
+  box-shadow: none;
 }
 
 .widget-volume label, .widget-backlight label {
   font-weight: 700;
   font-size: 0.92rem;
-  color: #a9b665;
+  color: #ffffff;
 }
 
 .widget-volume scale highlight, .widget-backlight scale highlight {
-  background: linear-gradient(90deg, #a9b665, #d8a657);
+  background: #ffffff;
 }
 
 .widget-mpris {
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(169, 182, 101, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
   border-radius: 18px;
   padding: 14px 18px;
+  box-shadow: none;
 }
 
 .control-center .widget-title > label {
-  color: #dfd0b2;
+  color: #ffffff;
   font-size: 1.08rem;
   font-weight: 800;
 }

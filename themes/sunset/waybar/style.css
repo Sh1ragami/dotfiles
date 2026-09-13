@@ -1,6 +1,6 @@
 /*
  * Island-Style Waybar Theme (Sunset Theme)
- * Right Island Background Guarantee (.modules-right)
+ * Pure Transparent Capsule - ZERO Box Shadow (Eliminated Gray/Brown Shadow Blur)
  */
 
 * {
@@ -9,59 +9,74 @@
     font-weight: bold;
     border: none;
     border-radius: 0;
+    box-shadow: none;
 }
 
 window#waybar {
     background-color: transparent;
     color: #dfd0b2;
+    box-shadow: none;
 }
 
+.modules-left,
+.modules-center,
+.modules-right {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/* 1. 左島 (ワークスペース): 影(box-shadow)を完全にゼロ化して灰茶色のモヤを消去 */
 #workspaces {
-    background-color: rgba(30, 24, 28, 0.85);
+    background-color: rgba(0, 0, 0, 0.18);
     border-radius: 14px;
     padding: 2px 8px;
     margin: 3px 10px 0px 10px;
     min-height: 22px;
+    box-shadow: none;
 }
 
+/* 2. 中央島 (時計 & DND) */
 #custom-clock_dnd {
-    background-color: rgba(30, 24, 28, 0.85);
+    background-color: rgba(0, 0, 0, 0.18);
     border-radius: 0 0 14px 14px;
     padding: 2px 18px;
     margin: 0px 10px;
-    color: #dfd0b2;
+    color: #ffffff;
     font-size: 12px;
     min-height: 22px;
+    box-shadow: none;
 }
 
-/* 🌟 右端モジュール群全体 (.modules-right) に確実に背景を適用 */
+/* 3. 右島 (ハードウェア群) */
 .modules-right {
-    background-color: rgba(30, 24, 28, 0.85);
+    background-color: rgba(0, 0, 0, 0.18);
     border-radius: 14px;
     padding: 2px 8px;
     margin: 3px 10px 0px 10px;
     min-height: 22px;
+    box-shadow: none;
 }
 
 #workspaces button {
     padding: 0 6px;
-    color: #787c99;
+    color: #dfd0b2;
     background: transparent;
     border-radius: 8px;
     min-height: 20px;
     font-size: 12px;
+    box-shadow: none;
 }
 
 #workspaces button.active {
-    color: #ea6962;
-    background-color: rgba(234, 105, 98, 0.25);
+    color: #ffffff;
+    background-color: rgba(234, 105, 98, 0.35);
+    box-shadow: none;
 }
 
 #workspaces button:hover {
-    color: #d8a657;
+    color: #ffffff;
 }
 
-/* 内部モジュール自体の背景を重複させないための透明化 */
 #group-hardware,
 #pulseaudio,
 #bluetooth,
@@ -71,16 +86,18 @@ window#waybar {
     padding: 0 8px;
     margin: 0 1px;
     background: transparent;
+    color: #ffffff;
     min-height: 20px;
     font-size: 12px;
+    box-shadow: none;
 }
 
-#pulseaudio { color: #d8a657; }
-#pulseaudio.muted { color: #787c99; }
-#bluetooth { color: #a9b665; }
-#bluetooth.disabled { color: #787c99; }
-#network { color: #7aa2f7; }
+#pulseaudio { color: #ffffff; }
+#pulseaudio.muted { color: #dfd0b2; }
+#bluetooth { color: #ffffff; }
+#bluetooth.disabled { color: #dfd0b2; }
+#network { color: #ffffff; }
 #network.disconnected { color: #ea6962; }
-#memory { color: #d8a657; }
-#battery { color: #a9b665; }
-#battery.charging, #battery.plugged { color: #d8a657; }
+#memory { color: #ffffff; }
+#battery { color: #ffffff; }
+#battery.charging, #battery.plugged { color: #ffffff; }

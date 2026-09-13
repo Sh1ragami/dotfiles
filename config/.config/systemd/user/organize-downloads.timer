@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer to periodically organize Downloads folder
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

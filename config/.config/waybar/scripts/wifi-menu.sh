@@ -12,19 +12,24 @@ import subprocess
 import sys
 import os
 
-def run_cmd(cmd):
-    return subprocess.run(cmd, capture_output=True, text=True)
+def run_cmd(cmd, **kwargs):
+    return subprocess.run(cmd, capture_output=True, text=True, **kwargs)
+
+def run_nmcli(args, **kwargs):
+    env = os.environ.copy()
+    env["LC_ALL"] = "C"
+    return subprocess.run(["nmcli"] + args, capture_output=True, text=True, env=env, encoding="utf-8", errors="replace", **kwargs)
 
 def notify(summary, body, icon="network-wireless", urgency="normal"):
     subprocess.run(["notify-send", "-u", urgency, "-i", icon, summary, body])
 
-# 1. Wi-Fi の有効・無効状態を確認
-res_wifi_status = run_cmd(["nmcli", "-fields", "WIFI", "g"])
+# 1. Wi-Fi の有効・無効状態を確認 (LC_ALL=C で判定)
+res_wifi_status = run_nmcli(["-fields", "WIFI", "g"])
 wifi_enabled = "enabled" in res_wifi_status.stdout.lower()
 
 if not wifi_enabled:
     menu_items = ["󰤨  Wi-Fi をオンにする"]
-    choice = run_cmd([
+    res_choice = run_cmd([
         "wofi", "--dmenu",
         "--prompt", "Wi-Fi (現在オフ)",
         "--width", "350",
@@ -32,15 +37,16 @@ if not wifi_enabled:
         "--cache-file", "/dev/null",
         "--hide-scroll",
         "--define", "key_exit=Escape"
-    ], input="\n".join(menu_items)).stdout.strip()
+    ], input="\n".join(menu_items))
+    choice = res_choice.stdout.strip()
     
     if "オンにする" in choice:
-        run_cmd(["nmcli", "r", "wifi", "on"])
+        run_nmcli(["r", "wifi", "on"])
         notify("Wi-Fi", "Wi-Fi をオンにしました")
     sys.exit(0)
 
 # 2. 周辺 Wi-Fi のスキャンと取得
-res_scan = run_cmd(["nmcli", "-t", "-f", "IN-USE,SSID,SIGNAL,SECURITY", "dev", "wifi", "list"])
+res_scan = run_nmcli(["-t", "-f", "IN-USE,SSID,SIGNAL,SECURITY", "dev", "wifi", "list"])
 lines = res_scan.stdout.strip().split("\n")
 
 networks = {}
@@ -60,7 +66,7 @@ for line in lines:
             networks[ssid] = {"in_use": in_use, "signal": signal, "security": security}
 
 # 保存済みの接続プロファイル一覧を取得
-res_saved = run_cmd(["nmcli", "-t", "-f", "NAME", "con", "show"])
+res_saved = run_nmcli(["-t", "-f", "NAME", "con", "show"])
 saved_connections = set(res_saved.stdout.strip().split("\n"))
 
 # メニューの作成
@@ -86,7 +92,7 @@ for ssid, info in sorted_ssids:
     display_to_ssid[display_text] = (ssid, info)
 
 # 3. Wofi でメニューを表示
-res_wofi = subprocess.run([
+res_wofi = run_cmd([
     "wofi", "--dmenu",
     "--prompt", "Select Wi-Fi Network",
     "--width", "420",
@@ -94,7 +100,7 @@ res_wofi = subprocess.run([
     "--cache-file", "/dev/null",
     "--hide-scroll",
     "--define", "key_exit=Escape"
-], input="\n".join(menu_lines), capture_output=True, text=True)
+], input="\n".join(menu_lines))
 
 selected = res_wofi.stdout.strip()
 if not selected or selected.startswith("───"):
@@ -102,13 +108,14 @@ if not selected or selected.startswith("───"):
 
 if "再スキャン" in selected:
     notify("Wi-Fi", "周辺のネットワークを再スキャン中...")
-    run_cmd(["nmcli", "dev", "wifi", "rescan"])
-    # 再実行
-    os.execv(sys.argv[0] if sys.argv[0].endswith(".sh") else "/home/sh1ragami/.config/waybar/scripts/wifi-menu.sh", ["wifi-menu.sh"])
+    run_nmcli(["dev", "wifi", "rescan"])
+    # スクリプト再実行
+    script_path = os.path.expanduser("~/.config/waybar/scripts/wifi-menu.sh")
+    os.execv(script_path, [script_path])
     sys.exit(0)
 
 if "オフにする" in selected:
-    run_cmd(["nmcli", "r", "wifi", "off"])
+    run_nmcli(["r", "wifi", "off"])
     notify("Wi-Fi", "Wi-Fi をオフにしました", icon="network-wireless-offline")
     sys.exit(0)
 
@@ -126,7 +133,7 @@ notify("Wi-Fi", f"「{target_ssid}」に接続を試みています...")
 
 if target_ssid in saved_connections:
     # 保存済みプロファイルで接続
-    res_conn = run_cmd(["nmcli", "con", "up", target_ssid])
+    res_conn = run_nmcli(["con", "up", target_ssid])
     if res_conn.returncode == 0:
         notify("Wi-Fi", f"「{target_ssid}」に接続しました！", icon="network-wireless")
     else:
@@ -136,20 +143,20 @@ else:
     is_secured = target_info["security"] and target_info["security"] != "--"
     if is_secured:
         # パスワード入力プロンプト
-        res_pass = subprocess.run([
+        res_pass = run_cmd([
             "wofi", "--dmenu", "--password",
             "--prompt", f"Password for {target_ssid}:",
             "--width", "360",
             "--cache-file", "/dev/null",
             "--define", "key_exit=Escape"
-        ], capture_output=True, text=True)
+        ])
         pwd = res_pass.stdout.strip()
         if not pwd:
             sys.exit(0)
-        res_conn = run_cmd(["nmcli", "dev", "wifi", "connect", target_ssid, "password", pwd])
+        res_conn = run_nmcli(["dev", "wifi", "connect", target_ssid, "password", pwd])
     else:
         # オープンネットワーク
-        res_conn = run_cmd(["nmcli", "dev", "wifi", "connect", target_ssid])
+        res_conn = run_nmcli(["dev", "wifi", "connect", target_ssid])
 
     if res_conn.returncode == 0:
         notify("Wi-Fi", f"「{target_ssid}」に接続しました！", icon="network-wireless")

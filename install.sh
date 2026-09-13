@@ -75,4 +75,54 @@ EOF
     echo "  -> Created ~/.gitconfig.local. Please edit it with your own name and email!"
 fi
 
+# 6. ダウンロード自動整理タイマーの有効化
+echo "Enabling organize-downloads timer..."
+systemctl --user daemon-reload
+systemctl --user enable --now organize-downloads.timer 2>/dev/null || true
+
+# 7. Google Drive 連携と自動バックアップの設定
+echo ""
+echo "=== Google Drive & Backup Setup ==="
+if command -v rclone &> /dev/null && rclone listremotes 2>/dev/null | grep -q '^gdrive:'; then
+    echo "Google Drive remote 'gdrive' is already configured."
+    echo "Enabling Google Drive mount & backup services..."
+    systemctl --user enable --now rclone-mount.service 2>/dev/null || true
+    systemctl --user enable --now rclone-sync.timer 2>/dev/null || true
+    echo "  -> Google Drive mount & backup services are active!"
+else
+    echo "Google Drive 連携 ('gdrive') がまだ設定されていません。"
+    echo ""
+    echo "【セットアップの流れ】"
+    echo "  1. リモート名: 'gdrive' と入力"
+    echo "  2. ストレージタイプ: 'drive' (Google Drive) を選択"
+    echo "  3. ブラウザが開いたら Google アカウントでログイン・許可"
+    echo ""
+    setup_gdrive="Y"
+    read -rp "今すぐ Google Drive を設定しますか？ [Y/n]: " setup_gdrive || true
+    setup_gdrive="${setup_gdrive:-Y}"
+    if [[ "$setup_gdrive" =~ ^[Yy]$ ]]; then
+        rclone config
+        if rclone listremotes 2>/dev/null | grep -q '^gdrive:'; then
+            echo ""
+            echo "Google Drive の設定が完了しました！サービスを有効化します..."
+            systemctl --user daemon-reload
+            systemctl --user enable --now rclone-mount.service 2>/dev/null || true
+            systemctl --user enable --now rclone-sync.timer 2>/dev/null || true
+            echo "  -> Google Drive のマウント (~/GoogleDrive) と自動バックアップが有効になりました！"
+        else
+            echo "Google Drive ('gdrive') が作成されませんでした。"
+            echo "後で設定する場合は以下のコマンドを実行してください："
+            echo "  rclone config"
+            echo "  systemctl --user enable --now rclone-mount.service rclone-sync.timer"
+        fi
+    else
+        echo "Google Drive セットアップをスキップしました。"
+        echo "後で設定する場合は以下のコマンドを実行してください："
+        echo "  rclone config"
+        echo "  systemctl --user enable --now rclone-mount.service rclone-sync.timer"
+    fi
+fi
+
+echo ""
 echo "=== Dotfiles installation completed successfully! ==="
+

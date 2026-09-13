@@ -73,10 +73,16 @@ window#waybar {
     box-shadow: none;
 }
 
-#workspaces button.visible:not(.active) {
-    color: #ffffff;
-    background-color: rgba(125, 174, 163, 0.45);
-    box-shadow: none;
+/* 外部モニターが占有しているワークスペースの文字色（背景はそのまま） */
+window#waybar.eDP-1 #workspaces button:not(.hosting-monitor),
+window#waybar:not(.eDP-1) #workspaces button.hosting-monitor {
+    color: #7daea3;
+}
+
+window#waybar.eDP-1 #workspaces button:not(.hosting-monitor).active,
+window#waybar:not(.eDP-1) #workspaces button.hosting-monitor.active {
+    color: #7daea3;
+    background-color: rgba(234, 105, 98, 0.35);
 }
 
 #workspaces button:hover {

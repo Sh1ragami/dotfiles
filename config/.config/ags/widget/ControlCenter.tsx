@@ -17,11 +17,11 @@ function getThemeRgb(theme: string): string {
 /* ═══════════════════════════════════════════════════════════
    Scrim — Fullscreen invisible click target for close
    ═══════════════════════════════════════════════════════════ */
-function Scrim(gdkmonitor: Gdk.Monitor) {
+function Scrim(gdkmonitor: Gdk.Monitor, connector: string) {
   const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
   return (
     <window
-      name="cc-scrim"
+      name={`cc-scrim-${connector}`}
       namespace="cc-scrim"
       gdkmonitor={gdkmonitor}
       anchor={TOP | BOTTOM | LEFT | RIGHT}
@@ -35,7 +35,7 @@ function Scrim(gdkmonitor: Gdk.Monitor) {
         click.set_button(0)
         click.connect("pressed", () => {
           self.visible = false
-          const cc = app.get_window("control-center")
+          const cc = app.get_window(`control-center-${connector}`)
           if (cc) cc.visible = false
         })
         self.add_controller(click)
@@ -50,16 +50,16 @@ function Scrim(gdkmonitor: Gdk.Monitor) {
           const click = new Gtk.GestureClick()
           click.set_button(0)
           click.connect("pressed", () => {
-            const scrim = app.get_window("cc-scrim")
-            const cc = app.get_window("control-center")
+            const scrim = app.get_window(`cc-scrim-${connector}`)
+            const cc = app.get_window(`control-center-${connector}`)
             if (scrim) scrim.visible = false
             if (cc) cc.visible = false
           })
           btn.add_controller(click)
         }}
         onClicked={() => {
-          const scrim = app.get_window("cc-scrim")
-          const cc = app.get_window("control-center")
+          const scrim = app.get_window(`cc-scrim-${connector}`)
+          const cc = app.get_window(`control-center-${connector}`)
           if (scrim) scrim.visible = false
           if (cc) cc.visible = false
         }}
@@ -201,10 +201,12 @@ export default function ControlCenter(gdkmonitor: Gdk.Monitor) {
   loadTheme()
   loadSystemValues()
 
+  const connector = (gdkmonitor.get_connector && gdkmonitor.get_connector()) || "default"
+
   // ─── Handlers ─── 
   function closeAll() {
-    const scrim = app.get_window("cc-scrim")
-    const panel = app.get_window("control-center")
+    const scrim = app.get_window(`cc-scrim-${connector}`)
+    const panel = app.get_window(`control-center-${connector}`)
     if (scrim) scrim.visible = false
     if (panel) panel.visible = false
   }
@@ -309,11 +311,11 @@ export default function ControlCenter(gdkmonitor: Gdk.Monitor) {
   }
 
   // Build the scrim
-  Scrim(gdkmonitor)
+  Scrim(gdkmonitor, connector)
 
   return (
     <window
-      name="control-center"
+      name={`control-center-${connector}`}
       namespace="control-center"
       class={currentTheme((t) => `ControlCenterWindow theme-${t}`)}
       gdkmonitor={gdkmonitor}
@@ -335,7 +337,7 @@ export default function ControlCenter(gdkmonitor: Gdk.Monitor) {
         self.add_controller(keyCtrl)
 
         self.connect("notify::visible", () => {
-          const scrim = app.get_window("cc-scrim")
+          const scrim = app.get_window(`cc-scrim-${connector}`)
           if (self.visible) {
             loadTheme()
             loadSystemValues()

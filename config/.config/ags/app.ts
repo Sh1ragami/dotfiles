@@ -9,24 +9,46 @@ app.start({
   },
   requestHandler(argv, res) {
     const cmd = Array.isArray(argv) ? argv.join(" ") : String(argv)
-    if (cmd === "toggle" || cmd === "toggle control-center") {
-      const panel = app.get_window("control-center")
+    const parts = cmd.trim().split(/\s+/)
+    const action = parts[0]
+    const target = parts[1] // monitor connector name, e.g. "HDMI-A-1" or "eDP-1"
+
+    if (action === "toggle") {
+      let panel: any = null
+      if (target) {
+        panel = app.get_window(`control-center-${target}`)
+      }
+      if (!panel) {
+        panel = app.windows.find(
+          (w) => w.name && w.name.startsWith("control-center-") && !w.name.startsWith("cc-scrim")
+        ) || app.get_window("control-center")
+      }
+
       if (panel) {
+        if (!panel.visible) {
+          // Close other control-center panels if open
+          for (const w of app.windows) {
+            if (w !== panel && w.name && w.name.startsWith("control-center")) {
+              w.visible = false
+            }
+          }
+        }
         panel.visible = !panel.visible
-        // scrim visibility is managed by panel's notify::visible handler
       }
       res("ok")
-    } else if (cmd === "close" || cmd === "close control-center") {
-      const scrim = app.get_window("cc-scrim")
-      const panel = app.get_window("control-center")
-      if (scrim) scrim.visible = false
-      if (panel) panel.visible = false
+    } else if (action === "close") {
+      for (const w of app.windows) {
+        if (w.name && (w.name.startsWith("control-center") || w.name.startsWith("cc-scrim"))) {
+          w.visible = false
+        }
+      }
       res("ok")
-    } else if (cmd === "visible") {
-      const win = app.get_window("control-center")
-      res(win ? String(win.visible) : "false")
-    } else if (cmd.startsWith("theme ")) {
-      // theme switching handled via loadTheme() on open
+    } else if (action === "visible") {
+      const anyVisible = app.windows.some(
+        (w) => w.name && w.name.startsWith("control-center") && w.visible
+      )
+      res(String(anyVisible))
+    } else if (action.startsWith("theme")) {
       res("ok")
     } else {
       res("ok")

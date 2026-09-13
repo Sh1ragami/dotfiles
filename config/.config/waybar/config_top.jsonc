@@ -43,7 +43,7 @@
         "tooltip-format": "{controller_alias}\t{controller_address}",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "overskride || blueman-manager"
+        "on-click": "XDG_CURRENT_DESKTOP=GNOME gnome-control-center bluetooth"
     },
 
     "pulseaudio": {
@@ -52,7 +52,7 @@
         "format-icons": {
             "default": ["", "", ""]
         },
-        "on-click": "pwvucontrol || pavucontrol"
+        "on-click": "XDG_CURRENT_DESKTOP=GNOME gnome-control-center sound"
     },
 
     "battery": {
@@ -64,7 +64,8 @@
         "format-charging": "󱐋 {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{icon} {time}",
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "on-click": "XDG_CURRENT_DESKTOP=GNOME gnome-control-center power"
     },
 
     "network": {

@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+import sys
+import os
+import hashlib
+import subprocess
+import time
+import gi
+
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, Gdk
+
+MOUNT_DIR = os.path.expanduser("~/スマホ写真")
+PIN_FILE = os.path.expanduser("~/.config/rclone/.photos_vault_pin")
+os.makedirs(os.path.expanduser("~/.config/rclone"), exist_ok=True)
+
+def is_mounted():
+    try:
+        res = subprocess.run(["mountpoint", "-q", MOUNT_DIR], capture_output=True)
+        return res.returncode == 0
+    except Exception:
+        return False
+
+def verify_pin(pin):
+    try:
+        if not os.path.exists(PIN_FILE):
+            return False
+        with open(PIN_FILE, 'r') as f:
+            stored = f.read().strip()
+        salt, h = stored.split(':', 1)
+        return hashlib.sha256((salt + pin).encode('utf-8')).hexdigest() == h
+    except Exception:
+        return False
+
+def save_pin(pin):
+    salt = os.urandom(16).hex()
+    h = hashlib.sha256((salt + pin).encode('utf-8')).hexdigest()
+    with open(PIN_FILE, 'w') as f:
+        f.write(f"{salt}:{h}")
+    os.chmod(PIN_FILE, 0o600)
+
+def notify(summary, body, icon="security-high", urgency="normal"):
+    try:
+        subprocess.run(["notify-send", "-u", urgency, "-i", icon, summary, body])
+    except Exception:
+        pass
+
+def mount_photos():
+    os.makedirs(MOUNT_DIR, exist_ok=True)
+    subprocess.Popen([
+        "rclone", "mount", "gdrive:スマホ写真", MOUNT_DIR,
+        "--vfs-cache-mode", "full",
+        "--vfs-cache-max-size", "10G",
+        "--vfs-cache-max-age", "24h",
+        "--dir-cache-time", "72h",
+        "--daemon"
+    ])
+    for _ in range(12):
+        if is_mounted():
+            break
+        time.sleep(0.5)
+    subprocess.Popen(["thunar", MOUNT_DIR])
+    notify("スマホ写真", "🔓 ロック解除しました\n見終わったらもう一度ロックできます", "security-low")
+
+def unmount_photos():
+    if is_mounted():
+        subprocess.run(["fusermount3", "-u", MOUNT_DIR])
+        # Recreate placeholder if unmounted
+        os.makedirs(MOUNT_DIR, exist_ok=True)
+        desktop_file = os.path.join(MOUNT_DIR, "🔒_PINを入力してロック解除.desktop")
+        if not os.path.exists(desktop_file):
+            with open(desktop_file, "w") as f:
+                f.write("[Desktop Entry]\nName=🔒 PINを入力してロック解除\nExec=/home/sh1ragami/.local/bin/toggle_photos.sh\nIcon=security-high\nTerminal=false\nType=Application\n")
+            os.chmod(desktop_file, 0o755)
+        notify("スマホ写真", "🔒 ロックしました（マウント解除）", "security-high")
+
+def prompt_pin_dialog(prompt_text="PINを入力してください:"):
+    dialog = Gtk.MessageDialog(
+        flags=Gtk.DialogFlags.MODAL,
+        type=Gtk.MessageType.QUESTION,
+        buttons=Gtk.ButtonsType.OK_CANCEL,
+        message_format="🔒 スマホ写真のロック解除"
+    )
+    dialog.format_secondary_text(prompt_text)
+    dialog.set_position(Gtk.WindowPosition.CENTER)
+    dialog.set_default_size(360, 140)
+
+    entry = Gtk.Entry()
+    entry.set_visibility(False)
+    entry.set_activates_default(True)
+    entry.set_margin_top(10)
+    entry.set_margin_bottom(10)
+    entry.set_margin_start(20)
+    entry.set_margin_end(20)
+
+    content_box = dialog.get_message_area()
+    content_box.pack_end(entry, False, False, 0)
+    dialog.set_default_response(Gtk.ResponseType.OK)
+    dialog.show_all()
+
+    response = dialog.run()
+    text = entry.get_text()
+    dialog.destroy()
+
+    if response == Gtk.ResponseType.OK:
+        return text
+    return None
+
+def prompt_unlocked_dialog():
+    dialog = Gtk.MessageDialog(
+        flags=Gtk.DialogFlags.MODAL,
+        type=Gtk.MessageType.INFO,
+        buttons=Gtk.ButtonsType.NONE,
+        message_format="🔒 スマホ写真（現在ロック解除中）"
+    )
+    dialog.format_secondary_text("フォルダは現在開かれています。どうしますか？")
+    dialog.set_position(Gtk.WindowPosition.CENTER)
+    dialog.add_button("📂 フォルダを開く", Gtk.ResponseType.APPLY)
+    dialog.add_button("🔒 ロックする (施錠)", Gtk.ResponseType.CLOSE)
+    dialog.add_button("閉じる", Gtk.ResponseType.CANCEL)
+    
+    dialog.show_all()
+    response = dialog.run()
+    dialog.destroy()
+    return response
+
+def main():
+    if is_mounted():
+        resp = prompt_unlocked_dialog()
+        if resp == Gtk.ResponseType.CLOSE:
+            unmount_photos()
+        elif resp == Gtk.ResponseType.APPLY:
+            subprocess.Popen(["thunar", MOUNT_DIR])
+        return
+
+    # Check if PIN is configured
+    if not os.path.exists(PIN_FILE):
+        pin = prompt_pin_dialog("初めての使用です。新しいPIN/パスワードを設定してください:")
+        if not pin:
+            return
+        confirm = prompt_pin_dialog("確認のためもう一度PINを入力してください:")
+        if pin != confirm:
+            notify("スマホ写真", "❌ PINが一致しませんでした。設定を中止します。", "dialog-error", "critical")
+            return
+        save_pin(pin)
+        notify("スマホ写真", "PINを設定しました。マウントを開始します。", "security-high")
+        mount_photos()
+        return
+
+    # Existing PIN prompt
+    pin = prompt_pin_dialog("PIN / パスワードを入力してください:")
+    if pin is None:
+        return
+    if verify_pin(pin):
+        mount_photos()
+    else:
+        notify("スマホ写真", "❌ PINが間違っています", "dialog-error", "critical")
+
+if __name__ == "__main__":
+    main()

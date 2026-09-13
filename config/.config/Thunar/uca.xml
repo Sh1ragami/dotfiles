@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>security-high</icon>
+	<name>🔒 スマホ写真 (PINで開く/施錠)</name>
+	<submenu></submenu>
+	<unique-id>toggle-photos-vault-1</unique-id>
+	<command>/home/sh1ragami/.local/bin/toggle_photos.sh</command>
+	<description>PINを入力してスマホ写真をロック解除・施錠します</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<other-files/>
+</action>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1775679733281705-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+</actions>

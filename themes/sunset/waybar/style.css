@@ -73,6 +73,12 @@ window#waybar {
     box-shadow: none;
 }
 
+#workspaces button.visible {
+    color: #ffffff;
+    background-color: rgba(125, 174, 163, 0.45);
+    box-shadow: none;
+}
+
 #workspaces button:hover {
     color: #ffffff;
 }
